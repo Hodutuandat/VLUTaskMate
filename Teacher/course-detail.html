@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết Học phần - VLUTaskMate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vlu-red': '#dc2626',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-vlu-red">VLUTaskMate</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- Notification Bell with Dropdown -->
+                    <div class="relative">
+                        <button id="notificationBtn" class="relative p-2 text-gray-600 hover:text-gray-900">
+                            <i class="fas fa-bell"></i>
+                            <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-vlu-red"></span>
+                        </button>
+                        
+                        <!-- Notification Dropdown -->
+                        <div id="notificationDropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                            <!-- Header -->
+                            <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                                <h3 class="text-lg font-semibold text-gray-900">Thông báo</h3>
+                                <button id="closeNotifications" class="text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Notification List -->
+                            <div class="max-h-96 overflow-y-auto">
+                                <!-- Project Update Notification -->
+                                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-chart-line text-blue-600 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900">Cập nhật tiến độ dự án</p>
+                                            <p class="text-sm text-gray-500 mt-1">Nhóm K47-CNTT đã hoàn thành 75% dự án</p>
+                                            <p class="text-xs text-gray-400 mt-1">2 giờ trước</p>
+                                        </div>
+                                        <div class="flex flex-col space-y-1">
+                                            <button class="bg-blue-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-blue-600 transition-colors">
+                                                Xem
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Evaluation Complete Notification -->
+                                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-star text-green-600 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900">Đánh giá hoàn thành</p>
+                                            <p class="text-sm text-gray-500 mt-1">Nhóm K47-CNTT đã hoàn thành peer evaluation</p>
+                                            <p class="text-xs text-gray-400 mt-1">1 ngày trước</p>
+                                        </div>
+                                        <div class="flex flex-col space-y-1">
+                                            <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
+                                                Xem
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Footer -->
+                            <div class="p-4 border-t border-gray-200">
+                                <button onclick="window.location.href='notifications.html'" class="w-full text-center text-sm text-vlu-red hover:text-red-700 font-medium">
+                                    Xem tất cả thông báo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <button id="userMenuBtn" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                            <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
+                            <span class="text-sm font-medium">TS. Nguyễn Văn A</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        
+                        <!-- User Menu Dropdown -->
+                        <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                            <div class="py-1">
+                                <button onclick="window.location.href='profile.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-user mr-3"></i>
+                                    Hồ sơ
+                                </button>
+                                <button onclick="window.location.href='../Student/login.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-sign-out-alt mr-3"></i>
+                                    Đăng xuất
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="flex h-screen bg-gray-50">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-sm border-r border-gray-200">
+            <div class="p-6">
+                <div class="px-4 space-y-2">
+                    <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                        <i class="fas fa-tachometer-alt mr-3"></i>
+                        Dashboard
+                    </a>
+                    <a href="courses.html" class="flex items-center px-4 py-3 text-vlu-red bg-vlu-light-red rounded-lg font-medium">
+                        <i class="fas fa-book mr-3"></i>
+                        Học phần
+                    </a>
+                    <a href="notifications.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                        <i class="fas fa-bell mr-3"></i>
+                        Thông báo
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Page Header -->
+                <div class="mb-8">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="flex items-center space-x-2 mb-2">
+                                <button onclick="window.location.href='index.html'" class="text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-arrow-left"></i>
+                                </button>
+                                <h2 class="text-3xl font-bold text-gray-900">Lập trình Web</h2>
+                            </div>
+                            <p class="text-gray-600">Mã lớp: CNTT-K47-01 • Học kỳ 1 - Năm học 2024-2025</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="text-right">
+                                <p class="text-sm text-gray-600">Tiến độ chung</p>
+                                <p class="text-2xl font-bold text-vlu-red">82%</p>
+                            </div>
+                            <div class="w-32 bg-gray-200 rounded-full h-3">
+                                <div class="bg-vlu-red h-3 rounded-full" style="width: 82%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Statistics -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-blue-100 rounded-full p-3">
+                                <i class="fas fa-users text-blue-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-600">Tổng nhóm</p>
+                                <p class="text-2xl font-bold text-gray-900">6</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-green-100 rounded-full p-3">
+                                <i class="fas fa-user-graduate text-green-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-600">Sinh viên</p>
+                                <p class="text-2xl font-bold text-gray-900">36</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-purple-100 rounded-full p-3">
+                                <i class="fas fa-tasks text-purple-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-600">Tổng task</p>
+                                <p class="text-2xl font-bold text-gray-900">124</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 bg-orange-100 rounded-full p-3">
+                                <i class="fas fa-star text-orange-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-600">Đánh giá TB</p>
+                                <p class="text-2xl font-bold text-gray-900">4.2</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Groups -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900">Danh sách nhóm dự án</h3>
+                        <div class="flex items-center space-x-2">
+                            <select class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
+                                <option value="">Tất cả trạng thái</option>
+                                <option value="active">Đang hoạt động</option>
+                                <option value="completed">Hoàn thành</option>
+                                <option value="struggling">Cần hỗ trợ</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Group 1 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer" onclick="window.location.href='group-detail.html'">
+                            <div class="flex items-start justify-between mb-3">
+                                <h4 class="font-semibold text-gray-900">Nhóm 1 - Website E-commerce</h4>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    Đang hoạt động
+                                </span>
+                            </div>
+                            <div class="space-y-2 mb-3">
+                                <p class="text-sm text-gray-600"><i class="fas fa-user mr-2"></i>Trưởng nhóm: Hồ Du Tuấn Đạt</p>
+                                <p class="text-sm text-gray-600"><i class="fas fa-users mr-2"></i>Thành viên: 6 người</p>
+                                <p class="text-sm text-gray-600"><i class="fas fa-tasks mr-2"></i>Task: 24/30 hoàn thành</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="flex items-center justify-between text-xs text-gray-500 mb-1">
+                                    <span>Tiến độ</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>Deadline: 20/12/2024</span>
+                                <span>Đánh giá: 4.5/5</span>
+                            </div>
+                        </div>
+
+                        <!-- Group 2 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer" onclick="window.location.href='group-detail.html'">
+                            <div class="flex items-start justify-between mb-3">
+                                <h4 class="font-semibold text-gray-900">Nhóm 2 - Hệ thống Quản lý</h4>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    Đang hoạt động
+                                </span>
+                            </div>
+                            <div class="space-y-2 mb-3">
+                                <p class="text-sm text-gray-600"><i class="fas fa-user mr-2"></i>Trưởng nhóm: Nguyễn Văn B</p>
+                                <p class="text-sm text-gray-600"><i class="fas fa-users mr-2"></i>Thành viên: 5 người</p>
+                                <p class="text-sm text-gray-600"><i class="fas fa-tasks mr-2"></i>Task: 18/25 hoàn thành</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="flex items-center justify-between text-xs text-gray-500 mb-1">
+                                    <span>Tiến độ</span>
+                                    <span>72%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 72%"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>Deadline: 22/12/2024</span>
+                                <span>Đánh giá: 4.2/5</span>
+                            </div>
+                        </div>
+
+                        <!-- Group 3 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer" onclick="window.location.href='group-detail.html'">
+                            <div class="flex items-start justify-between mb-3">
+                                <h4 class="font-semibold text-gray-900">Nhóm 3 - Ứng dụng Mobile</h4>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Cần hỗ trợ
+                                </span>
+                            </div>
+                            <div class="space-y-2 mb-3">
+                                <p class="text-sm text-gray-600"><i class="fas fa-user mr-2"></i>Trưởng nhóm: Trần Thị C</p>
+                                <p class="text-sm text-gray-600"><i class="fas fa-users mr-2"></i>Thành viên: 4 người</p>
+                                <p class="text-sm text-gray-600"><i class="fas fa-tasks mr-2"></i>Task: 12/20 hoàn thành</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="flex items-center justify-between text-xs text-gray-500 mb-1">
+                                    <span>Tiến độ</span>
+                                    <span>60%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>Deadline: 25/12/2024</span>
+                                <span>Đánh giá: 3.8/5</span>
+                            </div>
+                        </div>
+
+                        <!-- Group 4 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer" onclick="window.location.href='group-detail.html'">
+                            <div class="flex items-start justify-between mb-3">
+                                <h4 class="font-semibold text-gray-900">Nhóm 4 - Blog System</h4>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                    Hoàn thành
+                                </span>
+                            </div>
+                            <div class="space-y-2 mb-3">
+                                <p class="text-sm text-gray-600"><i class="fas fa-user mr-2"></i>Trưởng nhóm: Lê Văn D</p>
+                                <p class="text-sm text-gray-600"><i class="fas fa-users mr-2"></i>Thành viên: 6 người</p>
+                                <p class="text-sm text-gray-600"><i class="fas fa-tasks mr-2"></i>Task: 28/28 hoàn thành</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="flex items-center justify-between text-xs text-gray-500 mb-1">
+                                    <span>Tiến độ</span>
+                                    <span>100%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-blue-500 h-2 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>Hoàn thành: 15/12/2024</span>
+                                <span>Đánh giá: 4.7/5</span>
+                            </div>
+                        </div>
+
+                        <!-- Group 5 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer" onclick="window.location.href='group-detail.html'">
+                            <div class="flex items-start justify-between mb-3">
+                                <h4 class="font-semibold text-gray-900">Nhóm 5 - Chat App</h4>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    Đang hoạt động
+                                </span>
+                            </div>
+                            <div class="space-y-2 mb-3">
+                                <p class="text-sm text-gray-600"><i class="fas fa-user mr-2"></i>Trưởng nhóm: Phạm Thị E</p>
+                                <p class="text-sm text-gray-600"><i class="fas fa-users mr-2"></i>Thành viên: 5 người</p>
+                                <p class="text-sm text-gray-600"><i class="fas fa-tasks mr-2"></i>Task: 20/26 hoàn thành</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="flex items-center justify-between text-xs text-gray-500 mb-1">
+                                    <span>Tiến độ</span>
+                                    <span>77%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 77%"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>Deadline: 23/12/2024</span>
+                                <span>Đánh giá: 4.1/5</span>
+                            </div>
+                        </div>
+
+                        <!-- Group 6 -->
+                        <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer" onclick="window.location.href='group-detail.html'">
+                            <div class="flex items-start justify-between mb-3">
+                                <h4 class="font-semibold text-gray-900">Nhóm 6 - Portfolio Website</h4>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    Đang hoạt động
+                                </span>
+                            </div>
+                            <div class="space-y-2 mb-3">
+                                <p class="text-sm text-gray-600"><i class="fas fa-user mr-2"></i>Trưởng nhóm: Vũ Văn F</p>
+                                <p class="text-sm text-gray-600"><i class="fas fa-users mr-2"></i>Thành viên: 4 người</p>
+                                <p class="text-sm text-gray-600"><i class="fas fa-tasks mr-2"></i>Task: 16/22 hoàn thành</p>
+                            </div>
+                            <div class="mb-3">
+                                <div class="flex items-center justify-between text-xs text-gray-500 mb-1">
+                                    <span>Tiến độ</span>
+                                    <span>73%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 73%"></div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>Deadline: 24/12/2024</span>
+                                <span>Đánh giá: 4.3/5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../assets/script.js"></script>
+</body>
+</html> 

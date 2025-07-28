@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - VLUTaskMate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vlu-red': '#dc2626',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <!-- Logo and Title -->
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-vlu-red mb-2">VLUTaskMate</h1>
+                <p class="text-gray-600">Hệ thống quản lý dự án sinh viên</p>
+            </div>
+
+            <!-- Login Form -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Đăng nhập</h2>
+                    <p class="text-gray-600 mt-2">Sử dụng tài khoản Microsoft của bạn</p>
+                </div>
+
+                <!-- Microsoft Login Button -->
+                <div class="space-y-4">
+                    <button id="microsoftLoginBtn" class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent transition-colors">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" class="h-6 w-6 mr-3">
+                        Đăng nhập bằng Microsoft
+                    </button>
+
+                    <!-- Account Type Indicator -->
+                    <div id="accountTypeIndicator" class="hidden">
+                        <div class="flex items-center justify-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-user-graduate text-blue-600"></i>
+                                <span class="text-sm font-medium text-gray-700">Sinh viên</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-chalkboard-teacher text-green-600"></i>
+                                <span class="text-sm font-medium text-gray-700">Giảng viên</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email Domain Warning -->
+                    <div id="emailWarning" class="hidden bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                        <div class="flex">
+                            <i class="fas fa-exclamation-triangle text-yellow-400 mt-0.5 mr-3"></i>
+                            <div>
+                                <h3 class="text-sm font-medium text-yellow-800">Lưu ý về tài khoản</h3>
+                                <div class="mt-2 text-sm text-yellow-700">
+                                    <p><strong>Sinh viên:</strong> Sử dụng email @vanlanguni.vn</p>
+                                    <p><strong>Giảng viên:</strong> Sử dụng email @vlu.edu.vn</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Login Demo -->
+                    <div class="border-t border-gray-200 pt-4">
+                        <p class="text-sm text-gray-600 text-center mb-4">Hoặc thử đăng nhập nhanh:</p>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="quickLogin('student')" class="flex items-center justify-center px-3 py-2 bg-blue-100 text-blue-700 rounded-lg text-sm font-medium hover:bg-blue-200 transition-colors">
+                                <i class="fas fa-user-graduate mr-2"></i>
+                                Sinh viên
+                            </button>
+                            <button onclick="quickLogin('teacher')" class="flex items-center justify-center px-3 py-2 bg-green-100 text-green-700 rounded-lg text-sm font-medium hover:bg-green-200 transition-colors">
+                                <i class="fas fa-chalkboard-teacher mr-2"></i>
+                                Giảng viên
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Help Section -->
+                <div class="mt-6 pt-6 border-t border-gray-200">
+                    <div class="text-center">
+                        <p class="text-sm text-gray-600">Cần hỗ trợ?</p>
+                        <a href="#" class="text-sm text-vlu-red hover:text-red-700 font-medium">Liên hệ IT Support</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-center">
+                <p class="text-xs text-gray-500">
+                    © 2024 VLUTaskMate. Được phát triển bởi Đại học Văn Lang
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Show account type indicator and warning
+        document.addEventListener('DOMContentLoaded', function() {
+            const accountTypeIndicator = document.getElementById('accountTypeIndicator');
+            const emailWarning = document.getElementById('emailWarning');
+            
+            // Show indicators after a short delay
+            setTimeout(() => {
+                accountTypeIndicator.classList.remove('hidden');
+                emailWarning.classList.remove('hidden');
+            }, 1000);
+        });
+
+        // Quick login function
+        function quickLogin(type) {
+            if (type === 'student') {
+                // Redirect to student dashboard
+                window.location.href = 'index.html';
+            } else if (type === 'teacher') {
+                // Redirect to teacher dashboard
+                window.location.href = '../Teacher/index.html';
+            }
+        }
+
+        // Microsoft login simulation
+        document.getElementById('microsoftLoginBtn').addEventListener('click', function() {
+            // Simulate Microsoft login process
+            this.innerHTML = '<i class="fas fa-spinner fa-spin mr-3"></i>Đang đăng nhập...';
+            this.disabled = true;
+            
+            // Simulate login delay
+            setTimeout(() => {
+                // For demo purposes, redirect to student dashboard
+                // In real implementation, this would check the email domain
+                window.location.href = 'index.html';
+            }, 2000);
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLUTaskMate - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vlu-red': '#dc2626',
+                        'vlu-light-red': '#fef2f2',
+                        'vlu-gray': '#6b7280'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-vlu-red">VLUTaskMate</h1>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- Notification Bell with Dropdown -->
+                    <div class="relative">
+                        <button id="notificationBtn" class="relative p-2 text-gray-600 hover:text-gray-900">
+                            <i class="fas fa-bell"></i>
+                            <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-vlu-red"></span>
+                        </button>
+                        
+                        <!-- Notification Dropdown -->
+                        <div id="notificationDropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                            <!-- Header -->
+                            <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                                <h3 class="text-lg font-semibold text-gray-900">Thông báo</h3>
+                                <button id="closeNotifications" class="text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Notification List -->
+                            <div class="max-h-96 overflow-y-auto">
+                                <!-- Task Assignment Notification -->
+                                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-tasks text-blue-600 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900">Bạn được giao nhiệm vụ mới</p>
+                                            <p class="text-sm text-gray-500 mt-1">"Thiết kế giao diện" trong dự án Website E-commerce</p>
+                                            <p class="text-xs text-gray-400 mt-1">2 phút trước</p>
+                                        </div>
+                                        <div class="flex flex-col space-y-1">
+                                            <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
+                                                Xác nhận
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Group Invitation Notification -->
+                                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-users text-purple-600 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900">Lời mời tham gia nhóm</p>
+                                            <p class="text-sm text-gray-500 mt-1">Bạn được mời tham gia dự án "Hệ thống Quản lý Thư viện"</p>
+                                            <p class="text-xs text-gray-400 mt-1">15 phút trước</p>
+                                        </div>
+                                        <div class="flex flex-col space-y-1">
+                                            <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
+                                                Xác nhận
+                                            </button>
+                                            <button class="bg-red-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-red-600 transition-colors">
+                                                Từ chối
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Footer -->
+                            <div class="p-4 border-t border-gray-200">
+                                <button onclick="window.location.href='notifications.html'" class="w-full text-center text-sm text-vlu-red hover:text-red-700 font-medium">
+                                    Xem tất cả thông báo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <button id="userMenuBtn" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                            <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
+                            <span class="text-sm font-medium">Hồ Du Tuấn Đạt</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        
+                        <!-- User Menu Dropdown -->
+                        <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                            <div class="py-1">
+                                <button onclick="window.location.href='profile.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-user mr-3"></i>
+                                    Hồ sơ
+                                </button>
+                                <button onclick="window.location.href='login.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-sign-out-alt mr-3"></i>
+                                    Đăng xuất
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex h-screen bg-gray-50">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-sm">
+            <nav class="mt-8">
+                <div class="px-4 space-y-2">
+                    <a href="index.html" class="flex items-center px-4 py-3 text-vlu-red bg-vlu-light-red rounded-lg font-medium">
+                        <i class="fas fa-folder mr-3"></i>
+                        Dự án của tôi
+                    </a>
+                    <a href="my-tasks.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                        <i class="fas fa-tasks mr-3"></i>
+                        Nhiệm vụ của tôi
+                    </a>
+                    <a href="notifications.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                        <i class="fas fa-bell mr-3"></i>
+                        Thông báo
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Page Header -->
+                <div class="mb-8">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900">Dự án của tôi</h2>
+                            <p class="text-gray-600 mt-2">Quản lý và theo dõi các dự án của bạn</p>
+                        </div>
+                        <button id="createProjectBtn" class="bg-vlu-red text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors">
+                            <i class="fas fa-plus mr-2"></i>
+                            Tạo Dự Án Mới
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project Tabs -->
+                <div class="mb-6">
+                    <!-- Removed tabs - showing all projects on one page -->
+                </div>
+
+                <!-- Leader Projects -->
+                <div id="leader-projects" class="project-content">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Dự án tôi làm Leader (2)</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Project Card 1 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                        <div class="p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900">Hệ thống Quản lý Thư viện</h3>
+                                    <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                        <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                        <p><i class="fas fa-users mr-1"></i>Lớp CNTT-K15</p>
+                                        <p><i class="fas fa-chalkboard-teacher mr-1"></i>GV: TS. Nguyễn Văn A</p>
+                                    </div>
+                                </div>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    <i class="fas fa-crown mr-1"></i>
+                                    Leader
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                    Đang hoạt động
+                                </span>
+                                <span class="text-sm text-gray-500">5 thành viên</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="text-sm text-gray-500">
+                                    <i class="fas fa-calendar mr-1"></i>
+                                    01/12/2024 - 15/12/2024
+                                </div>
+                                <button onclick="window.location.href='project.html'" class="bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+                                    Vào Dự Án
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 2 - Leader -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                        <div class="p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900">Website E-commerce</h3>
+                                    <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                        <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                        <p><i class="fas fa-users mr-1"></i>Lớp CNTT-K15</p>
+                                        <p><i class="fas fa-chalkboard-teacher mr-1"></i>GV: ThS. Trần Thị B</p>
+                                    </div>
+                                </div>
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    <i class="fas fa-crown mr-1"></i>
+                                    Leader
+                                </span>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                    Đã hoàn tất
+                                </span>
+                                <span class="text-sm text-gray-500">6 thành viên</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div class="text-sm text-gray-500">
+                                    <i class="fas fa-calendar mr-1"></i>
+                                    01/11/2024 - 10/11/2024
+                                </div>
+                                <button onclick="window.location.href='project-ecommerce.html'" class="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-600 transition-colors">
+                                    Xem Dự Án
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member Projects -->
+                <div id="member-projects" class="project-content">
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Dự án tôi tham gia (14)</h3>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Project Card 1 (Member) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Ứng dụng Mobile Banking</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-users mr-1"></i>Lớp CNTT-K15</p>
+                                            <p><i class="fas fa-chalkboard-teacher mr-1"></i>GV: PGS.TS. Lê Văn C</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                        <i class="fas fa-user mr-1"></i>
+                                        Member
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        Đang hoạt động
+                                    </span>
+                                    <span class="text-sm text-gray-500">4 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        05/12/2024 - 20/12/2024
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+                                        Vào Dự Án
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 2 (Member) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Hệ thống Quản lý Kho</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-users mr-1"></i>Lớp Kinh tế-K15</p>
+                                            <p><i class="fas fa-chalkboard-teacher mr-1"></i>GV: TS. Phạm Thị D</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                        <i class="fas fa-user mr-1"></i>
+                                        Member
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        Chờ phê duyệt
+                                    </span>
+                                    <span class="text-sm text-gray-500">3 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        10/12/2024 - 25/12/2024
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-gray-400 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-500 transition-colors">
+                                        Chờ Phê Duyệt
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 3 (Member) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Website Tin tức</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-users mr-1"></i>Lớp Truyền thông-K15</p>
+                                            <p><i class="fas fa-chalkboard-teacher mr-1"></i>GV: ThS. Hoàng Văn E</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                        <i class="fas fa-user mr-1"></i>
+                                        Member
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Đã hoàn tất
+                                    </span>
+                                    <span class="text-sm text-gray-500">5 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        01/11/2024 - 15/11/2024
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-600 transition-colors">
+                                        Xem Dự Án
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 4 (Member) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Ứng dụng Du lịch</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-users mr-1"></i>Lớp Du lịch-K15</p>
+                                            <p><i class="fas fa-chalkboard-teacher mr-1"></i>GV: ThS. Nguyễn Thị F</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                        <i class="fas fa-user mr-1"></i>
+                                        Member
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        Đang hoạt động
+                                    </span>
+                                    <span class="text-sm text-gray-500">6 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        15/12/2024 - 30/01/2025
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+                                        Vào Dự Án
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 5 (Member) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Hệ thống Đăng ký Môn học</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-users mr-1"></i>Lớp CNTT-K15</p>
+                                            <p><i class="fas fa-chalkboard-teacher mr-1"></i>GV: TS. Vũ Văn G</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                        <i class="fas fa-user mr-1"></i>
+                                        Member
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                        <i class="fas fa-pause mr-1"></i>
+                                        Tạm dừng
+                                    </span>
+                                    <span class="text-sm text-gray-500">4 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        20/11/2024 - 10/12/2024
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-purple-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-600 transition-colors">
+                                        Xem Chi Tiết
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 6 (External Project) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Dự án Hackathon 2024</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-external-link-alt mr-1"></i>Dự án ngoài</p>
+                                            <p><i class="fas fa-trophy mr-1"></i>Cuộc thi Hackathon</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                        <i class="fas fa-star mr-1"></i>
+                                        External
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        Đang hoạt động
+                                    </span>
+                                    <span class="text-sm text-gray-500">3 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        01/12/2024 - 15/12/2024
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+                                        Vào Dự Án
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 7 (External Project) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Startup Weekend</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-external-link-alt mr-1"></i>Dự án ngoài</p>
+                                            <p><i class="fas fa-rocket mr-1"></i>Startup Competition</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                        <i class="fas fa-star mr-1"></i>
+                                        External
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Đã hoàn tất
+                                    </span>
+                                    <span class="text-sm text-gray-500">4 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        10/11/2024 - 12/11/2024
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-600 transition-colors">
+                                        Xem Dự Án
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 8 (Member) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Hệ thống Quản lý Bệnh viện</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-users mr-1"></i>Lớp Y tế-K15</p>
+                                            <p><i class="fas fa-chalkboard-teacher mr-1"></i>GV: PGS.TS. Vũ Thị H</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                        <i class="fas fa-user mr-1"></i>
+                                        Member
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        Đang hoạt động
+                                    </span>
+                                    <span class="text-sm text-gray-500">5 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        05/12/2024 - 25/12/2024
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+                                        Vào Dự Án
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 9 (Member) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Ứng dụng Giáo dục Online</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-users mr-1"></i>Lớp Sư phạm-K15</p>
+                                            <p><i class="fas fa-chalkboard-teacher mr-1"></i>GV: TS. Nguyễn Văn I</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                        <i class="fas fa-user mr-1"></i>
+                                        Member
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        Chờ phê duyệt
+                                    </span>
+                                    <span class="text-sm text-gray-500">4 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        15/12/2024 - 05/01/2025
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-gray-400 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-500 transition-colors">
+                                        Chờ Phê Duyệt
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 10 (External Project) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Microsoft Imagine Cup</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-external-link-alt mr-1"></i>Dự án ngoài</p>
+                                            <p><i class="fas fa-trophy mr-1"></i>Microsoft Competition</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                        <i class="fas fa-star mr-1"></i>
+                                        External
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        Đang hoạt động
+                                    </span>
+                                    <span class="text-sm text-gray-500">3 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        20/12/2024 - 15/01/2025
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+                                        Vào Dự Án
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 11 (Member) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Hệ thống Quản lý Nhà hàng</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-users mr-1"></i>Lớp Quản trị-K15</p>
+                                            <p><i class="fas fa-chalkboard-teacher mr-1"></i>GV: ThS. Trần Văn J</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                        <i class="fas fa-user mr-1"></i>
+                                        Member
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Đã hoàn tất
+                                    </span>
+                                    <span class="text-sm text-gray-500">6 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        01/11/2024 - 20/11/2024
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-600 transition-colors">
+                                        Xem Dự Án
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 12 (External Project) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Google Developer Student Clubs</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-external-link-alt mr-1"></i>Dự án ngoài</p>
+                                            <p><i class="fas fa-code mr-1"></i>Google Developer Program</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                        <i class="fas fa-star mr-1"></i>
+                                        External
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                        Đang hoạt động
+                                    </span>
+                                    <span class="text-sm text-gray-500">5 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        10/12/2024 - 30/01/2025
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+                                        Vào Dự Án
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 13 (Member) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Ứng dụng Thời tiết</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-users mr-1"></i>Lớp CNTT-K15</p>
+                                            <p><i class="fas fa-chalkboard-teacher mr-1"></i>GV: TS. Lê Văn K</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                        <i class="fas fa-user mr-1"></i>
+                                        Member
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                        <i class="fas fa-pause mr-1"></i>
+                                        Tạm dừng
+                                    </span>
+                                    <span class="text-sm text-gray-500">3 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        25/11/2024 - 15/12/2024
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-purple-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-600 transition-colors">
+                                        Xem Chi Tiết
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Card 14 (External Project) -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="p-6">
+                                <div class="flex items-start justify-between mb-4">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">Facebook Developer Circles</h3>
+                                        <div class="text-sm text-gray-500 mt-1 space-y-1">
+                                            <p><i class="fas fa-graduation-cap mr-1"></i>Học kỳ 1 - Năm học 2024-2025</p>
+                                            <p><i class="fas fa-external-link-alt mr-1"></i>Dự án ngoài</p>
+                                            <p><i class="fas fa-users mr-1"></i>Facebook Developer Community</p>
+                                        </div>
+                                    </div>
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                        <i class="fas fa-star mr-1"></i>
+                                        External
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                        Đã hoàn tất
+                                    </span>
+                                    <span class="text-sm text-gray-500">4 thành viên</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="text-sm text-gray-500">
+                                        <i class="fas fa-calendar mr-1"></i>
+                                        05/11/2024 - 25/11/2024
+                                    </div>
+                                    <button onclick="window.location.href='project.html'" class="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-600 transition-colors">
+                                        Xem Dự Án
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Project Modal -->
+    <div id="createProjectModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-900">Tạo Dự Án Mới</h3>
+                    <button id="closeCreateModal" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="createProjectForm">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tên dự án</label>
+                        <input type="text" name="projectName" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Mô tả</label>
+                        <textarea name="projectDescription" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3"></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Ngày bắt đầu</label>
+                            <input type="date" name="projectStartDate" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Ngày kết thúc</label>
+                            <input type="date" name="projectEndDate" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <!-- Thêm thành viên -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Thêm thành viên</label>
+                        <div class="space-y-3">
+                            <div class="flex space-x-2">
+                                <input type="email" id="memberEmail" placeholder="email@vlu.edu.vn" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
+                                <button type="button" id="addMemberBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm">
+                                    <i class="fas fa-plus mr-1"></i>
+                                    Mời
+                                </button>
+                            </div>
+                            
+                            <!-- Danh sách thành viên đã mời -->
+                            <div id="invitedMembersList" class="space-y-2">
+                                <!-- Members will be added here dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3">
+                        <button type="button" id="cancelCreateProject" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Hủy</button>
+                        <button type="submit" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700">Tạo Dự Án</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/script.js"></script>
+    <script>
+        // Simple initialization - no tab switching needed
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded - showing all projects on one page');
+            
+            // Ensure all project sections are visible
+            const leaderProjects = document.getElementById('leader-projects');
+            const memberProjects = document.getElementById('member-projects');
+            
+            if (leaderProjects) {
+                leaderProjects.style.display = 'block';
+                leaderProjects.style.visibility = 'visible';
+                leaderProjects.style.opacity = '1';
+                leaderProjects.classList.remove('hidden');
+                console.log('Leader projects visible');
+            }
+            
+            if (memberProjects) {
+                memberProjects.style.display = 'block';
+                memberProjects.style.visibility = 'visible';
+                memberProjects.style.opacity = '1';
+                memberProjects.classList.remove('hidden');
+                console.log('Member projects visible');
+            }
+            
+            console.log('All projects displayed on one page');
+        });
+    </script>
+</body>
+</html> 

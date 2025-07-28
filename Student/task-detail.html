@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLUTaskMate - Chi tiết Task</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vlu-red': '#dc2626',
+                        'vlu-light-red': '#fef2f2',
+                        'vlu-gray': '#6b7280'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-vlu-red">VLUTaskMate</a>
+                    <span class="mx-4 text-gray-400">/</span>
+                    <a href="project.html" class="text-gray-600 hover:text-vlu-red">Hệ thống Quản lý Thư viện</a>
+                    <span class="mx-4 text-gray-400">/</span>
+                    <span class="text-lg font-medium text-gray-900">Thiết kế Database</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-gray-600 hover:text-vlu-red">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">1</span>
+                    </button>
+                    <div class="relative">
+                        <button class="flex items-center space-x-2 text-gray-700 hover:text-vlu-red">
+                            <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
+                            <span class="text-sm font-medium">Hồ Du Tuấn Đạt</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex h-screen bg-gray-50">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-sm">
+            <nav class="mt-8">
+                <div class="px-4 space-y-2">
+                    <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                        <i class="fas fa-folder mr-3"></i>
+                        Dự án của tôi
+                    </a>
+                    <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                        <i class="fas fa-tasks mr-3"></i>
+                        Nhiệm vụ của tôi
+                    </a>
+                    <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                        <i class="fas fa-bell mr-3"></i>
+                        Thông báo
+                    </a>
+                    <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                        <i class="fas fa-user mr-3"></i>
+                        Tài khoản
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Task Header -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="flex-1">
+                            <h1 class="text-2xl font-bold text-gray-900 mb-2">Thiết kế Database</h1>
+                            <p class="text-gray-600 mb-4">Thiết kế cấu trúc database cho hệ thống quản lý thư viện bao gồm các bảng sách, độc giả, mượn trả, và báo cáo.</p>
+                            
+                            <div class="flex items-center space-x-6 text-sm text-gray-500">
+                                <div class="flex items-center">
+                                    <i class="fas fa-user mr-2"></i>
+                                    <span>Giao cho: Nguyễn Văn A</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-calendar mr-2"></i>
+                                    <span>Deadline: 15/12/2024</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock mr-2"></i>
+                                    <span>Còn 5 ngày</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
+                                Cao
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                In Progress
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task Content -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Main Content -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <!-- Subtasks -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Subtasks</h3>
+                                <button id="addSubtaskBtn" class="bg-vlu-red text-white px-3 py-1 rounded text-sm font-medium hover:bg-red-700 transition-colors">
+                                    <i class="fas fa-plus mr-1"></i>
+                                    Thêm
+                                </button>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg">
+                                    <input type="checkbox" class="h-4 w-4 text-vlu-red focus:ring-vlu-red border-gray-300 rounded" checked>
+                                    <span class="flex-1 text-gray-900 line-through">Tạo ERD diagram</span>
+                                    <span class="text-xs text-gray-500">Hoàn thành</span>
+                                </div>
+                                
+                                <div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg">
+                                    <input type="checkbox" class="h-4 w-4 text-vlu-red focus:ring-vlu-red border-gray-300 rounded">
+                                    <span class="flex-1 text-gray-900">Thiết kế các bảng chính</span>
+                                    <span class="text-xs text-gray-500">Đang làm</span>
+                                </div>
+                                
+                                <div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg">
+                                    <input type="checkbox" class="h-4 w-4 text-vlu-red focus:ring-vlu-red border-gray-300 rounded">
+                                    <span class="flex-1 text-gray-900">Tạo script SQL</span>
+                                    <span class="text-xs text-gray-500">Chưa bắt đầu</span>
+                                </div>
+                                
+                                <div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg">
+                                    <input type="checkbox" class="h-4 w-4 text-vlu-red focus:ring-vlu-red border-gray-300 rounded">
+                                    <span class="flex-1 text-gray-900">Viết tài liệu database</span>
+                                    <span class="text-xs text-gray-500">Chưa bắt đầu</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Comments -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Bình luận</h3>
+                            
+                            <div class="space-y-4 mb-6">
+                                <!-- Comment 1 -->
+                                <div class="flex space-x-3">
+                                    <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
+                                    <div class="flex-1">
+                                        <div class="flex items-center space-x-2 mb-1">
+                                            <span class="font-medium text-gray-900">Nguyễn Văn A</span>
+                                            <span class="text-xs text-gray-500">2 giờ trước</span>
+                                        </div>
+                                        <p class="text-gray-700 mb-2">ERD diagram đã hoàn thành. Bạn có thể xem trong file đính kèm.</p>
+                                        <div class="flex items-center space-x-4 text-xs text-gray-500">
+                                            <button class="hover:text-vlu-red">Trả lời</button>
+                                            <button class="hover:text-vlu-red">Chỉnh sửa</button>
+                                            <button class="hover:text-red-600">Xóa</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Comment 2 -->
+                                <div class="flex space-x-3">
+                                    <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
+                                    <div class="flex-1">
+                                        <div class="flex items-center space-x-2 mb-1">
+                                            <span class="font-medium text-gray-900">Hồ Du Tuấn Đạt</span>
+                                            <span class="text-xs text-gray-500">1 giờ trước</span>
+                                        </div>
+                                        <p class="text-gray-700 mb-2">Cảm ơn! Tôi sẽ review và cho feedback sớm nhất.</p>
+                                        <div class="flex items-center space-x-4 text-xs text-gray-500">
+                                            <button class="hover:text-vlu-red">Trả lời</button>
+                                            <button class="hover:text-vlu-red">Chỉnh sửa</button>
+                                            <button class="hover:text-red-600">Xóa</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Add Comment -->
+                            <div class="border-t pt-4">
+                                <div class="flex space-x-3">
+                                    <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
+                                    <div class="flex-1">
+                                        <textarea id="commentInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3" placeholder="Thêm bình luận..."></textarea>
+                                        <div class="flex items-center justify-between mt-2">
+                                            <div class="flex items-center space-x-2 text-sm text-gray-500">
+                                                <span>Hỗ trợ @mention</span>
+                                            </div>
+                                            <button id="submitComment" class="bg-vlu-red text-white px-4 py-2 rounded text-sm font-medium hover:bg-red-700 transition-colors">
+                                                Gửi bình luận
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="space-y-6">
+                        <!-- Task Info -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Thông tin Task</h3>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Người tạo</label>
+                                    <p class="text-gray-900">Hồ Du Tuấn Đạt</p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Ngày tạo</label>
+                                    <p class="text-gray-900">01/12/2024</p>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Trạng thái</label>
+                                    <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
+                                        <option>To Do</option>
+                                        <option selected>In Progress</option>
+                                        <option>Review</option>
+                                        <option>Done</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Độ ưu tiên</label>
+                                    <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
+                                        <option selected>Cao</option>
+                                        <option>Trung bình</option>
+                                        <option>Thấp</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Tags</label>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                            Database
+                                        </span>
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                            Backend
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Activity History -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Lịch sử hoạt động</h3>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-vlu-red rounded-full mt-2"></div>
+                                    <div class="flex-1">
+                                        <p class="text-sm text-gray-900">Task được tạo</p>
+                                        <p class="text-xs text-gray-500">01/12/2024 09:00</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                                    <div class="flex-1">
+                                        <p class="text-sm text-gray-900">Chuyển sang "In Progress"</p>
+                                        <p class="text-xs text-gray-500">02/12/2024 14:30</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                                    <div class="flex-1">
+                                        <p class="text-sm text-gray-900">Subtask "Tạo ERD diagram" hoàn thành</p>
+                                        <p class="text-xs text-gray-500">03/12/2024 11:15</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
+                                    <div class="flex-1">
+                                        <p class="text-sm text-gray-900">Bình luận được thêm</p>
+                                        <p class="text-xs text-gray-500">03/12/2024 16:45</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Hành động</h3>
+                            
+                            <div class="space-y-3">
+                                <button class="w-full bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+                                    <i class="fas fa-check mr-2"></i>
+                                    Hoàn thành Task
+                                </button>
+                                
+                                <button class="w-full bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-600 transition-colors">
+                                    <i class="fas fa-edit mr-2"></i>
+                                    Chỉnh sửa Task
+                                </button>
+                                
+                                <button class="w-full bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+                                    <i class="fas fa-trash mr-2"></i>
+                                    Xóa Task
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Subtask Modal -->
+    <div id="addSubtaskModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-900">Thêm Subtask</h3>
+                    <button id="closeSubtaskModal" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tên subtask</label>
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Mô tả</label>
+                        <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3"></textarea>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button type="button" id="cancelSubtask" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Hủy</button>
+                        <button type="submit" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700">Thêm Subtask</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/script.js"></script>
+</body>
+</html> 

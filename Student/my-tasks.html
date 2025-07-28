@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhiệm vụ của tôi - VLUTaskMate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../assets/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vlu-red': '#dc2626',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-vlu-red">VLUTaskMate</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- Notification Bell with Dropdown -->
+                    <div class="relative">
+                        <button id="notificationBtn" class="relative p-2 text-gray-600 hover:text-gray-900">
+                            <i class="fas fa-bell"></i>
+                            <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-vlu-red"></span>
+                        </button>
+                        
+                        <!-- Notification Dropdown -->
+                        <div id="notificationDropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                            <!-- Header -->
+                            <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                                <h3 class="text-lg font-semibold text-gray-900">Thông báo</h3>
+                                <button id="closeNotifications" class="text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Notification List -->
+                            <div class="max-h-96 overflow-y-auto">
+                                <!-- Task Assignment Notification -->
+                                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-tasks text-blue-600 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900">Bạn được giao nhiệm vụ mới</p>
+                                            <p class="text-sm text-gray-500 mt-1">"Thiết kế giao diện" trong dự án Website E-commerce</p>
+                                            <p class="text-xs text-gray-400 mt-1">2 phút trước</p>
+                                        </div>
+                                        <div class="flex flex-col space-y-1">
+                                            <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
+                                                Xác nhận
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Group Invitation Notification -->
+                                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-users text-purple-600 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900">Lời mời tham gia nhóm</p>
+                                            <p class="text-sm text-gray-500 mt-1">Bạn được mời tham gia dự án "Hệ thống Quản lý Thư viện"</p>
+                                            <p class="text-xs text-gray-400 mt-1">15 phút trước</p>
+                                        </div>
+                                        <div class="flex flex-col space-y-1">
+                                            <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
+                                                Xác nhận
+                                            </button>
+                                            <button class="bg-red-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-red-600 transition-colors">
+                                                Từ chối
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Footer -->
+                            <div class="p-4 border-t border-gray-200">
+                                <button onclick="window.location.href='notifications.html'" class="w-full text-center text-sm text-vlu-red hover:text-red-700 font-medium">
+                                    Xem tất cả thông báo
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <button id="userMenuBtn" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                            <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
+                            <span class="text-sm font-medium">Hồ Du Tuấn Đạt</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        
+                        <!-- User Menu Dropdown -->
+                        <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                            <div class="py-1">
+                                <button onclick="window.location.href='profile.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-user mr-3"></i>
+                                    Hồ sơ
+                                </button>
+                                <button onclick="window.location.href='login.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-sign-out-alt mr-3"></i>
+                                    Đăng xuất
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="flex h-screen bg-gray-50">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white shadow-sm border-r border-gray-200">
+            <div class="p-6">
+                <div class="px-4 space-y-2">
+                    <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                        <i class="fas fa-folder mr-3"></i>
+                        Dự án của tôi
+                    </a>
+                    <a href="my-tasks.html" class="flex items-center px-4 py-3 text-vlu-red bg-vlu-light-red rounded-lg font-medium">
+                        <i class="fas fa-tasks mr-3"></i>
+                        Nhiệm vụ của tôi
+                    </a>
+                    <a href="notifications.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                        <i class="fas fa-bell mr-3"></i>
+                        Thông báo
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Page Header -->
+                <div class="mb-8">
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-900">Nhiệm vụ của tôi</h2>
+                        <p class="text-gray-600 mt-2">Quản lý và theo dõi các nhiệm vụ cá nhân</p>
+                    </div>
+                </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Calendar Section -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-semibold text-gray-900">Lịch nhiệm vụ</h2>
+                        <div class="flex items-center space-x-2">
+                            <button id="prevMonth" class="p-2 text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span id="currentMonth" class="text-lg font-medium text-gray-900">Tháng 12, 2024</span>
+                            <button id="nextMonth" class="p-2 text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Calendar Grid -->
+                    <div class="calendar-container">
+                        <!-- Weekday Headers -->
+                        <div class="grid grid-cols-7 gap-1 mb-2">
+                            <div class="text-center text-sm font-medium text-gray-500 py-2">CN</div>
+                            <div class="text-center text-sm font-medium text-gray-500 py-2">T2</div>
+                            <div class="text-center text-sm font-medium text-gray-500 py-2">T3</div>
+                            <div class="text-center text-sm font-medium text-gray-500 py-2">T4</div>
+                            <div class="text-center text-sm font-medium text-gray-500 py-2">T5</div>
+                            <div class="text-center text-sm font-medium text-gray-500 py-2">T6</div>
+                            <div class="text-center text-sm font-medium text-gray-500 py-2">T7</div>
+                        </div>
+
+                        <!-- Calendar Days -->
+                        <div id="calendarDays" class="grid grid-cols-7 gap-1">
+                            <!-- Calendar days will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Tasks Section -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-6">Nhiệm vụ sắp đến hạn</h2>
+                    
+                    <div class="space-y-4" id="upcomingTasks">
+                        <!-- Task 1 - Due Today -->
+                        <div class="border-l-4 border-red-500 bg-red-50 p-4 rounded-r-lg">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-gray-900">Thiết kế giao diện</h3>
+                                    <p class="text-sm text-gray-600">Website E-commerce</p>
+                                    <p class="text-xs text-red-600 mt-1">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        Hôm nay
+                                    </p>
+                                </div>
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                    Khẩn cấp
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Task 2 - Due Tomorrow -->
+                        <div class="border-l-4 border-orange-500 bg-orange-50 p-4 rounded-r-lg">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-gray-900">Viết tài liệu API</h3>
+                                    <p class="text-sm text-gray-600">Website E-commerce</p>
+                                    <p class="text-xs text-orange-600 mt-1">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        Ngày mai
+                                    </p>
+                                </div>
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                    Cao
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Task 3 - Due in 3 days -->
+                        <div class="border-l-4 border-yellow-500 bg-yellow-50 p-4 rounded-r-lg">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-gray-900">Test tính năng thanh toán</h3>
+                                    <p class="text-sm text-gray-600">Website E-commerce</p>
+                                    <p class="text-xs text-yellow-600 mt-1">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        Trong 3 ngày
+                                    </p>
+                                </div>
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    Trung bình
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Task 4 - Due in 5 days -->
+                        <div class="border-l-4 border-blue-500 bg-blue-50 p-4 rounded-r-lg">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-gray-900">Review code</h3>
+                                    <p class="text-sm text-gray-600">Website E-commerce</p>
+                                    <p class="text-xs text-blue-600 mt-1">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        Trong 5 ngày
+                                    </p>
+                                </div>
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                    Thấp
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Task 5 - Due in 1 week -->
+                        <div class="border-l-4 border-green-500 bg-green-50 p-4 rounded-r-lg">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <h3 class="font-medium text-gray-900">Deploy lên server</h3>
+                                    <p class="text-sm text-gray-600">Website E-commerce</p>
+                                    <p class="text-xs text-green-600 mt-1">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        Trong 1 tuần
+                                    </p>
+                                </div>
+                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    Thấp
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- View All Tasks Button -->
+                    <div class="mt-6">
+                        <button onclick="window.location.href='all-tasks.html'" class="w-full bg-vlu-red text-white py-2 px-4 rounded-lg font-medium hover:bg-red-700 transition-colors">
+                            <i class="fas fa-list mr-2"></i>
+                            Xem tất cả nhiệm vụ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <!-- Task Statistics -->
+        <div class="mt-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-red-100 text-red-600">
+                            <i class="fas fa-exclamation-triangle text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Khẩn cấp</p>
+                            <p class="text-2xl font-bold text-gray-900">3</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-orange-100 text-orange-600">
+                            <i class="fas fa-clock text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Sắp đến hạn</p>
+                            <p class="text-2xl font-bold text-gray-900">5</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                            <i class="fas fa-spinner text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Đang thực hiện</p>
+                            <p class="text-2xl font-bold text-gray-900">8</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-green-100 text-green-600">
+                            <i class="fas fa-check-circle text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gray-600">Hoàn thành</p>
+                            <p class="text-2xl font-bold text-gray-900">12</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </main>
+    </div>
+
+    <script src="../assets/script.js"></script>
+    <script>
+        // Calendar functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarDays = document.getElementById('calendarDays');
+            const currentMonthElement = document.getElementById('currentMonth');
+            const prevMonthBtn = document.getElementById('prevMonth');
+            const nextMonthBtn = document.getElementById('nextMonth');
+
+            let currentDate = new Date();
+            let currentMonth = currentDate.getMonth();
+            let currentYear = currentDate.getFullYear();
+
+            // Sample task data
+            const tasks = [
+                { date: '2024-12-15', title: 'Thiết kế giao diện', project: 'Website E-commerce', priority: 'high', color: 'red' },
+                { date: '2024-12-16', title: 'Viết tài liệu API', project: 'Website E-commerce', priority: 'high', color: 'orange' },
+                { date: '2024-12-18', title: 'Test tính năng thanh toán', project: 'Website E-commerce', priority: 'medium', color: 'yellow' },
+                { date: '2024-12-20', title: 'Review code', project: 'Website E-commerce', priority: 'low', color: 'blue' },
+                { date: '2024-12-25', title: 'Deploy lên server', project: 'Website E-commerce', priority: 'low', color: 'green' },
+                { date: '2024-12-10', title: 'Fix bug login', project: 'Website E-commerce', priority: 'high', color: 'red' },
+                { date: '2024-12-12', title: 'Cập nhật database', project: 'Website E-commerce', priority: 'medium', color: 'orange' }
+            ];
+
+            function renderCalendar() {
+                const firstDay = new Date(currentYear, currentMonth, 1);
+                const lastDay = new Date(currentYear, currentMonth + 1, 0);
+                const startDate = new Date(firstDay);
+                startDate.setDate(startDate.getDate() - firstDay.getDay());
+
+                currentMonthElement.textContent = `${getMonthName(currentMonth)}, ${currentYear}`;
+
+                calendarDays.innerHTML = '';
+
+                for (let i = 0; i < 42; i++) {
+                    const date = new Date(startDate);
+                    date.setDate(startDate.getDate() + i);
+
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'min-h-[80px] border border-gray-200 p-2 relative';
+
+                    // Check if it's current month
+                    if (date.getMonth() === currentMonth) {
+                        dayElement.classList.add('bg-white');
+                    } else {
+                        dayElement.classList.add('bg-gray-50', 'text-gray-400');
+                    }
+
+                    // Check if it's today
+                    const today = new Date();
+                    if (date.toDateString() === today.toDateString()) {
+                        dayElement.classList.add('bg-blue-50', 'border-blue-300');
+                    }
+
+                    // Day number
+                    const dayNumber = document.createElement('div');
+                    dayNumber.className = 'text-sm font-medium mb-1';
+                    dayNumber.textContent = date.getDate();
+                    dayElement.appendChild(dayNumber);
+
+                    // Tasks for this day
+                    const dayTasks = tasks.filter(task => {
+                        const taskDate = new Date(task.date);
+                        return taskDate.toDateString() === date.toDateString();
+                    });
+
+                    dayTasks.forEach(task => {
+                        const taskElement = document.createElement('div');
+                        taskElement.className = `text-xs p-1 rounded mb-1 cursor-pointer hover:opacity-80 transition-opacity`;
+                        
+                        // Set color based on priority
+                        switch(task.color) {
+                            case 'red':
+                                taskElement.classList.add('bg-red-100', 'text-red-800');
+                                break;
+                            case 'orange':
+                                taskElement.classList.add('bg-orange-100', 'text-orange-800');
+                                break;
+                            case 'yellow':
+                                taskElement.classList.add('bg-yellow-100', 'text-yellow-800');
+                                break;
+                            case 'blue':
+                                taskElement.classList.add('bg-blue-100', 'text-blue-800');
+                                break;
+                            case 'green':
+                                taskElement.classList.add('bg-green-100', 'text-green-800');
+                                break;
+                        }
+
+                        taskElement.textContent = task.title;
+                        taskElement.title = `${task.title} - ${task.project}`;
+                        dayElement.appendChild(taskElement);
+                    });
+
+                    calendarDays.appendChild(dayElement);
+                }
+            }
+
+            function getMonthName(month) {
+                const months = [
+                    'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
+                    'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'
+                ];
+                return months[month];
+            }
+
+            // Navigation
+            prevMonthBtn.addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                renderCalendar();
+            });
+
+            nextMonthBtn.addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                renderCalendar();
+            });
+
+            // Initial render
+            renderCalendar();
+        });
+    </script>
+</body>
+</html> 
