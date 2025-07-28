@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLUTaskMate - Quản lý Nhóm</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id="login-page" class="login-wrapper">
+        <div class="login-card">
+            <h2>Đăng nhập VLUTaskMate</h2>
+            <form id="loginForm">
+                <label for="email">Email / MSSV</label>
+                <input type="email" id="email" placeholder="example@vlute.edu.vn" required>
+
+                <label for="password">Mật khẩu</label>
+                <input type="password" id="password" placeholder="********" required>
+
+                <button type="submit" class="primary">Đăng nhập</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="app-content" style="display: none;">
+        <nav class="navbar">
+            <div class="logo">VLUTaskMate</div>
+            <ul class="navbar-nav" id="main-navbar-links">
+                <li><a href="#" class="nav-link active" data-page="dashboard">🏠 Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-page="my-projects">📁 My Projects</a></li>
+            </ul>
+            <div class="navbar-right">
+                <div class="hamburger-menu" id="hamburgerMenu">☰</div>
+                <div class="user-info" id="userInfo">
+                    <img src="https://via.placeholder.com/40" alt="Avatar">
+                    <span id="userName">Nguyễn Văn A</span>
+                    <div class="user-dropdown" id="userDropdown">
+                        <a href="#">Account Settings</a>
+                        <a href="#" id="logoutButton">Đăng xuất</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+        <div class="mobile-nav" id="mobileNav">
+            <span class="close-mobile-nav" id="closeMobileNav">&times;</span>
+            <ul>
+                <li><a href="#" class="nav-link active" data-page="dashboard">🏠 Dashboard</a></li>
+                <li><a href="#" class="nav-link" data-page="my-projects">📁 My Projects</a></li>
+                <li><a href="#">Account Settings</a></li>
+                <li><a href="#" id="logoutButtonMobile">Đăng xuất</a></li>
+            </ul>
+        </div>
+
+        <main class="container">
+            <section id="dashboard-page" class="page-content active">
+                <h2>Dashboard</h2>
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>📅 Lịch deadline</h3>
+                        <div class="calendar-view">
+                            <p>Hiển thị lịch các task có deadline</p>
+                            </div>
+                    </div>
+                    <div class="card">
+                        <h3>⏰ Danh sách task sắp tới hạn</h3>
+                        <div class="upcoming-tasks-list">
+                            <p>Task 1: Hoàn thành báo cáo (còn 2 ngày)</p>
+                            <p>Task 2: Họp nhóm (còn 1 ngày)</p>
+                            <p>Task 3: Nộp đề cương (còn 3 ngày)</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>🔔 Thông báo nhanh</h3>
+                        <div class="notifications-list">
+                            <div class="notification-item">Bạn được mời vào nhóm "Phát triển ứng dụng di động".</div>
+                            <div class="notification-item">Có comment mới trong task "Thiết kế UI".</div>
+                            <div class="notification-item">Task "Xây dựng Backend" đã được tạo.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="my-projects-page" class="page-content">
+                <h2>My Projects</h2>
+                <div class="tabs">
+                    <button class="tab-button active" data-tab="leader-projects">👑 As Team Leader</button>
+                    <button class="tab-button" data-tab="invited-projects">🤝 Invited Projects</button>
+                </div>
+
+                <div id="leader-projects-content" class="tab-content-pane active">
+                    <div class="project-grid">
+                        <div class="project-card">
+                            <h4>VLUTaskMate v1</h4>
+                            <p>Môn học: Phát triển ứng dụng Web</p>
+                            <p>Học kỳ: 2024-2025/1</p>
+                            <p>Tiến độ:</p>
+                            <div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div>
+                            <button class="view-button" data-project-id="1">View Project</button>
+                        </div>
+                        <div class="project-card">
+                            <h4>Project Alpha</h4>
+                            <p>Môn học: Cơ sở dữ liệu</p>
+                            <p>Học kỳ: 2024-2025/1</p>
+                            <p>Tiến độ:</p>
+                            <div class="progress-bar-container"><div class="progress-bar" style="width: 20%;"></div></div>
+                            <button class="view-button" data-project-id="2">View Project</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="invited-projects-content" class="tab-content-pane">
+                    <div class="project-grid">
+                        <div class="project-card">
+                            <h4>Đồ án tốt nghiệp</h4>
+                            <p>Môn học: Đồ án</p>
+                            <p>Học kỳ: 2024-2025/2</p>
+                            <p>Tiến độ:</p>
+                            <div class="progress-bar-container"><div class="progress-bar" style="width: 50%;"></div></div>
+                            <button class="view-button" data-project-id="3">View Project</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="project-detail-page" class="page-content">
+                <div class="project-detail-header">
+                    <h2 id="project-detail-title">VLUTaskMate v1</h2>
+                    <p id="project-detail-desc">Hệ thống quản lý nhóm và dự án cho sinh viên VLUTE.</p>
+                </div>
+
+                <div class="project-detail-tabs">
+                    <button class="project-detail-tab-button active" data-detail-tab="tasks">🗂 Tasks</button>
+                    <button class="project-detail-tab-button" data-detail-tab="team">👥 Team</button>
+                    <button class="project-detail-tab-button" data-detail-tab="comments">💬 Comments</button>
+                    <button class="project-detail-tab-button" data-detail-tab="evaluation">📝 Evaluation</button>
+                    <button class="project-detail-tab-button" data-detail-tab="project-info">📄 Project Info</button>
+                </div>
+
+                <div id="tasks-tab-content" class="tab-content active">
+                    <h3>Quản lý Task</h3>
+                    <div class="kanban-board">
+                        <div class="kanban-column" id="column-todo">
+                            <h4>To Do</h4>
+                            <div class="task-card" draggable="true" data-task-id="T001">
+                                <h5>Thiết kế cơ sở dữ liệu</h5>
+                                <p>Deadline: 25/07/2025</p>
+                                <p><span class="badge assignee">NV A</span> <span class="badge status">Mới</span></p>
+                            </div>
+                            <div class="task-card" draggable="true" data-task-id="T002">
+                                <h5>Phân tích yêu cầu</h5>
+                                <p>Deadline: 20/07/2025</p>
+                                <p><span class="badge assignee">LT B</span> <span class="badge status">Mới</span></p>
+                            </div>
+                            <button class="primary" style="margin-top: 1rem;">+ Thêm Task</button>
+                        </div>
+                        <div class="kanban-column" id="column-in-progress">
+                            <h4>In Progress</h4>
+                            <div class="task-card" draggable="true" data-task-id="T003">
+                                <h5>Xây dựng giao diện đăng nhập</h5>
+                                <p>Deadline: 30/07/2025</p>
+                                <p><span class="badge assignee">CD C</span> <span class="badge status">Đang làm</span></p>
+                            </div>
+                        </div>
+                        <div class="kanban-column" id="column-done">
+                            <h4>Done</h4>
+                            <div class="task-card" draggable="true" data-task-id="T004">
+                                <h5>Khởi tạo dự án</h5>
+                                <p>Hoàn thành: 15/07/2025</p>
+                                <p><span class="badge assignee">NV A</span> <span class="badge status">Đã xong</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="team-tab-content" class="tab-content">
+                    <h3>Thành viên nhóm</h3>
+                    <ul class="team-list">
+                        <li class="team-member-item">
+                            <img src="https://via.placeholder.com/50" alt="Avatar">
+                            <div class="member-info">
+                                <h5>Nguyễn Văn A (Leader)</h5>
+                                <p>MSSV: 21110001</p>
+                            </div>
+                            <div class="member-actions">
+                                <button class="secondary">Chuyển quyền</button>
+                                <button class="danger">Xóa</button>
+                            </div>
+                        </li>
+                        <li class="team-member-item">
+                            <img src="https://via.placeholder.com/50" alt="Avatar">
+                            <div class="member-info">
+                                <h5>Lê Thị B</h5>
+                                <p>MSSV: 21110002</p>
+                            </div>
+                            <div class="member-actions">
+                                </div>
+                        </li>
+                    </ul>
+                    <button class="primary" style="margin-top: 1.5rem;">Mời thành viên</button>
+                </div>
+
+                <div id="comments-tab-content" class="tab-content">
+                    <h3>Bình luận</h3>
+                    <div class="comments-section">
+                        <div class="comment-input-area">
+                            <textarea placeholder="Viết bình luận của bạn..."></textarea>
+                            <button class="primary">Gửi</button>
+                        </div>
+                        <div class="comment-list">
+                            <div class="comment-item">
+                                <img src="https://via.placeholder.com/40" alt="Avatar" class="comment-avatar">
+                                <div class="comment-content">
+                                    <div class="comment-meta"><strong>Nguyễn Văn A</strong> - 22/07/2025 10:30 AM</div>
+                                    <p>Mình đã hoàn thành phần thiết kế database. Mọi người xem có cần chỉnh sửa gì không nhé!</p>
+                                </div>
+                            </div>
+                            <div class="comment-item">
+                                <img src="https://via.placeholder.com/40" alt="Avatar" class="comment-avatar">
+                                <div class="comment-content">
+                                    <div class="comment-meta"><strong>Lê Thị B</strong> - 22/07/2025 11:00 AM</div>
+                                    <p>Mình thấy tốt rồi đó A. Chú ý thêm ràng buộc khóa ngoại nhé.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="evaluation-tab-content" class="tab-content">
+                    <h3>Đánh giá dự án</h3>
+                    <p>Chức năng đánh giá sẽ hiển thị khi dự án hoàn thành.</p>
+                    </div>
+
+                <div id="project-info-tab-content" class="tab-content">
+                    <h3>Thông tin dự án</h3>
+                    <div class="project-info-detail">
+                        <div class="info-item">
+                            <label>Tên nhóm:</label>
+                            <span>VLUTaskMate v1</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Môn học:</label>
+                            <span>Phát triển ứng dụng Web</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Học kỳ:</label>
+                            <span>2024-2025/1</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Trạng thái:</label>
+                            <span>Đang hoạt động</span>
+                        </div>
+                        <div class="info-item full-width">
+                            <label>Mô tả:</label>
+                            <span>Hệ thống quản lý nhóm và dự án dành riêng cho sinh viên trường VLUTE, giúp tối ưu hóa quá trình làm việc nhóm, theo dõi tiến độ và giao tiếp hiệu quả.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="taskDetailModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close-button">&times;</button>
+            <h3>Chi tiết Task: <span id="modalTaskTitle"></span></h3>
+            <p><strong>Mô tả:</strong> <span id="modalTaskDescription"></span></p>
+            <p><strong>Deadline:</strong> <span id="modalTaskDeadline"></span></p>
+            <p><strong>Người thực hiện:</strong> <span id="modalTaskAssignee"></span></p>
+            <p><strong>Trạng thái:</strong> <span id="modalTaskStatus"></span></p>
+
+            <h4>Subtasks (Checklist)</h4>
+            <ul id="modalSubtaskList">
+                <li><input type="checkbox"> Subtask 1</li>
+                <li><input type="checkbox" checked> Subtask 2</li>
+            </ul>
+
+            <h4>Bình luận về Task</h4>
+            <div id="modalTaskComments">
+                <div class="comment-input-area" style="margin-top: 1rem;">
+                    <textarea placeholder="Viết bình luận..."></textarea>
+                    <button class="primary">Gửi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
