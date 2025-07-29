@@ -108,21 +108,25 @@
                     <div class="relative">
                         <button id="userMenuBtn" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
                             <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
-                            <span class="text-sm font-medium">Hồ Du Tuấn Đạt</span>
+                            <span class="text-sm font-medium" id="userName">Hồ Du Tuấn Đạt</span>
                             <i class="fas fa-chevron-down text-xs"></i>
                         </button>
                         
                         <!-- User Menu Dropdown -->
                         <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                            <div class="px-4 py-2 text-sm text-gray-700 border-b">
+                                <div id="userEmail">student@vlu.edu.vn</div>
+                                <div class="text-xs text-gray-500">Sinh viên</div>
+                            </div>
                             <div class="py-1">
                                 <button onclick="window.location.href='profile.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     <i class="fas fa-user mr-3"></i>
                                     Hồ sơ
                                 </button>
-                                <button onclick="window.location.href='login.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                <a href="../logout.html" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     <i class="fas fa-sign-out-alt mr-3"></i>
                                     Đăng xuất
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -136,7 +140,7 @@
         <aside class="w-64 bg-white shadow-sm">
             <nav class="mt-8">
                 <div class="px-4 space-y-2">
-                    <a href="index.html" class="flex items-center px-4 py-3 text-vlu-red bg-vlu-light-red rounded-lg font-medium">
+                    <a href="index.html" class="flex items-center px-4 py-3 text-vlu-red bg-red-50 rounded-lg font-medium">
                         <i class="fas fa-folder mr-3"></i>
                         Dự án của tôi
                     </a>
@@ -818,9 +822,132 @@
 
     <script src="../assets/script.js"></script>
     <script>
+        // Check user authentication and role
+        function checkAuth() {
+            const userInfo = localStorage.getItem('userInfo');
+            if (!userInfo) {
+                window.location.href = '../login.html';
+                return;
+            }
+
+            const user = JSON.parse(userInfo);
+            if (user.role !== 'student') {
+                alert('Bạn không có quyền truy cập trang này!');
+                window.location.href = '../login.html';
+                return;
+            }
+
+            // Update user info in header
+            document.getElementById('userName').textContent = user.name;
+            document.getElementById('userEmail').textContent = user.email;
+        }
+
         // Simple initialization - no tab switching needed
         document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
             console.log('DOM loaded - showing all projects on one page');
+            
+            // Debug: Check if elements exist
+            console.log('User menu button:', document.getElementById('userMenuBtn'));
+            console.log('User menu dropdown:', document.getElementById('userMenuDropdown'));
+            console.log('Notification button:', document.getElementById('notificationBtn'));
+            console.log('Notification dropdown:', document.getElementById('notificationDropdown'));
+            console.log('Close notifications button:', document.getElementById('closeNotifications'));
+            
+            // User menu toggle
+            const userMenuBtn = document.getElementById('userMenuBtn');
+            const userMenuDropdown = document.getElementById('userMenuDropdown');
+            
+            if (userMenuBtn && userMenuDropdown) {
+                userMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    userMenuDropdown.classList.toggle('hidden');
+                    console.log('User menu toggled');
+                });
+            }
+
+            // Notification button toggle
+            const notificationBtn = document.getElementById('notificationBtn');
+            const notificationDropdown = document.getElementById('notificationDropdown');
+            
+            if (notificationBtn && notificationDropdown) {
+                notificationBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    notificationDropdown.classList.toggle('hidden');
+                    console.log('Notification dropdown toggled');
+                });
+            }
+
+            // Close notification dropdown
+            const closeNotificationsBtn = document.getElementById('closeNotifications');
+            if (closeNotificationsBtn && notificationDropdown) {
+                closeNotificationsBtn.addEventListener('click', function() {
+                    notificationDropdown.classList.add('hidden');
+                    console.log('Notifications closed');
+                });
+            }
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(event) {
+                // Close user menu
+                if (userMenuDropdown && userMenuBtn && !userMenuDropdown.contains(event.target) && !userMenuBtn.contains(event.target)) {
+                    userMenuDropdown.classList.add('hidden');
+                }
+                
+                // Close notification dropdown
+                if (notificationDropdown && notificationBtn && !notificationDropdown.contains(event.target) && !notificationBtn.contains(event.target)) {
+                    notificationDropdown.classList.add('hidden');
+                }
+            });
+
+            // Create project modal functionality
+            document.getElementById('createProjectBtn').addEventListener('click', function() {
+                document.getElementById('createProjectModal').classList.remove('hidden');
+            });
+
+            document.getElementById('closeCreateModal').addEventListener('click', function() {
+                document.getElementById('createProjectModal').classList.add('hidden');
+            });
+
+            document.getElementById('cancelCreateProject').addEventListener('click', function() {
+                document.getElementById('createProjectModal').classList.add('hidden');
+            });
+
+            // Close modal when clicking outside
+            document.getElementById('createProjectModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.add('hidden');
+                }
+            });
+
+            // Handle form submission
+            document.getElementById('createProjectForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                // Simulate form submission
+                alert('Dự án đã được tạo thành công!');
+                this.reset();
+                document.getElementById('createProjectModal').classList.add('hidden');
+            });
+
+            // Handle add member button
+            document.getElementById('addMemberBtn').addEventListener('click', function() {
+                const emailInput = document.getElementById('memberEmail');
+                const email = emailInput.value.trim();
+                
+                if (email) {
+                    const membersList = document.getElementById('invitedMembersList');
+                    const memberItem = document.createElement('div');
+                    memberItem.className = 'flex items-center justify-between p-2 bg-gray-50 rounded';
+                    memberItem.innerHTML = `
+                        <span class="text-sm text-gray-700">${email}</span>
+                        <button type="button" class="text-red-500 hover:text-red-700" onclick="this.parentElement.remove()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    membersList.appendChild(memberItem);
+                    emailInput.value = '';
+                }
+            });
             
             // Ensure all project sections are visible
             const leaderProjects = document.getElementById('leader-projects');

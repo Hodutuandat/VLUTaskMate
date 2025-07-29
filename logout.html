@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VLUTaskMate - Đăng xuất</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vlu-red': '#dc2626',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-vlu-red to-red-800 min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full mx-4">
+        <!-- Logo and Title -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full shadow-lg mb-4">
+                <i class="fas fa-tasks text-3xl text-vlu-red"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-white mb-2">VLUTaskMate</h1>
+            <p class="text-white/80">Đăng xuất thành công</p>
+        </div>
+
+        <!-- Logout Message -->
+        <div class="bg-white rounded-lg shadow-xl p-8 text-center">
+            <div class="mb-6">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-2xl text-green-600"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Đăng xuất thành công</h2>
+                <p class="text-gray-600">Bạn đã đăng xuất khỏi hệ thống</p>
+            </div>
+
+            <div class="space-y-4">
+                <a href="login.html" 
+                   class="w-full bg-vlu-red text-white py-3 px-4 rounded-lg font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors inline-block">
+                    <i class="fas fa-sign-in-alt mr-2"></i>
+                    Đăng nhập lại
+                </a>
+                
+                <button onclick="goBack()" 
+                        class="w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Quay lại
+                </button>
+            </div>
+
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600">
+                    Cảm ơn bạn đã sử dụng VLUTaskMate
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Clear user session
+        function clearUserSession() {
+            localStorage.removeItem('userInfo');
+            sessionStorage.clear();
+        }
+
+        // Go back to previous page
+        function goBack() {
+            if (document.referrer) {
+                window.history.back();
+            } else {
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Auto redirect to login after 5 seconds
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 5000);
+
+        // Clear session when page loads
+        window.addEventListener('load', function() {
+            clearUserSession();
+        });
+    </script>
+</body>
+</html> 
