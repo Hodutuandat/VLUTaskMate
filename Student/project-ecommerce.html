@@ -415,31 +415,145 @@
                 <!-- Tag Selection -->
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 mb-3">Chọn tag:</label>
-                    <div class="grid grid-cols-2 gap-2">
-                        <button class="tag-btn px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-vlu-red hover:text-vlu-red transition-colors" data-tag="Thận thiện">
-                            Thân thiện
-                        </button>
-                        <button class="tag-btn px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-vlu-red hover:text-vlu-red transition-colors" data-tag="Hòa đồng">
-                            Hòa đồng
-                        </button>
-                        <button class="tag-btn px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-vlu-red hover:text-vlu-red transition-colors" data-tag="Hoạt bát">
-                            Hoạt bát
-                        </button>
-                        <button class="tag-btn px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-vlu-red hover:text-vlu-red transition-colors" data-tag="Không hòa đồng">
-                            Không hòa đồng
-                        </button>
-                        <button class="tag-btn px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-vlu-red hover:text-vlu-red transition-colors" data-tag="Trễ hạn">
-                            Trễ hạn
-                        </button>
-                        <button class="tag-btn px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-vlu-red hover:text-vlu-red transition-colors" data-tag="Chủ động">
-                            Chủ động
-                        </button>
-                        <button class="tag-btn px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-vlu-red hover:text-vlu-red transition-colors" data-tag="Tích cực">
-                            Tích cực
-                        </button>
-                        <button class="tag-btn px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-vlu-red hover:text-vlu-red transition-colors" data-tag="Lười biếng">
-                            Lười biếng
-                        </button>
+                    
+                    <!-- Positive Tags -->
+                    <div class="mb-4">
+                        <h5 class="text-sm font-medium text-green-700 mb-2 flex items-center">
+                            <i class="fas fa-plus-circle mr-1"></i>
+                            Tag Tích Cực
+                        </h5>
+                        <div class="grid grid-cols-1 gap-2">
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Đúng hạn" data-description="Luôn hoàn thành đúng thời gian">
+                                <div class="flex justify-between items-center">
+                                    <span>Đúng hạn</span>
+                                    <span class="text-xs text-gray-500">Luôn hoàn thành đúng thời gian</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Có trách nhiệm" data-description="Nhận nhiệm vụ và làm đến cùng">
+                                <div class="flex justify-between items-center">
+                                    <span>Có trách nhiệm</span>
+                                    <span class="text-xs text-gray-500">Nhận nhiệm vụ và làm đến cùng</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Hỗ trợ tốt" data-description="Luôn sẵn sàng hỗ trợ bạn nhóm">
+                                <div class="flex justify-between items-center">
+                                    <span>Hỗ trợ tốt</span>
+                                    <span class="text-xs text-gray-500">Luôn sẵn sàng hỗ trợ bạn nhóm</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Lắng nghe" data-description="Biết tiếp thu ý kiến, lắng nghe góp ý">
+                                <div class="flex justify-between items-center">
+                                    <span>Lắng nghe</span>
+                                    <span class="text-xs text-gray-500">Biết tiếp thu ý kiến, lắng nghe góp ý</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Giao tiếp tốt" data-description="Giao tiếp rõ ràng, hiệu quả">
+                                <div class="flex justify-between items-center">
+                                    <span>Giao tiếp tốt</span>
+                                    <span class="text-xs text-gray-500">Giao tiếp rõ ràng, hiệu quả</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Linh hoạt" data-description="Dễ thích nghi, đổi kế hoạch phù hợp">
+                                <div class="flex justify-between items-center">
+                                    <span>Linh hoạt</span>
+                                    <span class="text-xs text-gray-500">Dễ thích nghi, đổi kế hoạch phù hợp</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Tư duy phản biện" data-description="Có góc nhìn phản biện tích cực">
+                                <div class="flex justify-between items-center">
+                                    <span>Tư duy phản biện</span>
+                                    <span class="text-xs text-gray-500">Có góc nhìn phản biện tích cực</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Sáng tạo" data-description="Đưa ra ý tưởng hay, khác biệt">
+                                <div class="flex justify-between items-center">
+                                    <span>Sáng tạo</span>
+                                    <span class="text-xs text-gray-500">Đưa ra ý tưởng hay, khác biệt</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Gắn kết nhóm" data-description="Kết nối và duy trì tinh thần nhóm">
+                                <div class="flex justify-between items-center">
+                                    <span>Gắn kết nhóm</span>
+                                    <span class="text-xs text-gray-500">Kết nối và duy trì tinh thần nhóm</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Kiên trì" data-description="Không bỏ cuộc giữa chừng">
+                                <div class="flex justify-between items-center">
+                                    <span>Kiên trì</span>
+                                    <span class="text-xs text-gray-500">Không bỏ cuộc giữa chừng</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Negative Tags -->
+                    <div>
+                        <h5 class="text-sm font-medium text-red-700 mb-2 flex items-center">
+                            <i class="fas fa-minus-circle mr-1"></i>
+                            Tag Tiêu Cực
+                        </h5>
+                        <div class="grid grid-cols-1 gap-2">
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Thiếu trách nhiệm" data-description="Nhận task nhưng không hoàn thành">
+                                <div class="flex justify-between items-center">
+                                    <span>Thiếu trách nhiệm</span>
+                                    <span class="text-xs text-gray-500">Nhận task nhưng không hoàn thành</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Không phản hồi" data-description="Không trả lời khi trao đổi nhóm">
+                                <div class="flex justify-between items-center">
+                                    <span>Không phản hồi</span>
+                                    <span class="text-xs text-gray-500">Không trả lời khi trao đổi nhóm</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Giao tiếp kém" data-description="Truyền đạt không rõ, gây hiểu lầm">
+                                <div class="flex justify-between items-center">
+                                    <span>Giao tiếp kém</span>
+                                    <span class="text-xs text-gray-500">Truyền đạt không rõ, gây hiểu lầm</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Tự ý quyết định" data-description="Làm việc không bàn bạc">
+                                <div class="flex justify-between items-center">
+                                    <span>Tự ý quyết định</span>
+                                    <span class="text-xs text-gray-500">Làm việc không bàn bạc</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Không đúng tiến độ" data-description="Thường xuyên trễ deadline">
+                                <div class="flex justify-between items-center">
+                                    <span>Không đúng tiến độ</span>
+                                    <span class="text-xs text-gray-500">Thường xuyên trễ deadline</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Mất kết nối" data-description="Biến mất giữa dự án, không tương tác">
+                                <div class="flex justify-between items-center">
+                                    <span>Mất kết nối</span>
+                                    <span class="text-xs text-gray-500">Biến mất giữa dự án, không tương tác</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Thiếu linh hoạt" data-description="Cứng nhắc, khó thích nghi">
+                                <div class="flex justify-between items-center">
+                                    <span>Thiếu linh hoạt</span>
+                                    <span class="text-xs text-gray-500">Cứng nhắc, khó thích nghi</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Phản ứng tiêu cực" data-description="Hay phàn nàn, tiêu cực khi làm việc">
+                                <div class="flex justify-between items-center">
+                                    <span>Phản ứng tiêu cực</span>
+                                    <span class="text-xs text-gray-500">Hay phàn nàn, tiêu cực khi làm việc</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Làm việc đơn lẻ" data-description="Không phối hợp với các thành viên khác">
+                                <div class="flex justify-between items-center">
+                                    <span>Làm việc đơn lẻ</span>
+                                    <span class="text-xs text-gray-500">Không phối hợp với các thành viên khác</span>
+                                </div>
+                            </button>
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Vi phạm nội quy" data-description="Không tuân thủ nguyên tắc nhóm">
+                                <div class="flex justify-between items-center">
+                                    <span>Vi phạm nội quy</span>
+                                    <span class="text-xs text-gray-500">Không tuân thủ nguyên tắc nhóm</span>
+                                </div>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -493,7 +607,7 @@
                     // Reset tags
                     selectedTags = [];
                     tagButtons.forEach(btn => {
-                        btn.classList.remove('bg-vlu-red', 'text-white', 'border-vlu-red');
+                        btn.classList.remove('bg-green-500', 'text-white', 'border-green-500', 'bg-red-500', 'border-red-500');
                         btn.classList.add('border-gray-300', 'text-gray-700');
                     });
                     
@@ -559,16 +673,27 @@
             tagButtons.forEach(btn => {
                 btn.addEventListener('click', function() {
                     const tag = this.getAttribute('data-tag');
+                    const isPositive = this.classList.contains('positive-tag');
+                    const isNegative = this.classList.contains('negative-tag');
                     
-                    if (this.classList.contains('bg-vlu-red')) {
+                    if (this.classList.contains('bg-green-500') || this.classList.contains('bg-red-500')) {
                         // Deselect tag
-                        this.classList.remove('bg-vlu-red', 'text-white', 'border-vlu-red');
-                        this.classList.add('border-gray-300', 'text-gray-700');
+                        if (isPositive) {
+                            this.classList.remove('bg-green-500', 'text-white', 'border-green-500');
+                            this.classList.add('border-gray-300', 'text-gray-700');
+                        } else if (isNegative) {
+                            this.classList.remove('bg-red-500', 'text-white', 'border-red-500');
+                            this.classList.add('border-gray-300', 'text-gray-700');
+                        }
                         selectedTags = selectedTags.filter(t => t !== tag);
                     } else {
                         // Select tag
                         this.classList.remove('border-gray-300', 'text-gray-700');
-                        this.classList.add('bg-vlu-red', 'text-white', 'border-vlu-red');
+                        if (isPositive) {
+                            this.classList.add('bg-green-500', 'text-white', 'border-green-500');
+                        } else if (isNegative) {
+                            this.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                        }
                         selectedTags.push(tag);
                     }
                 });
