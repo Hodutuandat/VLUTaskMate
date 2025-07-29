@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VLUTaskMate - Đánh giá tổng hợp</title>
+    <title>VLUTaskMate - Aggregate Evaluation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
@@ -19,7 +19,6 @@
     </script>
 </head>
 <body class="bg-gray-50">
-    <!-- Header -->
     <header class="bg-white shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
@@ -34,7 +33,6 @@
                             <span class="text-sm font-medium" id="userName">Admin</span>
                             <i class="fas fa-chevron-down text-xs"></i>
                         </button>
-                        <!-- User Menu Dropdown -->
                         <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
                             <div class="px-4 py-2 text-sm text-gray-700 border-b">
                                 <div id="userEmail">admin@adminvlu.vn</div>
@@ -42,7 +40,7 @@
                             </div>
                             <a href="../logout.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                 <i class="fas fa-sign-out-alt mr-2"></i>
-                                Đăng xuất
+                                Log out
                             </a>
                         </div>
                     </div>
@@ -51,13 +49,11 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <div class="flex">
-        <!-- Sidebar -->
         <aside class="w-64 bg-white shadow-sm min-h-screen">
             <nav class="mt-8">
                 <div class="px-4 py-2">
-                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Quản trị hệ thống</h3>
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">System Administration</h3>
                 </div>
                 <div class="mt-2">
                     <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900">
@@ -66,65 +62,62 @@
                     </a>
                     <a href="system-settings.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                         <i class="fas fa-cog mr-3"></i>
-                        <span>Cài đặt hệ thống</span>
+                        <span>System Settings</span>
                     </a>
                     <a href="student-accounts.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                         <i class="fas fa-users mr-3"></i>
-                        <span>Quản lý sinh viên</span>
+                        <span>Student Management</span>
                     </a>
                     <a href="group-monitoring.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                         <i class="fas fa-chart-line mr-3"></i>
-                        <span>Giám sát nhóm</span>
+                        <span>Group Monitoring</span>
                     </a>
                     <a href="#" class="flex items-center px-4 py-3 text-gray-700 bg-gray-100 border-r-2 border-vlu-red">
                         <i class="fas fa-star mr-3"></i>
-                        <span class="font-medium">Đánh giá tổng hợp</span>
+                        <span class="font-medium">Aggregate Evaluation</span>
                     </a>
                 </div>
             </nav>
         </aside>
 
-        <!-- Main Content Area -->
         <main class="flex-1 p-8">
-            <!-- Page Header -->
             <div class="mb-8">
-                <h1 class="text-3xl font-bold text-gray-900">Đánh giá tổng hợp</h1>
-                <p class="text-gray-600 mt-2">Xem báo cáo và thống kê đánh giá sinh viên</p>
+                <h1 class="text-3xl font-bold text-gray-900">Aggregate Evaluation</h1>
+                <p class="text-gray-600 mt-2">View student evaluation reports and statistics</p>
             </div>
 
-            <!-- Filters -->
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Học kỳ</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Semester</label>
                         <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red">
-                            <option value="">Tất cả học kỳ</option>
-                            <option value="hk1-2024" selected>Học kỳ 1 - 2024-2025</option>
-                            <option value="hk2-2023">Học kỳ 2 - 2023-2024</option>
+                            <option value="">All Semesters</option>
+                            <option value="hk1-2024" selected>Semester 1 - 2024-2025</option>
+                            <option value="hk2-2023">Semester 2 - 2023-2024</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Môn học</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
                         <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red">
-                            <option value="">Tất cả môn học</option>
-                            <option value="web">Phát triển Web</option>
-                            <option value="mobile">Phát triển Mobile</option>
-                            <option value="database">Cơ sở dữ liệu</option>
+                            <option value="">All Subjects</option>
+                            <option value="web">Web Development</option>
+                            <option value="mobile">Mobile Development</option>
+                            <option value="database">Database</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Lớp</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Class</label>
                         <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red">
-                            <option value="">Tất cả lớp</option>
+                            <option value="">All Classes</option>
                             <option value="72K29CNTT01">72K29CNTT01</option>
                             <option value="72K29CNTT02">72K29CNTT02</option>
                             <option value="72K29CNTT03">72K29CNTT03</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Khoảng điểm</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Score Range</label>
                         <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red">
-                            <option value="">Tất cả</option>
+                            <option value="">All</option>
                             <option value="4-5">4.0 - 5.0</option>
                             <option value="3-4">3.0 - 4.0</option>
                             <option value="2-3">2.0 - 3.0</option>
@@ -135,22 +128,21 @@
                 <div class="flex justify-between items-center">
                     <button class="bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
                         <i class="fas fa-search mr-2"></i>
-                        Lọc
+                        Filter
                     </button>
                     <div class="flex space-x-2">
                         <button class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors">
                             <i class="fas fa-file-csv mr-2"></i>
-                            Xuất CSV
+                            Export CSV
                         </button>
                         <button class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
                             <i class="fas fa-file-pdf mr-2"></i>
-                            Xuất PDF
+                            Export PDF
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Statistics Overview -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center">
@@ -160,7 +152,7 @@
                             </div>
                         </div>
                         <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">Tổng sinh viên</p>
+                            <p class="text-sm font-medium text-gray-500">Total Students</p>
                             <p class="text-2xl font-bold text-gray-900">1,247</p>
                         </div>
                     </div>
@@ -173,7 +165,7 @@
                             </div>
                         </div>
                         <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">Điểm TB chung</p>
+                            <p class="text-sm font-medium text-gray-500">Overall Avg. Score</p>
                             <p class="text-2xl font-bold text-gray-900">4.2</p>
                         </div>
                     </div>
@@ -186,7 +178,7 @@
                             </div>
                         </div>
                         <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">Đánh giá đã nộp</p>
+                            <p class="text-sm font-medium text-gray-500">Evaluations Submitted</p>
                             <p class="text-2xl font-bold text-gray-900">89%</p>
                         </div>
                     </div>
@@ -199,26 +191,25 @@
                             </div>
                         </div>
                         <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">Xuất sắc (4.5+)</p>
+                            <p class="text-sm font-medium text-gray-500">Excellent (4.5+)</p>
                             <p class="text-2xl font-bold text-gray-900">156</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Evaluation Data -->
             <div class="bg-white rounded-lg shadow-sm border border-gray-200">
                 <div class="px-6 py-4 border-b border-gray-200">
                     <div class="flex items-center justify-between">
-                        <h2 class="text-lg font-semibold text-gray-900">Dữ liệu đánh giá</h2>
+                        <h2 class="text-lg font-semibold text-gray-900">Evaluation Data</h2>
                         <div class="flex items-center space-x-2">
                             <button class="text-sm text-gray-500 hover:text-gray-700">
                                 <i class="fas fa-chart-bar mr-1"></i>
-                                Biểu đồ
+                                Chart
                             </button>
                             <button class="text-sm text-gray-500 hover:text-gray-700">
                                 <i class="fas fa-table mr-1"></i>
-                                Bảng
+                                Table
                             </button>
                         </div>
                     </div>
@@ -229,43 +220,43 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Học phần
+                                    Subject
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Nhóm
+                                    Group
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Sinh viên
+                                    Student
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Điểm TB
+                                    Avg. Score
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Số lượt đánh giá
+                                    No. of Evaluations
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Nhận xét
+                                    Comments
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Thao tác
+                                    Actions
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">Phát triển Mobile</div>
+                                    <div class="text-sm font-medium text-gray-900">Mobile Development</div>
                                     <div class="text-sm text-gray-500">72K29CNTT01</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">Mobile Banking App</div>
-                                    <div class="text-sm text-gray-500">4 thành viên</div>
+                                    <div class="text-sm text-gray-500">4 members</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="Student">
                                         <div class="ml-3">
-                                            <div class="text-sm font-medium text-gray-900">Hồ Du Tuấn Đạt</div>
+                                            <div class="text-sm font-medium text-gray-900">Ho Du Tuan Dat</div>
                                             <div class="text-sm text-gray-500">2374802010097</div>
                                         </div>
                                     </div>
@@ -287,27 +278,27 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">3</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <button onclick="viewComments('2374802010097')" class="text-vlu-red hover:text-red-700 text-sm">
-                                        Xem nhận xét
+                                        View comments
                                     </button>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button onclick="viewStudentEvaluation('2374802010097')" class="text-vlu-red hover:text-red-700">Xem chi tiết</button>
+                                    <button onclick="viewStudentEvaluation('2374802010097')" class="text-vlu-red hover:text-red-700">View Details</button>
                                 </td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">Phát triển Web</div>
+                                    <div class="text-sm font-medium text-gray-900">Web Development</div>
                                     <div class="text-sm text-gray-500">72K29CNTT01</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">Library Management</div>
-                                    <div class="text-sm text-gray-500">3 thành viên</div>
+                                    <div class="text-sm text-gray-500">3 members</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="Student">
                                         <div class="ml-3">
-                                            <div class="text-sm font-medium text-gray-900">Nguyễn Thị Anh</div>
+                                            <div class="text-sm font-medium text-gray-900">Nguyen Thi Anh</div>
                                             <div class="text-sm text-gray-500">2374802010098</div>
                                         </div>
                                     </div>
@@ -329,27 +320,27 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <button onclick="viewComments('2374802010098')" class="text-vlu-red hover:text-red-700 text-sm">
-                                        Xem nhận xét
+                                        View comments
                                     </button>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button onclick="viewStudentEvaluation('2374802010098')" class="text-vlu-red hover:text-red-700">Xem chi tiết</button>
+                                    <button onclick="viewStudentEvaluation('2374802010098')" class="text-vlu-red hover:text-red-700">View Details</button>
                                 </td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">Phát triển Web</div>
+                                    <div class="text-sm font-medium text-gray-900">Web Development</div>
                                     <div class="text-sm text-gray-500">72K29CNTT02</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">E-commerce Website</div>
-                                    <div class="text-sm text-gray-500">4 thành viên</div>
+                                    <div class="text-sm text-gray-500">4 members</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="Student">
                                         <div class="ml-3">
-                                            <div class="text-sm font-medium text-gray-900">Trần Văn Bình</div>
+                                            <div class="text-sm font-medium text-gray-900">Tran Van Binh</div>
                                             <div class="text-sm text-gray-500">2374802010099</div>
                                         </div>
                                     </div>
@@ -371,26 +362,25 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">2</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <button onclick="viewComments('2374802010099')" class="text-vlu-red hover:text-red-700 text-sm">
-                                        Xem nhận xét
+                                        View comments
                                     </button>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button onclick="viewStudentEvaluation('2374802010099')" class="text-vlu-red hover:text-red-700">Xem chi tiết</button>
+                                    <button onclick="viewStudentEvaluation('2374802010099')" class="text-vlu-red hover:text-red-700">View Details</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Pagination -->
                 <div class="px-6 py-4 border-t border-gray-200">
                     <div class="flex items-center justify-between">
                         <div class="text-sm text-gray-500">
-                            Hiển thị 1-10 của 1,247 đánh giá
+                            Showing 1-10 of 1,247 evaluations
                         </div>
                         <div class="flex items-center space-x-2">
                             <button class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">
-                                Trước
+                                Previous
                             </button>
                             <button class="px-3 py-1 bg-vlu-red text-white rounded-md text-sm">1</button>
                             <button class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">2</button>
@@ -398,7 +388,7 @@
                             <span class="text-sm text-gray-500">...</span>
                             <button class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">125</button>
                             <button class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-700 hover:bg-gray-50">
-                                Sau
+                                Next
                             </button>
                         </div>
                     </div>
@@ -407,38 +397,34 @@
         </main>
     </div>
 
-    <!-- Comments Modal -->
     <div id="commentsModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
         <div class="relative top-10 mx-auto p-5 border w-11/12 max-w-2xl shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-semibold text-gray-900">Nhận xét đánh giá</h3>
+                    <h3 class="text-xl font-semibold text-gray-900">Evaluation Comments</h3>
                     <button onclick="closeCommentsModal()" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
                 
                 <div id="commentsContent" class="space-y-4">
-                    <!-- Comments will be loaded dynamically -->
-                </div>
+                    </div>
             </div>
         </div>
     </div>
 
-    <!-- Student Evaluation Modal -->
     <div id="studentEvaluationModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
         <div class="relative top-10 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-xl font-semibold text-gray-900">Chi tiết đánh giá sinh viên</h3>
+                    <h3 class="text-xl font-semibold text-gray-900">Student Evaluation Details</h3>
                     <button onclick="closeStudentEvaluationModal()" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
                 
                 <div id="studentEvaluationContent">
-                    <!-- Content will be loaded dynamically -->
-                </div>
+                    </div>
             </div>
         </div>
     </div>
@@ -449,9 +435,9 @@
             const content = `
                 <div class="bg-gray-50 rounded-lg p-4 mb-4">
                     <div class="flex items-center mb-2">
-                        <span class="text-sm font-medium text-gray-900">Hồ Du Tuấn Đạt (2374802010097)</span>
+                        <span class="text-sm font-medium text-gray-900">Ho Du Tuan Dat (2374802010097)</span>
                     </div>
-                    <p class="text-sm text-gray-600 mb-2">Dự án: Mobile Banking App</p>
+                    <p class="text-sm text-gray-600 mb-2">Project: Mobile Banking App</p>
                 </div>
                 
                 <div class="space-y-4">
@@ -464,9 +450,9 @@
                                 <i class="fas fa-star text-sm"></i>
                                 <i class="far fa-star text-sm"></i>
                             </div>
-                            <span class="text-sm text-gray-500">Đánh giá từ thành viên nhóm</span>
+                            <span class="text-sm text-gray-500">Evaluation from group member</span>
                         </div>
-                        <p class="text-sm text-gray-700">Có trách nhiệm, hoàn thành đúng hạn, giao tiếp tốt với nhóm.</p>
+                        <p class="text-sm text-gray-700">Responsible, completes on time, good communication with the group.</p>
                     </div>
                     
                     <div class="border-l-4 border-blue-500 pl-4">
@@ -478,9 +464,9 @@
                                 <i class="fas fa-star text-sm"></i>
                                 <i class="far fa-star text-sm"></i>
                             </div>
-                            <span class="text-sm text-gray-500">Đánh giá từ thành viên nhóm</span>
+                            <span class="text-sm text-gray-500">Evaluation from group member</span>
                         </div>
-                        <p class="text-sm text-gray-700">Làm việc chăm chỉ, có ý tưởng sáng tạo, hỗ trợ tốt cho team.</p>
+                        <p class="text-sm text-gray-700">Hardworking, has creative ideas, good support for the team.</p>
                     </div>
                     
                     <div class="border-l-4 border-purple-500 pl-4">
@@ -492,9 +478,9 @@
                                 <i class="fas fa-star text-sm"></i>
                                 <i class="far fa-star text-sm"></i>
                             </div>
-                            <span class="text-sm text-gray-500">Đánh giá từ thành viên nhóm</span>
+                            <span class="text-sm text-gray-500">Evaluation from group member</span>
                         </div>
-                        <p class="text-sm text-gray-700">Cần cải thiện thêm về kỹ năng thuyết trình.</p>
+                        <p class="text-sm text-gray-700">Needs to improve presentation skills.</p>
                     </div>
                 </div>
             `;
@@ -511,65 +497,62 @@
             // Simulate loading student evaluation details
             const content = `
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                    <!-- Student Information -->
                     <div class="bg-gray-50 rounded-lg p-4">
-                        <h4 class="font-medium text-gray-900 mb-4">Thông tin sinh viên</h4>
+                        <h4 class="font-medium text-gray-900 mb-4">Student Information</h4>
                         <div class="space-y-3">
                             <div class="flex justify-between">
-                                <span class="text-sm text-gray-600">Họ và tên:</span>
-                                <span class="text-sm font-medium">Hồ Du Tuấn Đạt</span>
+                                <span class="text-sm text-gray-600">Full Name:</span>
+                                <span class="text-sm font-medium">Ho Du Tuan Dat</span>
                             </div>
                             <div class="flex justify-between">
-                                <span class="text-sm text-gray-600">MSSV:</span>
+                                <span class="text-sm text-gray-600">Student ID:</span>
                                 <span class="text-sm font-medium">2374802010097</span>
                             </div>
                             <div class="flex justify-between">
-                                <span class="text-sm text-gray-600">Lớp:</span>
+                                <span class="text-sm text-gray-600">Class:</span>
                                 <span class="text-sm font-medium">72K29CNTT01</span>
                             </div>
                             <div class="flex justify-between">
-                                <span class="text-sm text-gray-600">Điểm TB chung:</span>
+                                <span class="text-sm text-gray-600">Overall Avg. Score:</span>
                                 <span class="text-sm font-medium">4.2/5.0</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Evaluation Summary -->
                     <div class="bg-gray-50 rounded-lg p-4">
-                        <h4 class="font-medium text-gray-900 mb-4">Tổng hợp đánh giá</h4>
+                        <h4 class="font-medium text-gray-900 mb-4">Evaluation Summary</h4>
                         <div class="space-y-3">
                             <div class="flex justify-between">
-                                <span class="text-sm text-gray-600">Tổng số đánh giá:</span>
+                                <span class="text-sm text-gray-600">Total Evaluations:</span>
                                 <span class="text-sm font-medium">15</span>
                             </div>
                             <div class="flex justify-between">
-                                <span class="text-sm text-gray-600">Điểm cao nhất:</span>
+                                <span class="text-sm text-gray-600">Highest Score:</span>
                                 <span class="text-sm font-medium">4.8</span>
                             </div>
                             <div class="flex justify-between">
-                                <span class="text-sm text-gray-600">Điểm thấp nhất:</span>
+                                <span class="text-sm text-gray-600">Lowest Score:</span>
                                 <span class="text-sm font-medium">3.5</span>
                             </div>
                             <div class="flex justify-between">
-                                <span class="text-sm text-gray-600">Độ lệch chuẩn:</span>
+                                <span class="text-sm text-gray-600">Standard Deviation:</span>
                                 <span class="text-sm font-medium">0.3</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Evaluation History -->
                 <div class="mb-6">
-                    <h4 class="font-medium text-gray-900 mb-4">Lịch sử đánh giá theo dự án</h4>
+                    <h4 class="font-medium text-gray-900 mb-4">Project-based Evaluation History</h4>
                     <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Dự án</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Học kỳ</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Điểm TB</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Số lượt</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Vai trò</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Project</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Semester</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Avg. Score</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Count</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Role</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
@@ -621,4 +604,4 @@
     </script>
     <script src="admin-script.js"></script>
 </body>
-</html> 
+</html>

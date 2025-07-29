@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VLUTaskMate - Chi tiết dự án</title>
+    <title>VLUTaskMate - Project Details</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/style.css">
@@ -20,28 +20,140 @@
             }
         }
     </script>
+    <style>
+        /* Drag and Drop Styles */
+        .task-card.dragging {
+            opacity: 0.5;
+            transform: rotate(5deg);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .kanban-column.drag-over {
+            background-color: #f3f4f6;
+            border: 2px dashed #3b82f6;
+            border-radius: 8px;
+        }
+
+        .kanban-column.drag-over .kanban-task-list {
+            min-height: 100px;
+        }
+
+        .drop-indicator {
+            height: 3px;
+            background-color: #3b82f6;
+            margin: 8px 0;
+            border-radius: 2px;
+            transition: all 0.2s ease;
+        }
+
+        .task-card.drag-over {
+            border: 2px dashed #3b82f6;
+            background-color: #eff6ff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Header -->
     <header class="bg-white shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
-                    <a href="index.html" class="text-2xl font-bold text-vlu-red">VLUTaskMate</a>
-                    <span class="mx-4 text-gray-400">/</span>
-                    <span class="text-lg font-medium text-gray-900">Hệ thống Quản lý Thư viện</span>
+                    <h1 class="text-2xl font-bold text-vlu-red">VLUTaskMate</h1>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button class="relative p-2 text-gray-600 hover:text-vlu-red">
-                        <i class="fas fa-bell text-xl"></i>
-                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">2</span>
-                    </button>
                     <div class="relative">
-                        <button class="flex items-center space-x-2 text-gray-700 hover:text-vlu-red">
+                        <button id="notificationBtn" class="relative p-2 text-gray-600 hover:text-gray-900">
+                            <i class="fas fa-bell"></i>
+                            <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-vlu-red"></span>
+                        </button>
+                        
+                        <div id="notificationDropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                            <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                                <h3 class="text-lg font-semibold text-gray-900">Notifications</h3>
+                                <button id="closeNotifications" class="text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="max-h-96 overflow-y-auto">
+                                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-tasks text-blue-600 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900">You have a new task assigned</p>
+                                            <p class="text-sm text-gray-500 mt-1">"Interface Design" in the E-commerce Website project</p>
+                                            <p class="text-xs text-gray-400 mt-1">2 minutes ago</p>
+                                        </div>
+                                        <div class="flex flex-col space-y-1">
+                                            <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
+                                                Confirm
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-users text-purple-600 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900">Group Invitation</p>
+                                            <p class="text-sm text-gray-500 mt-1">You are invited to join the "Library Management System" project</p>
+                                            <p class="text-xs text-gray-400 mt-1">15 minutes ago</p>
+                                        </div>
+                                        <div class="flex flex-col space-y-1">
+                                            <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
+                                                Accept
+                                            </button>
+                                            <button class="bg-red-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-red-600 transition-colors">
+                                                Decline
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-4 border-t border-gray-200">
+                                <button onclick="window.location.href='notifications.html'" class="w-full text-center text-sm text-vlu-red hover:text-red-700 font-medium">
+                                    View all notifications
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <button id="userMenuBtn" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
                             <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
-                            <span class="text-sm font-medium">Hồ Du Tuấn Đạt</span>
+                            <span class="text-sm font-medium">Ho Du Tuan Dat</span>
                             <i class="fas fa-chevron-down text-xs"></i>
                         </button>
+                        
+                        <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                            <div class="py-1">
+                                <button onclick="window.location.href='profile.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-user mr-3"></i>
+                                    Profile
+                                </button>
+                                <a href="../logout.html" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-sign-out-alt mr-3"></i>
+                                    Log out
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,43 +161,36 @@
     </header>
 
     <div class="flex h-screen bg-gray-50">
-        <!-- Sidebar -->
         <aside class="w-64 bg-white shadow-sm">
             <nav class="mt-8">
                 <div class="px-4 space-y-2">
-                    <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                    <a href="index.html" class="flex items-center px-4 py-3 text-vlu-red bg-red-50 rounded-lg font-medium">
                         <i class="fas fa-folder mr-3"></i>
-                        Dự án của tôi
+                        My Groups
                     </a>
                     <a href="my-tasks.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
                         <i class="fas fa-tasks mr-3"></i>
-                        Nhiệm vụ của tôi
+                        My Tasks
                     </a>
                     <a href="notifications.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
                         <i class="fas fa-bell mr-3"></i>
-                        Thông báo
-                    </a>
-                    <a href="profile.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
-                        <i class="fas fa-user mr-3"></i>
-                        Tài khoản
+                        Notifications
                     </a>
                 </div>
             </nav>
         </aside>
 
-        <!-- Main Content -->
         <main class="flex-1 overflow-y-auto">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <!-- Project Info -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
                     <div class="flex items-center justify-between mb-4">
                         <div>
-                            <h1 class="text-2xl font-bold text-gray-900">Hệ thống Quản lý Thư viện</h1>
+                            <h1 class="text-2xl font-bold text-gray-900">Library Management System</h1>
                             <div class="text-gray-600 mt-2 space-y-1">
-                                <p><i class="fas fa-graduation-cap mr-2"></i>Học kỳ 1 - Năm học 2024-2025</p>
-                                <p><i class="fas fa-users mr-2"></i>Lớp CNTT-K15</p>
-                                <p><i class="fas fa-chalkboard-teacher mr-2"></i>GV: TS. Nguyễn Văn A</p>
-                                <p><i class="fas fa-calendar mr-2"></i>01/12/2024 đến 15/12/2024</p>
+                                <p><i class="fas fa-graduation-cap mr-2"></i>Semester 1 - Academic Year 2024-2025</p>
+                                <p><i class="fas fa-users mr-2"></i>Class CNTT-K15</p>
+                                <p><i class="fas fa-chalkboard-teacher mr-2"></i>Lecturer: Dr. Nguyen Van A</p>
+                                <p><i class="fas fa-calendar mr-2"></i>01/12/2024 to 15/12/2024</p>
                             </div>
                         </div>
                         <div class="flex items-center space-x-3">
@@ -93,59 +198,55 @@
                                 Leader
                             </span>
                             <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                                Đang hoạt động
+                                Active
                             </span>
-                            <button class="leave-group-toolbar-btn bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors" data-member="Hồ Du Tuấn Đạt" data-role="Leader">
+                            <button class="leave-group-toolbar-btn bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors" data-member="Ho Du Tuan Dat" data-role="Leader">
                                 <i class="fas fa-sign-out-alt mr-2"></i>
-                                Rời nhóm
+                                Leave Group
                             </button>
                         </div>
                     </div>
-                    <p class="text-gray-700">Xây dựng hệ thống quản lý thư viện trực tuyến với các tính năng mượn trả sách, quản lý độc giả, và báo cáo thống kê.</p>
+                    <p class="text-gray-700">Develop an online library management system with features for borrowing/returning books, managing readers, and statistical reports.</p>
                 </div>
 
-                <!-- Navigation Tabs -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
                     <nav class="flex space-x-8 px-6">
                         <button class="tab-btn py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" data-tab="members">
                             <i class="fas fa-users mr-2"></i>
-                            Thành viên nhóm
+                            Group Members
                         </button>
                         <button class="tab-btn active py-4 px-1 border-b-2 border-vlu-red text-vlu-red font-medium" data-tab="tasks">
                             <i class="fas fa-tasks mr-2"></i>
-                            Nhiệm vụ
+                            Tasks
                         </button>
                         <button class="tab-btn py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" data-tab="evaluation">
                             <i class="fas fa-chart-bar mr-2"></i>
-                            Đánh giá
+                            Evaluation
                         </button>
                         <button class="tab-btn py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" data-tab="close">
                             <i class="fas fa-lock mr-2"></i>
-                            Đóng dự án
+                            Close Project
                         </button>
                     </nav>
                 </div>
 
-                <!-- Tab Content -->
                 <div id="tabContent">
-                    <!-- Members Tab -->
                     <div id="members" class="tab-content hidden" data-tab-content="members">
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-lg font-semibold text-gray-900">Thành viên nhóm</h3>
+                                <h3 class="text-lg font-semibold text-gray-900">Group Members</h3>
                                 <button id="inviteMemberBtn" class="bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
                                     <i class="fas fa-plus mr-2"></i>
-                                    Mời thành viên
+                                    Invite Member
                                 </button>
                             </div>
                             
                             <div class="space-y-4">
-                                <!-- Member 1 -->
                                 <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                                     <div class="flex items-center space-x-4">
                                         <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="Member">
                                         <div>
-                                            <h4 class="font-medium text-gray-900">Hồ Du Tuấn Đạt</h4>
+                                            <h4 class="font-medium text-gray-900">Ho Du Tuan Dat</h4>
                                             <p class="text-sm text-gray-500">2374802010097 - 72K29CNTT01</p>
                                         </div>
                                     </div>
@@ -153,19 +254,18 @@
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                             Leader
                                         </span>
-                                        <button class="kick-member-btn text-red-600 hover:text-red-800 font-medium text-sm px-3 py-1 rounded border border-red-600 hover:bg-red-50 transition-colors" data-member="Hồ Du Tuấn Đạt">
+                                        <button class="kick-member-btn text-red-600 hover:text-red-800 font-medium text-sm px-3 py-1 rounded border border-red-600 hover:bg-red-50 transition-colors" data-member="Ho Du Tuan Dat">
                                             <i class="fas fa-user-times mr-1"></i>
                                             Kick
                                         </button>
                                     </div>
                                 </div>
 
-                                <!-- Member 2 -->
                                 <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                                     <div class="flex items-center space-x-4">
                                         <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="Member">
                                         <div>
-                                            <h4 class="font-medium text-gray-900">Nguyễn Văn A</h4>
+                                            <h4 class="font-medium text-gray-900">Nguyen Van A</h4>
                                             <p class="text-sm text-gray-500">2374802010098 - 72K29CNTT01</p>
                                         </div>
                                     </div>
@@ -173,19 +273,18 @@
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                             Member
                                         </span>
-                                        <button class="kick-member-btn text-red-600 hover:text-red-800 font-medium text-sm px-3 py-1 rounded border border-red-600 hover:bg-red-50 transition-colors" data-member="Nguyễn Văn A">
+                                        <button class="kick-member-btn text-red-600 hover:text-red-800 font-medium text-sm px-3 py-1 rounded border border-red-600 hover:bg-red-50 transition-colors" data-member="Nguyen Van A">
                                             <i class="fas fa-user-times mr-1"></i>
                                             Kick
                                         </button>
                                     </div>
                                 </div>
 
-                                <!-- Member 3 -->
                                 <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                                     <div class="flex items-center space-x-4">
                                         <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="Member">
                                         <div>
-                                            <h4 class="font-medium text-gray-900">Trần Thị B</h4>
+                                            <h4 class="font-medium text-gray-900">Tran Thi B</h4>
                                             <p class="text-sm text-gray-500">2374802010099 - 72K29CNTT01</p>
                                         </div>
                                     </div>
@@ -193,19 +292,18 @@
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                             Member
                                         </span>
-                                        <button class="kick-member-btn text-red-600 hover:text-red-800 font-medium text-sm px-3 py-1 rounded border border-red-600 hover:bg-red-50 transition-colors" data-member="Trần Thị B">
+                                        <button class="kick-member-btn text-red-600 hover:text-red-800 font-medium text-sm px-3 py-1 rounded border border-red-600 hover:bg-red-50 transition-colors" data-member="Tran Thi B">
                                             <i class="fas fa-user-times mr-1"></i>
                                             Kick
                                         </button>
                                     </div>
                                 </div>
 
-                                <!-- Pending Member -->
                                 <div class="flex items-center justify-between p-4 border border-yellow-200 rounded-lg bg-yellow-50">
                                     <div class="flex items-center space-x-4">
                                         <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="Member">
                                         <div>
-                                            <h4 class="font-medium text-gray-900">Lê Văn C</h4>
+                                            <h4 class="font-medium text-gray-900">Le Van C</h4>
                                             <p class="text-sm text-gray-500">2374802010100 - 72K29CNTT01</p>
                                         </div>
                                     </div>
@@ -214,7 +312,7 @@
                                             <i class="fas fa-clock mr-1"></i>
                                             Pending
                                         </span>
-                                        <button class="kick-member-btn text-red-600 hover:text-red-800 font-medium text-sm px-3 py-1 rounded border border-red-600 hover:bg-red-50 transition-colors" data-member="Lê Văn C">
+                                        <button class="kick-member-btn text-red-600 hover:text-red-800 font-medium text-sm px-3 py-1 rounded border border-red-600 hover:bg-red-50 transition-colors" data-member="Le Van C">
                                             <i class="fas fa-user-times mr-1"></i>
                                             Kick
                                         </button>
@@ -224,34 +322,30 @@
                         </div>
                     </div>
 
-                    <!-- Tasks Tab -->
                     <div id="tasks" class="tab-content active" data-tab-content="tasks">
                         <div class="bg-gray-50 rounded-lg p-6">
 
-                            <!-- Kanban Board -->
                             <div class="flex space-x-6 overflow-x-auto pb-4">
-                                <!-- To Do Column -->
                                 <div class="flex-shrink-0 w-80">
                                     <div class="bg-white rounded-lg shadow-sm border border-gray-200">
                                         <div class="p-4 border-b border-gray-200">
                                             <div class="flex items-center justify-between">
-                                                <h4 class="font-medium text-gray-900">To Do</h4>
+                                                <h4 class="font-medium text-gray-900">To Do <span class="text-sm text-gray-500 task-count">(2)</span></h4>
                                                 <button class="text-gray-400 hover:text-gray-600">
                                                     <i class="fas fa-ellipsis-h"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="p-4">
-                                            <div class="space-y-3">
-                                                <!-- Task Card 1 -->
-                                                <div class="bg-gray-50 rounded-lg p-3 cursor-pointer task-card hover:bg-gray-100 transition-colors" data-task-id="1" data-task-title="Sinh viên điểm danh bằng QR" data-task-description="Là sinh viên, tôi muốn quét mã QR để điểm danh nhanh chóng và chính xác." data-task-type="Feature" data-task-priority="High">
+                                        <div class="p-4 kanban-column" data-column="todo">
+                                            <div class="space-y-3 kanban-task-list">
+                                                <div class="bg-gray-50 rounded-lg p-3 cursor-pointer task-card hover:bg-gray-100 transition-colors" draggable="true" data-task-id="1" data-task-title="Student Attendance by QR" data-task-description="As a student, I want to scan a QR code for quick and accurate attendance." data-task-type="Feature" data-task-priority="High">
                                                     <div class="flex items-start justify-between mb-2">
-                                                        <h5 class="font-medium text-gray-900 text-sm">Sinh viên điểm danh bằng QR</h5>
+                                                        <h5 class="font-medium text-gray-900 text-sm">Student Attendance by QR</h5>
                                                         <button class="text-gray-400 hover:text-gray-600">
                                                             <i class="fas fa-ellipsis-h text-xs"></i>
                                                         </button>
                                                     </div>
-                                                    <p class="text-xs text-gray-600 mb-3">Là sinh viên, tôi muốn quét mã QR để điểm danh nhanh chóng và chính xác.</p>
+                                                    <p class="text-xs text-gray-600 mb-3">As a student, I want to scan a QR code for quick and accurate attendance.</p>
                                                     <div class="flex items-center justify-between">
                                                         <div class="flex items-center space-x-2">
                                                             <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
@@ -268,15 +362,14 @@
                                                     </div>
                                                 </div>
 
-                                                <!-- Task Card 2 -->
-                                                <div class="bg-gray-50 rounded-lg p-3 cursor-pointer task-card hover:bg-gray-100 transition-colors" data-task-id="2" data-task-title="Thiết kế Database" data-task-description="Thiết kế cấu trúc database cho hệ thống thư viện" data-task-type="Backend" data-task-priority="High">
+                                                <div class="bg-gray-50 rounded-lg p-3 cursor-pointer task-card hover:bg-gray-100 transition-colors" draggable="true" data-task-id="2" data-task-title="Database Design" data-task-description="Design the database structure for the library system" data-task-type="Backend" data-task-priority="High">
                                                     <div class="flex items-start justify-between mb-2">
-                                                        <h5 class="font-medium text-gray-900 text-sm">Thiết kế Database</h5>
+                                                        <h5 class="font-medium text-gray-900 text-sm">Database Design</h5>
                                                         <button class="text-gray-400 hover:text-gray-600">
                                                             <i class="fas fa-ellipsis-h text-xs"></i>
                                                         </button>
                                                     </div>
-                                                    <p class="text-xs text-gray-600 mb-3">Thiết kế cấu trúc database cho hệ thống thư viện</p>
+                                                    <p class="text-xs text-gray-600 mb-3">Design the database structure for the library system</p>
                                                     <div class="flex items-center justify-between">
                                                         <div class="flex items-center space-x-2">
                                                             <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -294,7 +387,6 @@
                                                 </div>
                                             </div>
                                             
-                                            <!-- Add Task Button -->
                                             <button class="add-card-btn w-full mt-3 p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors text-sm" data-column="todo">
                                                 <i class="fas fa-plus mr-2"></i>
                                                 Add a task
@@ -303,28 +395,26 @@
                                     </div>
                                 </div>
 
-                                <!-- In Progress Column -->
                                 <div class="flex-shrink-0 w-80">
                                     <div class="bg-white rounded-lg shadow-sm border border-gray-200">
                                         <div class="p-4 border-b border-gray-200">
                                             <div class="flex items-center justify-between">
-                                                <h4 class="font-medium text-gray-900">In Progress</h4>
+                                                <h4 class="font-medium text-gray-900">In Progress <span class="text-sm text-gray-500 task-count">(1)</span></h4>
                                                 <button class="text-gray-400 hover:text-gray-600">
                                                     <i class="fas fa-ellipsis-h"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="p-4">
-                                            <div class="space-y-3">
-                                                <!-- Task Card -->
-                                                <div class="bg-gray-50 rounded-lg p-3 cursor-pointer task-card hover:bg-gray-100 transition-colors" data-task-id="3" data-task-title="Frontend Development" data-task-description="Phát triển giao diện người dùng với React" data-task-type="Frontend" data-task-priority="Medium">
+                                        <div class="p-4 kanban-column" data-column="inprogress">
+                                            <div class="space-y-3 kanban-task-list">
+                                                <div class="bg-gray-50 rounded-lg p-3 cursor-pointer task-card hover:bg-gray-100 transition-colors" draggable="true" data-task-id="3" data-task-title="Frontend Development" data-task-description="Develop user interface with React" data-task-type="Frontend" data-task-priority="Medium">
                                                     <div class="flex items-start justify-between mb-2">
                                                         <h5 class="font-medium text-gray-900 text-sm">Frontend Development</h5>
                                                         <button class="text-gray-400 hover:text-gray-600">
                                                             <i class="fas fa-ellipsis-h text-xs"></i>
                                                         </button>
                                                     </div>
-                                                    <p class="text-xs text-gray-600 mb-3">Phát triển giao diện người dùng với React</p>
+                                                    <p class="text-xs text-gray-600 mb-3">Develop user interface with React</p>
                                                     <div class="flex items-center justify-between">
                                                         <div class="flex items-center space-x-2">
                                                             <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
@@ -342,7 +432,6 @@
                                                 </div>
                                             </div>
                                             
-                                            <!-- Add Task Button -->
                                             <button class="add-card-btn w-full mt-3 p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors text-sm" data-column="inprogress">
                                                 <i class="fas fa-plus mr-2"></i>
                                                 Add a task
@@ -351,28 +440,26 @@
                                     </div>
                                 </div>
 
-                                <!-- Review Column -->
                                 <div class="flex-shrink-0 w-80">
                                     <div class="bg-white rounded-lg shadow-sm border border-gray-200">
                                         <div class="p-4 border-b border-gray-200">
                                             <div class="flex items-center justify-between">
-                                                <h4 class="font-medium text-gray-900">Review</h4>
+                                                <h4 class="font-medium text-gray-900">Review <span class="text-sm text-gray-500 task-count">(1)</span></h4>
                                                 <button class="text-gray-400 hover:text-gray-600">
                                                     <i class="fas fa-ellipsis-h"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="p-4">
-                                            <div class="space-y-3">
-                                                <!-- Task Card -->
-                                                <div class="bg-gray-50 rounded-lg p-3 cursor-pointer task-card hover:bg-gray-100 transition-colors" data-task-id="4" data-task-title="API Documentation" data-task-description="Viết tài liệu API cho hệ thống" data-task-type="Docs" data-task-priority="Low">
+                                        <div class="p-4 kanban-column" data-column="review">
+                                            <div class="space-y-3 kanban-task-list">
+                                                <div class="bg-gray-50 rounded-lg p-3 cursor-pointer task-card hover:bg-gray-100 transition-colors" draggable="true" data-task-id="4" data-task-title="API Documentation" data-task-description="Write API documentation for the system" data-task-type="Docs" data-task-priority="Low">
                                                     <div class="flex items-start justify-between mb-2">
                                                         <h5 class="font-medium text-gray-900 text-sm">API Documentation</h5>
                                                         <button class="text-gray-400 hover:text-gray-600">
                                                             <i class="fas fa-ellipsis-h text-xs"></i>
                                                         </button>
                                                     </div>
-                                                    <p class="text-xs text-gray-600 mb-3">Viết tài liệu API cho hệ thống</p>
+                                                    <p class="text-xs text-gray-600 mb-3">Write API documentation for the system</p>
                                                     <div class="flex items-center justify-between">
                                                         <div class="flex items-center space-x-2">
                                                             <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
@@ -390,7 +477,6 @@
                                                 </div>
                                             </div>
                                             
-                                            <!-- Add Task Button -->
                                             <button class="add-card-btn w-full mt-3 p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors text-sm" data-column="review">
                                                 <i class="fas fa-plus mr-2"></i>
                                                 Add a task
@@ -399,28 +485,26 @@
                                     </div>
                                 </div>
 
-                                <!-- Done Column -->
                                 <div class="flex-shrink-0 w-80">
                                     <div class="bg-white rounded-lg shadow-sm border border-gray-200">
                                         <div class="p-4 border-b border-gray-200">
                                             <div class="flex items-center justify-between">
-                                                <h4 class="font-medium text-gray-900">Done</h4>
+                                                <h4 class="font-medium text-gray-900">Done <span class="text-sm text-gray-500 task-count">(1)</span></h4>
                                                 <button class="text-gray-400 hover:text-gray-600">
                                                     <i class="fas fa-ellipsis-h"></i>
                                                 </button>
                                             </div>
                                         </div>
-                                        <div class="p-4">
-                                            <div class="space-y-3">
-                                                <!-- Task Card -->
-                                                <div class="bg-gray-50 rounded-lg p-3 cursor-pointer task-card hover:bg-gray-100 transition-colors" data-task-id="5" data-task-title="Project Setup" data-task-description="Thiết lập dự án ban đầu" data-task-type="Setup" data-task-priority="Completed">
+                                        <div class="p-4 kanban-column" data-column="done">
+                                            <div class="space-y-3 kanban-task-list">
+                                                <div class="bg-gray-50 rounded-lg p-3 cursor-pointer task-card hover:bg-gray-100 transition-colors" draggable="true" data-task-id="5" data-task-title="Project Setup" data-task-description="Initial project setup" data-task-type="Setup" data-task-priority="Completed">
                                                     <div class="flex items-start justify-between mb-2">
                                                         <h5 class="font-medium text-gray-900 text-sm">Project Setup</h5>
                                                         <button class="text-gray-400 hover:text-gray-600">
                                                             <i class="fas fa-ellipsis-h text-xs"></i>
                                                         </button>
                                                     </div>
-                                                    <p class="text-xs text-gray-600 mb-3">Thiết lập dự án ban đầu</p>
+                                                    <p class="text-xs text-gray-600 mb-3">Initial project setup</p>
                                                     <div class="flex items-center justify-between">
                                                         <div class="flex items-center space-x-2">
                                                             <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -438,7 +522,6 @@
                                                 </div>
                                             </div>
                                             
-                                            <!-- Add Task Button -->
                                             <button class="add-card-btn w-full mt-3 p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors text-sm" data-column="done">
                                                 <i class="fas fa-plus mr-2"></i>
                                                 Add a task
@@ -447,7 +530,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Add Another List -->
                                 <div class="flex-shrink-0 w-80">
                                     <button class="w-full h-32 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-500 hover:text-gray-700 hover:border-gray-400 transition-colors">
                                         <i class="fas fa-plus mr-2"></i>
@@ -458,37 +540,33 @@
                         </div>
                     </div>
 
-                    <!-- Evaluation Tab -->
                     <div id="evaluation" class="tab-content hidden" data-tab-content="evaluation">
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-lg font-semibold text-gray-900">Đánh giá thành viên</h3>
+                                <h3 class="text-lg font-semibold text-gray-900">Member Evaluation</h3>
                                 <button id="submitEvaluationBtn" class="bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
                                     <i class="fas fa-paper-plane mr-2"></i>
-                                    Gửi đánh giá
+                                    Submit Evaluation
                                 </button>
                             </div>
 
-                            <!-- Project Status Check -->
                             <div id="evaluationStatus" class="mb-6">
-                                <!-- This will be populated by JavaScript -->
-                            </div>
+                                </div>
 
                             <div class="space-y-6" id="evaluationContent">
-                                <!-- Evaluation Form -->
                                 <div class="border border-gray-200 rounded-lg p-6">
-                                    <h4 class="font-medium text-gray-900 mb-4">Đánh giá thành viên</h4>
+                                    <h4 class="font-medium text-gray-900 mb-4">Evaluate Member</h4>
                                     <div class="space-y-4">
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Chọn thành viên</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Select Member</label>
                                             <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
-                                                <option>Nguyễn Văn A</option>
-                                                <option>Trần Thị B</option>
-                                                <option>Lê Văn C</option>
+                                                <option>Nguyen Van A</option>
+                                                <option>Tran Thi B</option>
+                                                <option>Le Van C</option>
                                             </select>
                                         </div>
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Điểm đánh giá</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Rating</label>
                                             <div class="flex items-center space-x-2">
                                                 <i class="fas fa-star text-yellow-400 text-xl"></i>
                                                 <i class="fas fa-star text-yellow-400 text-xl"></i>
@@ -498,34 +576,33 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Nhận xét</label>
-                                            <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3" placeholder="Nhập nhận xét của bạn..."></textarea>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Comments</label>
+                                            <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3" placeholder="Enter your comments..."></textarea>
                                         </div>
                                         <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Tag</label>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Tags</label>
                                             <div class="flex flex-wrap gap-2">
                                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 cursor-pointer hover:bg-green-200">
-                                                    Tích cực
+                                                    Positive
                                                 </span>
                                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800 cursor-pointer hover:bg-red-200">
-                                                    Không hợp tác
+                                                    Uncooperative
                                                 </span>
                                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 cursor-pointer hover:bg-blue-200">
-                                                    Chủ động
+                                                    Proactive
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Evaluation Results -->
                                 <div class="border border-gray-200 rounded-lg p-6">
-                                    <h4 class="font-medium text-gray-900 mb-4">Kết quả đánh giá của bạn</h4>
+                                    <h4 class="font-medium text-gray-900 mb-4">Your Evaluation Results</h4>
                                     <div class="space-y-4">
                                         <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                             <div>
-                                                <h5 class="font-medium text-gray-900">Nguyễn Văn A</h5>
-                                                <p class="text-sm text-gray-600">Điểm trung bình: 4.2/5</p>
+                                                <h5 class="font-medium text-gray-900">Nguyen Van A</h5>
+                                                <p class="text-sm text-gray-600">Average Score: 4.2/5</p>
                                             </div>
                                             <div class="flex items-center space-x-1">
                                                 <i class="fas fa-star text-yellow-400"></i>
@@ -541,26 +618,25 @@
                         </div>
                     </div>
 
-                    <!-- Close Project Tab -->
                     <div id="close" class="tab-content hidden" data-tab-content="close">
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <div class="text-center">
                                 <i class="fas fa-lock text-4xl text-gray-400 mb-4"></i>
-                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Đóng dự án</h3>
-                                <p class="text-gray-600 mb-6">Kiểm tra điều kiện trước khi đóng dự án</p>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Close Project</h3>
+                                <p class="text-gray-600 mb-6">Check conditions before closing the project</p>
                                 
                                 <div class="space-y-4 mb-6">
                                     <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                                         <div class="flex items-center">
                                             <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                                            <span class="text-gray-900">Tất cả task đã hoàn thành</span>
+                                            <span class="text-gray-900">All tasks completed</span>
                                         </div>
                                         <span class="text-green-600 font-medium">✓</span>
                                     </div>
                                     <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                                         <div class="flex items-center">
                                             <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                                            <span class="text-gray-900">Tất cả đánh giá đã gửi</span>
+                                            <span class="text-gray-900">All evaluations submitted</span>
                                         </div>
                                         <span class="text-green-600 font-medium">✓</span>
                                     </div>
@@ -568,7 +644,7 @@
 
                                 <button id="closeProjectBtn" class="bg-red-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-700 transition-colors">
                                     <i class="fas fa-lock mr-2"></i>
-                                    Đóng Dự Án
+                                    Close Project
                                 </button>
                             </div>
                         </div>
@@ -578,12 +654,11 @@
         </main>
     </div>
 
-    <!-- Invite Member Modal -->
     <div id="inviteMemberModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">Mời thành viên</h3>
+                    <h3 class="text-lg font-medium text-gray-900">Invite Member</h3>
                     <button id="closeInviteModal" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times"></i>
                     </button>
@@ -594,38 +669,37 @@
                         <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" placeholder="example@vlu.edu.vn">
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Vai trò</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
                         <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
                             <option>Member</option>
                             <option>Leader</option>
                         </select>
                     </div>
                     <div class="flex justify-end space-x-3">
-                        <button type="button" id="cancelInvite" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Hủy</button>
-                        <button type="submit" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700">Gửi lời mời</button>
+                        <button type="button" id="cancelInvite" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700">Send Invitation</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Create Task Modal -->
     <div id="createTaskModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">Tạo Task mới</h3>
+                    <h3 class="text-lg font-medium text-gray-900">Create New Task</h3>
                     <button id="closeTaskModal" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <form>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tên task</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Task Name</label>
                         <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Mô tả</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
                         <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3"></textarea>
                     </div>
                     <div class="mb-4">
@@ -633,36 +707,35 @@
                         <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Giao cho</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Assign to</label>
                         <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
-                            <option>Nguyễn Văn A</option>
-                            <option>Trần Thị B</option>
-                            <option>Lê Văn C</option>
+                            <option>Nguyen Van A</option>
+                            <option>Tran Thi B</option>
+                            <option>Le Van C</option>
                         </select>
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Độ ưu tiên</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Priority</label>
                         <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
-                            <option>Cao</option>
-                            <option>Trung bình</option>
-                            <option>Thấp</option>
+                            <option>High</option>
+                            <option>Medium</option>
+                            <option>Low</option>
                         </select>
                     </div>
                     <div class="flex justify-end space-x-3">
-                        <button type="button" id="cancelTask" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Hủy</button>
-                        <button type="submit" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700">Tạo Task</button>
+                        <button type="button" id="cancelTask" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700">Create Task</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Kick Member Confirmation Modal -->
     <div id="kickMemberModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">Xác nhận Kick Member</h3>
+                    <h3 class="text-lg font-medium text-gray-900">Confirm Kick Member</h3>
                     <button id="closeKickModal" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times"></i>
                     </button>
@@ -673,23 +746,23 @@
                             <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
                         </div>
                         <div>
-                            <h4 class="font-medium text-gray-900">Bạn có chắc chắn muốn kick thành viên này?</h4>
-                            <p class="text-sm text-gray-600 mt-1">Hành động này không thể hoàn tác.</p>
+                            <h4 class="font-medium text-gray-900">Are you sure you want to kick this member?</h4>
+                            <p class="text-sm text-gray-600 mt-1">This action cannot be undone.</p>
                         </div>
                     </div>
                     <div class="bg-gray-50 p-4 rounded-lg">
                         <div class="flex items-center space-x-3">
                             <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="Member">
                             <div>
-                                <p class="font-medium text-gray-900" id="kickMemberName">Tên thành viên</p>
-                                <p class="text-sm text-gray-500" id="kickMemberInfo">Thông tin thành viên</p>
+                                <p class="font-medium text-gray-900" id="kickMemberName">Member Name</p>
+                                <p class="text-sm text-gray-500" id="kickMemberInfo">Member Info</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="flex justify-end space-x-3">
                     <button id="cancelKick" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">
-                        Hủy
+                        Cancel
                     </button>
                     <button id="confirmKick" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">
                         <i class="fas fa-user-times mr-2"></i>
@@ -700,28 +773,27 @@
         </div>
     </div>
 
-    <!-- Add Card Modal -->
     <div id="addCardModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">Thêm Task Mới</h3>
+                    <h3 class="text-lg font-medium text-gray-900">Add New Task</h3>
                     <button id="closeAddCardModal" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <form id="addCardForm">
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tên task</label>
-                        <input type="text" id="newTaskTitle" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" placeholder="Nhập tên task...">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Task Name</label>
+                        <input type="text" id="newTaskTitle" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" placeholder="Enter task name...">
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Mô tả</label>
-                        <textarea id="newTaskDescription" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3" placeholder="Mô tả task..."></textarea>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                        <textarea id="newTaskDescription" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3" placeholder="Task description..."></textarea>
                     </div>
                     <div class="grid grid-cols-2 gap-4 mb-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Loại</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Type</label>
                             <select id="newTaskType" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
                                 <option value="Feature">Feature</option>
                                 <option value="Backend">Backend</option>
@@ -731,7 +803,7 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Độ ưu tiên</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Priority</label>
                             <select id="newTaskPriority" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
                                 <option value="High">High</option>
                                 <option value="Medium">Medium</option>
@@ -740,15 +812,14 @@
                         </div>
                     </div>
                     <div class="flex justify-end space-x-3">
-                        <button type="button" id="cancelAddCard" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Hủy</button>
-                        <button type="submit" class="bg-vlu-red text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors">Thêm Task</button>
+                        <button type="button" id="cancelAddCard" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
+                        <button type="submit" class="bg-vlu-red text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors">Add Task</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Task Detail Modal -->
     <div id="taskDetailModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
         <div class="relative top-10 mx-auto p-5 border w-4/5 max-w-4xl shadow-lg rounded-md bg-white">
             <div class="mt-3">
@@ -760,7 +831,7 @@
                             <option value="review">Review</option>
                             <option value="done">Done</option>
                         </select>
-                        <h3 class="text-xl font-medium text-gray-900" id="taskDetailTitle">Tên Task</h3>
+                        <h3 class="text-xl font-medium text-gray-900" id="taskDetailTitle">Task Name</h3>
                     </div>
                     <button id="closeTaskDetailModal" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times"></i>
@@ -768,30 +839,27 @@
                 </div>
                 
                 <div class="grid grid-cols-3 gap-6">
-                    <!-- Left Column - Task Details -->
                     <div class="col-span-2 space-y-6">
-                        <!-- Description -->
                         <div>
                             <div class="flex items-center justify-between mb-3">
-                                <h4 class="font-medium text-gray-900">Mô tả</h4>
+                                <h4 class="font-medium text-gray-900">Description</h4>
                                 <button id="editDescription" class="text-vlu-red hover:text-red-700 text-sm">
                                     <i class="fas fa-edit mr-1"></i>
                                     Edit
                                 </button>
                             </div>
                             <div id="descriptionContent" class="bg-gray-50 p-4 rounded-lg">
-                                <p id="taskDescription" class="text-gray-700">Mô tả task sẽ hiển thị ở đây...</p>
+                                <p id="taskDescription" class="text-gray-700">Task description will be displayed here...</p>
                             </div>
                             <div id="descriptionEdit" class="hidden">
                                 <textarea id="descriptionTextarea" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3"></textarea>
                                 <div class="flex justify-end space-x-2 mt-2">
-                                    <button id="cancelEditDescription" class="px-3 py-1 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50 text-sm">Hủy</button>
-                                    <button id="saveDescription" class="px-3 py-1 bg-vlu-red text-white rounded-md hover:bg-red-700 text-sm">Lưu</button>
+                                    <button id="cancelEditDescription" class="px-3 py-1 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50 text-sm">Cancel</button>
+                                    <button id="saveDescription" class="px-3 py-1 bg-vlu-red text-white rounded-md hover:bg-red-700 text-sm">Save</button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Subtasks -->
                         <div>
                             <div class="flex items-center justify-between mb-3">
                                 <h4 class="font-medium text-gray-900">Subtasks</h4>
@@ -803,21 +871,21 @@
                             <div id="subtasksContainer" class="space-y-2">
                                 <div class="subtask-item flex items-center space-x-3 p-2 hover:bg-gray-50 rounded">
                                     <input type="checkbox" class="rounded text-vlu-red focus:ring-vlu-red">
-                                    <span class="flex-1 text-sm text-gray-700">Thiết kế giao diện</span>
+                                    <span class="flex-1 text-sm text-gray-700">Design interface</span>
                                     <button class="text-gray-400 hover:text-red-600 text-xs">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
                                 <div class="subtask-item flex items-center space-x-3 p-2 hover:bg-gray-50 rounded">
                                     <input type="checkbox" class="rounded text-vlu-red focus:ring-vlu-red">
-                                    <span class="flex-1 text-sm text-gray-700">Xây API</span>
+                                    <span class="flex-1 text-sm text-gray-700">Build API</span>
                                     <button class="text-gray-400 hover:text-red-600 text-xs">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
                                 <div class="subtask-item flex items-center space-x-3 p-2 hover:bg-gray-50 rounded">
                                     <input type="checkbox" class="rounded text-vlu-red focus:ring-vlu-red">
-                                    <span class="flex-1 text-sm text-gray-700">Lưu dữ liệu</span>
+                                    <span class="flex-1 text-sm text-gray-700">Save data</span>
                                     <button class="text-gray-400 hover:text-red-600 text-xs">
                                         <i class="fas fa-trash"></i>
                                     </button>
@@ -825,7 +893,6 @@
                             </div>
                         </div>
 
-                        <!-- Comments -->
                         <div>
                             <h4 class="font-medium text-gray-900 mb-3">Comments</h4>
                             <div class="space-y-4">
@@ -837,7 +904,7 @@
                                                 <span class="font-medium text-sm text-gray-900">Shino</span>
                                                 <span class="text-xs text-gray-500">Feb 21, 2025, 12:32 AM</span>
                                             </div>
-                                            <p class="text-sm text-gray-700">Task này cần được hoàn thành sớm!</p>
+                                            <p class="text-sm text-gray-700">This task needs to be completed soon!</p>
                                         </div>
                                     </div>
                                 </div>
@@ -847,17 +914,15 @@
                                 <div class="flex justify-end space-x-2 mt-2">
                                     <button id="saveAllChangesBtn" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm">
                                         <i class="fas fa-save mr-1"></i>
-                                        Lưu tất cả
+                                        Save All
                                     </button>
-                                    <button id="addComment" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors text-sm">Thêm Comment</button>
+                                    <button id="addComment" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors text-sm">Add Comment</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column - Task Info -->
                     <div class="space-y-6">
-                        <!-- Action Buttons -->
                         <div class="space-y-2">
                             <button id="addDatesBtn" class="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-sm transition-colors">
                                 <i class="fas fa-calendar mr-2"></i>
@@ -873,7 +938,6 @@
                             </button>
                         </div>
 
-                        <!-- Labels -->
                         <div>
                             <h4 class="font-medium text-gray-900 mb-3">Labels</h4>
                             <div id="labelsContainer" class="space-y-2">
@@ -900,7 +964,6 @@
                             </button>
                         </div>
 
-                        <!-- Activity -->
                         <div>
                             <h4 class="font-medium text-gray-900 mb-3">Activity</h4>
                             <div id="activityContainer" class="space-y-3">
@@ -919,98 +982,95 @@
         </div>
     </div>
 
-    <!-- Add Dates Modal -->
     <div id="addDatesModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">Thêm Ngày</h3>
+                    <h3 class="text-lg font-medium text-gray-900">Add Dates</h3>
                     <button id="closeDatesModal" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <form id="addDatesForm">
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Ngày bắt đầu</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Start Date</label>
                         <input type="date" id="startDate" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Ngày kết thúc</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">End Date</label>
                         <input type="date" id="endDate" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
                     </div>
                     <div class="flex justify-end space-x-3">
-                        <button type="button" id="cancelDates" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Hủy</button>
-                        <button type="submit" class="bg-vlu-red text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors">Lưu</button>
+                        <button type="button" id="cancelDates" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
+                        <button type="submit" class="bg-vlu-red text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors">Save</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Add Members Modal -->
     <div id="addMembersModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">Thêm Thành Viên</h3>
+                    <h3 class="text-lg font-medium text-gray-900">Add Members</h3>
                     <button id="closeMembersModal" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Tìm thành viên</label>
-                    <input type="text" id="searchMember" placeholder="Nhập tên hoặc email..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Find member</label>
+                    <input type="text" id="searchMember" placeholder="Enter name or email..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
                 </div>
                 <div id="membersList" class="space-y-2 mb-4">
                     <div class="flex items-center justify-between p-2 hover:bg-gray-50 rounded">
                         <div class="flex items-center space-x-3">
                             <img class="h-8 w-8 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center" src="https://via.placeholder.com/32" alt="User">
                             <div>
-                                <p class="font-medium text-sm text-gray-900">Nguyễn Văn A</p>
+                                <p class="font-medium text-sm text-gray-900">Nguyen Van A</p>
                                 <p class="text-xs text-gray-500">nguyenvana@vlu.edu.vn</p>
                             </div>
                         </div>
-                        <button class="add-member-btn px-3 py-1 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors text-sm" data-member="Nguyễn Văn A">
-                            Thêm
+                        <button class="add-member-btn px-3 py-1 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors text-sm" data-member="Nguyen Van A">
+                            Add
                         </button>
                     </div>
                     <div class="flex items-center justify-between p-2 hover:bg-gray-50 rounded">
                         <div class="flex items-center space-x-3">
                             <img class="h-8 w-8 rounded-full bg-green-500 text-white text-xs flex items-center justify-center" src="https://via.placeholder.com/32" alt="User">
                             <div>
-                                <p class="font-medium text-sm text-gray-900">Trần Thị B</p>
+                                <p class="font-medium text-sm text-gray-900">Tran Thi B</p>
                                 <p class="text-xs text-gray-500">tranthib@vlu.edu.vn</p>
                             </div>
                         </div>
-                        <button class="add-member-btn px-3 py-1 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors text-sm" data-member="Trần Thị B">
-                            Thêm
+                        <button class="add-member-btn px-3 py-1 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors text-sm" data-member="Tran Thi B">
+                            Add
                         </button>
                     </div>
                 </div>
                 <div class="flex justify-end">
-                    <button id="cancelMembers" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Đóng</button>
+                    <button id="cancelMembers" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Add Label Modal -->
     <div id="addLabelModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">Thêm Label</h3>
+                    <h3 class="text-lg font-medium text-gray-900">Add Label</h3>
                     <button id="closeLabelModal" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <form id="addLabelForm">
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tên label</label>
-                        <input type="text" id="newLabelName" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" placeholder="Nhập tên label...">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Label Name</label>
+                        <input type="text" id="newLabelName" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" placeholder="Enter label name...">
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Màu sắc</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Color</label>
                         <div class="grid grid-cols-5 gap-2">
                             <button type="button" class="label-color-btn w-8 h-8 bg-blue-500 rounded-full border-2 border-transparent hover:border-gray-300" data-color="blue"></button>
                             <button type="button" class="label-color-btn w-8 h-8 bg-green-500 rounded-full border-2 border-transparent hover:border-gray-300" data-color="green"></button>
@@ -1020,82 +1080,78 @@
                         </div>
                     </div>
                     <div class="flex justify-end space-x-3">
-                        <button type="button" id="cancelLabel" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Hủy</button>
-                        <button type="submit" class="bg-vlu-red text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors">Thêm Label</button>
+                        <button type="button" id="cancelLabel" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
+                        <button type="submit" class="bg-vlu-red text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors">Add Label</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Add Subtask Modal -->
     <div id="addSubtaskModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">Thêm Subtask</h3>
+                    <h3 class="text-lg font-medium text-gray-900">Add Subtask</h3>
                     <button id="closeSubtaskModal" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <form id="addSubtaskForm">
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tên subtask</label>
-                        <input type="text" id="newSubtaskName" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" placeholder="Nhập tên subtask...">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Subtask Name</label>
+                        <input type="text" id="newSubtaskName" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" placeholder="Enter subtask name...">
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Mô tả (tùy chọn)</label>
-                        <textarea id="newSubtaskDescription" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="2" placeholder="Mô tả subtask..."></textarea>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Description (optional)</label>
+                        <textarea id="newSubtaskDescription" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="2" placeholder="Subtask description..."></textarea>
                     </div>
                     <div class="flex justify-end space-x-3">
-                        <button type="button" id="cancelSubtask" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Hủy</button>
-                        <button type="submit" class="bg-vlu-red text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors">Thêm Subtask</button>
+                        <button type="button" id="cancelSubtask" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
+                        <button type="submit" class="bg-vlu-red text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors">Add Subtask</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Add Attachment Modal -->
     <div id="addAttachmentModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">Thêm File Đính Kèm</h3>
+                    <h3 class="text-lg font-medium text-gray-900">Add Attachment File</h3>
                     <button id="closeAttachmentModal" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <form id="addAttachmentForm">
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Chọn file</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Choose file</label>
                         <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                             <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
-                            <p class="text-sm text-gray-600">Kéo thả file vào đây hoặc click để chọn</p>
+                            <p class="text-sm text-gray-600">Drag and drop files here or click to choose</p>
                             <input type="file" id="fileInput" class="hidden" multiple>
                             <button type="button" id="browseFiles" class="mt-2 px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors text-sm">
-                                Chọn File
+                                Choose File
                             </button>
                         </div>
                     </div>
                     <div id="selectedFiles" class="mb-4 space-y-2">
-                        <!-- Selected files will be displayed here -->
-                    </div>
+                        </div>
                     <div class="flex justify-end space-x-3">
-                        <button type="button" id="cancelAttachment" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Hủy</button>
-                        <button type="submit" class="bg-vlu-red text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors">Tải Lên</button>
+                        <button type="button" id="cancelAttachment" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
+                        <button type="submit" class="bg-vlu-red text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors">Upload</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Leave Group Confirmation Modal -->
     <div id="leaveGroupModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">Xác nhận Rời Nhóm</h3>
+                    <h3 class="text-lg font-medium text-gray-900">Confirm Leave Group</h3>
                     <button id="closeLeaveGroupModal" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times"></i>
                     </button>
@@ -1107,22 +1163,21 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <p class="font-medium text-gray-900" id="leaveGroupMemberName">Tên thành viên</p>
-                        <p class="text-sm text-gray-500" id="leaveGroupMemberRole">Vai trò trong nhóm</p>
+                        <p class="font-medium text-gray-900" id="leaveGroupMemberName">Member Name</p>
+                        <p class="text-sm text-gray-500" id="leaveGroupMemberRole">Role in Group</p>
                     </div>
                     
-                    <!-- Leader Transfer Section -->
                     <div id="leaderTransferSection" class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg hidden">
                         <div class="flex items-start">
                             <i class="fas fa-crown text-blue-500 mt-1 mr-3"></i>
                             <div class="flex-1">
-                                <p class="text-sm font-medium text-blue-900 mb-2">Nhượng quyền Leader</p>
-                                <p class="text-xs text-blue-700 mb-3">Vui lòng chọn thành viên để nhượng quyền Leader trước khi rời nhóm:</p>
+                                <p class="text-sm font-medium text-blue-900 mb-2">Transfer Leader Role</p>
+                                <p class="text-xs text-blue-700 mb-3">Please select a member to transfer Leader role to before leaving the group:</p>
                                 <select id="newLeaderSelect" class="w-full px-3 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
-                                    <option value="">-- Chọn thành viên --</option>
-                                    <option value="Nguyễn Văn A">Nguyễn Văn A (Member)</option>
-                                    <option value="Trần Thị B">Trần Thị B (Member)</option>
-                                    <option value="Lê Văn C">Lê Văn C (Pending)</option>
+                                    <option value="">-- Select member --</option>
+                                    <option value="Nguyen Van A">Nguyen Van A (Member)</option>
+                                    <option value="Tran Thi B">Tran Thi B (Member)</option>
+                                    <option value="Le Van C">Le Van C (Pending)</option>
                                 </select>
                             </div>
                         </div>
@@ -1132,11 +1187,11 @@
                         <div class="flex items-start">
                             <i class="fas fa-exclamation-triangle text-orange-500 mt-1 mr-3"></i>
                             <div>
-                                <p class="text-sm font-medium text-orange-900 mb-2">Bạn có chắc chắn muốn rời nhóm?</p>
+                                <p class="text-sm font-medium text-orange-900 mb-2">Are you sure you want to leave the group?</p>
                                 <ul class="text-xs text-orange-700 space-y-1">
-                                    <li>• Bạn sẽ không thể truy cập dự án này nữa</li>
-                                    <li>• Tất cả task được giao sẽ được chuyển cho thành viên khác</li>
-                                    <li>• Bạn cần được mời lại nếu muốn tham gia nhóm</li>
+                                    <li>• You will no longer be able to access this project.</li>
+                                    <li>• All assigned tasks will be transferred to another member.</li>
+                                    <li>• You will need to be invited again if you wish to rejoin the group.</li>
                                 </ul>
                             </div>
                         </div>
@@ -1144,11 +1199,11 @@
                 </div>
                 <div class="flex justify-end space-x-3">
                     <button id="cancelLeaveGroup" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">
-                        Hủy
+                        Cancel
                     </button>
                     <button id="confirmLeaveGroup" class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 transition-colors">
                         <i class="fas fa-sign-out-alt mr-2"></i>
-                        Rời Nhóm
+                        Leave Group
                     </button>
                 </div>
             </div>
@@ -1189,7 +1244,7 @@
             if (taskStatusSelect && taskTitle) {
                 const newStatus = taskStatusSelect.value;
                 const taskName = taskTitle.textContent;
-                changes.push(`Trạng thái: ${newStatus}`);
+                changes.push(`Status: ${newStatus}`);
                 hasChanges = true;
             }
             
@@ -1208,7 +1263,7 @@
                     descriptionTextarea.parentElement.classList.add('hidden');
                     descriptionContent.classList.remove('hidden');
                     
-                    changes.push('Mô tả task');
+                    changes.push('Task description');
                     hasChanges = true;
                 }
             }
@@ -1242,7 +1297,7 @@
                     newCommentTextarea.value = '';
                 }
                 
-                changes.push('Bình luận mới');
+                changes.push('New comment');
                 hasChanges = true;
             }
             
@@ -1251,14 +1306,14 @@
                 // Simulate saving to server
                 setTimeout(() => {
                     const changeText = changes.join(', ');
-                    showTaskNotification('Thành công', `Đã lưu tất cả thay đổi: ${changeText}!`);
+                    showTaskNotification('Success', `All changes saved: ${changeText}!`);
                     console.log('All changes saved:', changes);
                     
                     // Add activity history
-                    addTaskActivity(`Đã lưu: ${changeText}`, 'green');
+                    addTaskActivity(`Saved: ${changeText}`, 'green');
                 }, 1000);
             } else {
-                showTaskNotification('Thông báo', 'Không có thay đổi nào để lưu!');
+                showTaskNotification('Notice', 'No changes to save!');
             }
         }
 
@@ -1273,8 +1328,8 @@
                 <div class="flex-1">
                     <div class="bg-gray-50 p-3 rounded-lg">
                         <div class="flex items-center justify-between mb-1">
-                            <span class="font-medium text-sm text-gray-900">Hồ Du Tuấn Đạt</span>
-                            <span class="text-xs text-gray-500">Vừa xong</span>
+                            <span class="font-medium text-sm text-gray-900">Ho Du Tuan Dat</span>
+                            <span class="text-xs text-gray-500">Just now</span>
                         </div>
                         <p class="text-sm text-gray-700">${commentText}</p>
                     </div>
@@ -1295,7 +1350,7 @@
                 <img class="h-6 w-6 rounded-full bg-purple-500 text-white text-xs flex items-center justify-center" src="https://via.placeholder.com/24" alt="User">
                 <div class="flex-1">
                     <p class="text-sm text-gray-700">${activity}</p>
-                    <p class="text-xs text-gray-500">${new Date().toLocaleString('vi-VN')}</p>
+                    <p class="text-xs text-gray-500">${new Date().toLocaleString('en-US')}</p>
                 </div>
             `;
             
@@ -1330,16 +1385,21 @@
             }, 3000);
         }
 
-        // Override existing functions to work with task detail modal
+        // Initialize task card click functionality
         function initTaskDetail() {
-            console.log('Initializing task detail with save functionality...');
+            console.log('Initializing task card click functionality...');
             
-            // Initialize existing task detail functionality
+            // Initialize task card click events
             const taskCards = document.querySelectorAll('.task-card');
             taskCards.forEach(card => {
                 card.addEventListener('click', function(e) {
                     // Prevent opening if clicking on action buttons
                     if (e.target.closest('button')) {
+                        return;
+                    }
+                    
+                    // Prevent opening if we just finished dragging
+                    if (this.classList.contains('dragging') || this.classList.contains('just-dragged')) {
                         return;
                     }
                     
@@ -1349,20 +1409,196 @@
                     const taskType = this.getAttribute('data-task-type');
                     const taskPriority = this.getAttribute('data-task-priority');
                     
-                    openTaskDetail(this);
+                    // Navigate to task detail page with task data
+                    navigateToTaskDetail(taskId, taskTitle, taskDescription, taskType, taskPriority);
                 });
             });
             
-            // Initialize save buttons
-            initializeTaskDetailSaveButtons();
+            // Initialize save buttons if they exist
+            if (typeof initializeTaskDetailSaveButtons === 'function') {
+                initializeTaskDetailSaveButtons();
+            }
         }
 
-        // Call initTaskDetail when DOM is loaded
+        // Function to navigate to task detail page
+        function navigateToTaskDetail(taskId, taskTitle, taskDescription, taskType, taskPriority) {
+            console.log('Navigating to task detail:', { taskId, taskTitle, taskDescription, taskType, taskPriority });
+            
+            // Store task data in localStorage for task-detail.html to use
+            const taskData = {
+                id: taskId,
+                title: taskTitle,
+                description: taskDescription,
+                type: taskType,
+                priority: taskPriority,
+                projectId: 'project-1', // Current project ID
+                projectName: 'Library Management System'
+            };
+            
+            localStorage.setItem('currentTaskData', JSON.stringify(taskData));
+            
+            // Navigate to task detail page
+            window.location.href = 'task-detail.html';
+        }
+
+        // Initialize Drag and Drop functionality
+        function initDragAndDrop() {
+            console.log('Initializing drag and drop functionality...');
+            
+            let draggedElement = null;
+            let originalColumn = null;
+            
+            // Add drag event listeners to task cards
+            const taskCards = document.querySelectorAll('.task-card');
+            taskCards.forEach(card => {
+                card.addEventListener('dragstart', handleDragStart);
+                card.addEventListener('dragend', handleDragEnd);
+            });
+            
+            // Add drop event listeners to kanban columns
+            const kanbanColumns = document.querySelectorAll('.kanban-column');
+            kanbanColumns.forEach(column => {
+                column.addEventListener('dragover', handleDragOver);
+                column.addEventListener('dragenter', handleDragEnter);
+                column.addEventListener('dragleave', handleDragLeave);
+                column.addEventListener('drop', handleDrop);
+            });
+            
+            function handleDragStart(e) {
+                draggedElement = this;
+                originalColumn = this.closest('.kanban-column');
+                this.classList.add('dragging');
+                
+                // Set drag data
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', this.outerHTML);
+                
+                console.log('Drag started:', this.getAttribute('data-task-id'));
+            }
+            
+            function handleDragEnd(e) {
+                this.classList.remove('dragging');
+                this.classList.add('just-dragged');
+                
+                // Remove just-dragged class after a short delay to prevent accidental clicks
+                setTimeout(() => {
+                    this.classList.remove('just-dragged');
+                }, 300);
+                
+                draggedElement = null;
+                
+                // Remove drag-over classes from all columns
+                document.querySelectorAll('.kanban-column').forEach(col => {
+                    col.classList.remove('drag-over');
+                });
+                
+                console.log('Drag ended');
+            }
+            
+            function handleDragOver(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+            }
+            
+            function handleDragEnter(e) {
+                e.preventDefault();
+                this.classList.add('drag-over');
+            }
+            
+            function handleDragLeave(e) {
+                // Only remove class if we're leaving the column, not entering a child element
+                if (!this.contains(e.relatedTarget)) {
+                    this.classList.remove('drag-over');
+                }
+            }
+            
+            function handleDrop(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+                
+                if (draggedElement && originalColumn !== this) {
+                    const taskList = this.querySelector('.kanban-task-list');
+                    const taskId = draggedElement.getAttribute('data-task-id');
+                    const taskTitle = draggedElement.getAttribute('data-task-title');
+                    
+                    // Move the task card to the new column
+                    taskList.appendChild(draggedElement);
+                    
+                    // Update task status based on column
+                    const newStatus = this.getAttribute('data-column');
+                    updateTaskStatus(taskId, newStatus);
+                    
+                    // Show notification
+                    showTaskNotification(
+                        'Task moved successfully!',
+                        `"${taskTitle}" moved to ${getStatusDisplayName(newStatus)}`
+                    );
+                    
+                    // Add activity log
+                    addTaskActivity(`Moved task "${taskTitle}" to ${getStatusDisplayName(newStatus)}`, 'blue');
+                    
+                    // Update task counts
+                    updateTaskCounts();
+                    
+                    console.log(`Task ${taskId} moved from ${originalColumn.getAttribute('data-column')} to ${newStatus}`);
+                }
+            }
+            
+            function updateTaskStatus(taskId, newStatus) {
+                // Here you would typically make an API call to update the task status
+                console.log(`Updating task ${taskId} status to ${newStatus}`);
+                
+                // For demo purposes, we'll just log the change
+                // In a real application, you would send this to your backend
+                const statusUpdate = {
+                    taskId: taskId,
+                    newStatus: newStatus,
+                    timestamp: new Date().toISOString(),
+                    userId: 'current-user-id'
+                };
+                
+                // Store in localStorage for demo
+                const updates = JSON.parse(localStorage.getItem('taskStatusUpdates') || '[]');
+                updates.push(statusUpdate);
+                localStorage.setItem('taskStatusUpdates', JSON.stringify(updates));
+            }
+            
+            function getStatusDisplayName(status) {
+                const statusMap = {
+                    'todo': 'To Do',
+                    'inprogress': 'In Progress',
+                    'review': 'Review',
+                    'done': 'Done'
+                };
+                return statusMap[status] || status;
+            }
+            
+            function updateTaskCounts() {
+                const columns = document.querySelectorAll('.kanban-column');
+                columns.forEach(column => {
+                    const taskList = column.querySelector('.kanban-task-list');
+                    const taskCount = taskList.querySelectorAll('.task-card').length;
+                    const countElement = column.closest('.flex-shrink-0').querySelector('.task-count');
+                    if (countElement) {
+                        countElement.textContent = `(${taskCount})`;
+                    }
+                });
+            }
+            
+            // Update task counts initially
+            updateTaskCounts();
+        }
+
+        // Call initTaskDetail and initDragAndDrop when DOM is loaded
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initTaskDetail);
+            document.addEventListener('DOMContentLoaded', function() {
+                initTaskDetail();
+                initDragAndDrop();
+            });
         } else {
             initTaskDetail();
+            initDragAndDrop();
         }
     </script>
 </body>
-</html> 
+</html>

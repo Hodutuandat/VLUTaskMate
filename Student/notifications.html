@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông báo - VLUTaskMate</title>
+    <title>Notifications - VLUTaskMate</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/style.css">
@@ -20,7 +20,6 @@
     </script>
 </head>
 <body class="bg-gray-50">
-    <!-- Header -->
     <header class="bg-white shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
@@ -28,26 +27,21 @@
                     <h1 class="text-2xl font-bold text-vlu-red">VLUTaskMate</h1>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <!-- Notification Bell with Dropdown -->
                     <div class="relative">
                         <button id="notificationBtn" class="relative p-2 text-gray-600 hover:text-gray-900">
                             <i class="fas fa-bell"></i>
                             <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-vlu-red"></span>
                         </button>
                         
-                        <!-- Notification Dropdown -->
                         <div id="notificationDropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
-                            <!-- Header -->
                             <div class="flex items-center justify-between p-4 border-b border-gray-200">
-                                <h3 class="text-lg font-semibold text-gray-900">Thông báo</h3>
+                                <h3 class="text-lg font-semibold text-gray-900">Notifications</h3>
                                 <button id="closeNotifications" class="text-gray-400 hover:text-gray-600">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
                             
-                            <!-- Notification List -->
                             <div class="max-h-96 overflow-y-auto">
-                                <!-- Task Assignment Notification -->
                                 <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
                                     <div class="flex items-start space-x-3">
                                         <div class="flex-shrink-0">
@@ -56,19 +50,18 @@
                                             </div>
                                         </div>
                                         <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-medium text-gray-900">Bạn được giao nhiệm vụ mới</p>
-                                            <p class="text-sm text-gray-500 mt-1">"Thiết kế giao diện" trong dự án Website E-commerce</p>
-                                            <p class="text-xs text-gray-400 mt-1">2 phút trước</p>
+                                            <p class="text-sm font-medium text-gray-900">You have a new task assigned</p>
+                                            <p class="text-sm text-gray-500 mt-1">"Design Interface" in the E-commerce Website project</p>
+                                            <p class="text-xs text-gray-400 mt-1">2 minutes ago</p>
                                         </div>
                                         <div class="flex flex-col space-y-1">
                                             <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
-                                                Xác nhận
+                                                Confirm
                                             </button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Group Invitation Notification -->
                                 <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
                                     <div class="flex items-start space-x-3">
                                         <div class="flex-shrink-0">
@@ -77,22 +70,21 @@
                                             </div>
                                         </div>
                                         <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-medium text-gray-900">Lời mời tham gia nhóm</p>
-                                            <p class="text-sm text-gray-500 mt-1">Bạn được mời tham gia dự án "Hệ thống Quản lý Thư viện"</p>
-                                            <p class="text-xs text-gray-400 mt-1">15 phút trước</p>
+                                            <p class="text-sm font-medium text-gray-900">Group Invitation</p>
+                                            <p class="text-sm text-gray-500 mt-1">You are invited to join the "Library Management System" project</p>
+                                            <p class="text-xs text-gray-400 mt-1">15 minutes ago</p>
                                         </div>
                                         <div class="flex flex-col space-y-1">
                                             <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
-                                                Xác nhận
+                                                Accept
                                             </button>
                                             <button class="bg-red-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-red-600 transition-colors">
-                                                Từ chối
+                                                Decline
                                             </button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Task Due Soon Notification -->
                                 <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
                                     <div class="flex items-start space-x-3">
                                         <div class="flex-shrink-0">
@@ -101,19 +93,18 @@
                                             </div>
                                         </div>
                                         <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-medium text-gray-900">Nhiệm vụ sắp đến hạn</p>
-                                            <p class="text-sm text-gray-500 mt-1">"Viết tài liệu API" sẽ hết hạn trong 1 ngày</p>
-                                            <p class="text-xs text-gray-400 mt-1">1 giờ trước</p>
+                                            <p class="text-sm font-medium text-gray-900">Task Due Soon</p>
+                                            <p class="text-sm text-gray-500 mt-1">"Write API Documentation" is due in 1 day</p>
+                                            <p class="text-xs text-gray-400 mt-1">1 hour ago</p>
                                         </div>
                                         <div class="flex flex-col space-y-1">
                                             <button class="bg-blue-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-blue-600 transition-colors">
-                                                Xem
+                                                View
                                             </button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Task Completed Notification -->
                                 <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
                                     <div class="flex items-start space-x-3">
                                         <div class="flex-shrink-0">
@@ -122,19 +113,18 @@
                                             </div>
                                         </div>
                                         <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-medium text-gray-900">Nhiệm vụ đã hoàn thành</p>
-                                            <p class="text-sm text-gray-500 mt-1">"Fix bug login" đã được hoàn thành</p>
-                                            <p class="text-xs text-gray-400 mt-1">3 giờ trước</p>
+                                            <p class="text-sm font-medium text-gray-900">Task Completed</p>
+                                            <p class="text-sm text-gray-500 mt-1">"Fix login bug" has been completed</p>
+                                            <p class="text-xs text-gray-400 mt-1">3 hours ago</p>
                                         </div>
                                         <div class="flex flex-col space-y-1">
                                             <button class="bg-gray-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-gray-600 transition-colors">
-                                                Xem
+                                                View
                                             </button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Comment Mention Notification -->
                                 <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
                                     <div class="flex items-start space-x-3">
                                         <div class="flex-shrink-0">
@@ -143,23 +133,22 @@
                                             </div>
                                         </div>
                                         <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-medium text-gray-900">Bạn được tag trong bình luận</p>
-                                            <p class="text-sm text-gray-500 mt-1">@Hồ Du Tuấn Đạt: "Bạn có thể review code này không?"</p>
-                                            <p class="text-xs text-gray-400 mt-1">5 giờ trước</p>
+                                            <p class="text-sm font-medium text-gray-900">You were mentioned in a comment</p>
+                                            <p class="text-sm text-gray-500 mt-1">@Ho Du Tuan Dat: "Can you review this code?"</p>
+                                            <p class="text-xs text-gray-400 mt-1">5 hours ago</p>
                                         </div>
                                         <div class="flex flex-col space-y-1">
                                             <button class="bg-blue-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-blue-600 transition-colors">
-                                                Xem
+                                                View
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- Footer -->
                             <div class="p-4 border-t border-gray-200">
-                                <button class="w-full text-center text-sm text-vlu-red hover:text-red-700 font-medium">
-                                    Xem tất cả thông báo
+                                <button onclick="window.location.href='notifications.html'" class="w-full text-center text-sm text-vlu-red hover:text-red-700 font-medium">
+                                    View all notifications
                                 </button>
                             </div>
                         </div>
@@ -168,20 +157,19 @@
                     <div class="relative">
                         <button id="userMenuBtn" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
                             <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
-                            <span class="text-sm font-medium">Hồ Du Tuấn Đạt</span>
+                            <span class="text-sm font-medium">Ho Du Tuan Dat</span>
                             <i class="fas fa-chevron-down text-xs"></i>
                         </button>
                         
-                        <!-- User Menu Dropdown -->
                         <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
                             <div class="py-1">
                                 <button onclick="window.location.href='profile.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     <i class="fas fa-user mr-3"></i>
-                                    Hồ sơ
+                                    Profile
                                 </button>
                                 <button onclick="window.location.href='../logout.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     <i class="fas fa-sign-out-alt mr-3"></i>
-                                    Đăng xuất
+                                    Log out
                                 </button>
                             </div>
                         </div>
@@ -191,61 +179,54 @@
         </div>
     </header>
 
-    <!-- Main Layout -->
     <div class="flex h-screen bg-gray-50">
-        <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-sm border-r border-gray-200">
-            <div class="p-6">
+        <aside class="w-64 bg-white shadow-sm">
+            <nav class="mt-8">
                 <div class="px-4 space-y-2">
-                    <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                    <a href="index.html" class="flex items-center px-4 py-3 text-vlu-red bg-red-50 rounded-lg font-medium">
                         <i class="fas fa-folder mr-3"></i>
-                        Dự án của tôi
+                        My Groups
                     </a>
                     <a href="my-tasks.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
                         <i class="fas fa-tasks mr-3"></i>
-                        Nhiệm vụ của tôi
+                        My Tasks
                     </a>
-                    <a href="notifications.html" class="flex items-center px-4 py-3 text-vlu-red bg-vlu-light-red rounded-lg font-medium">
+                    <a href="notifications.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
                         <i class="fas fa-bell mr-3"></i>
-                        Thông báo
+                        Notifications
                     </a>
                 </div>
-            </div>
+            </nav>
         </aside>
 
-        <!-- Main Content -->
         <main class="flex-1 overflow-y-auto">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <!-- Page Header -->
                 <div class="mb-8">
-                    <h2 class="text-3xl font-bold text-gray-900">Thông báo</h2>
-                    <p class="text-gray-600 mt-2">Quản lý tất cả thông báo của bạn</p>
+                    <h2 class="text-3xl font-bold text-gray-900">Notifications</h2>
+                    <p class="text-gray-600 mt-2">Manage all your notifications</p>
                 </div>
 
-                <!-- Notification Filters -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
                     <div class="flex flex-wrap gap-4">
                         <button class="px-4 py-2 bg-vlu-red text-white rounded-lg text-sm font-medium">
-                            Tất cả
+                            All
                         </button>
                         <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300">
-                            Chưa đọc
+                            Unread
                         </button>
                         <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300">
-                            Nhiệm vụ
+                            Tasks
                         </button>
                         <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300">
-                            Lời mời
+                            Invitations
                         </button>
                         <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300">
-                            Nhắc nhở
+                            Reminders
                         </button>
                     </div>
                 </div>
 
-                <!-- All Notifications List -->
                 <div class="space-y-4">
-                    <!-- Task Assignment -->
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0">
@@ -255,25 +236,24 @@
                             </div>
                             <div class="flex-1">
                                 <div class="flex items-center justify-between">
-                                    <h3 class="text-lg font-semibold text-gray-900">Bạn được giao nhiệm vụ mới</h3>
-                                    <span class="text-sm text-gray-500">2 phút trước</span>
+                                    <h3 class="text-lg font-semibold text-gray-900">You have a new task assigned</h3>
+                                    <span class="text-sm text-gray-500">2 minutes ago</span>
                                 </div>
-                                <p class="text-gray-600 mt-2">Bạn được giao nhiệm vụ "Thiết kế giao diện" trong dự án Website E-commerce</p>
+                                <p class="text-gray-600 mt-2">You have been assigned the task "Design Interface" in the E-commerce Website project</p>
                                 <div class="flex items-center space-x-2 mt-4">
                                     <button class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-600 transition-colors">
                                         <i class="fas fa-check mr-2"></i>
-                                        Xác nhận
+                                        Confirm
                                     </button>
                                     <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
                                         <i class="fas fa-eye mr-2"></i>
-                                        Xem chi tiết
+                                        View Details
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Group Invitation -->
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0">
@@ -283,29 +263,28 @@
                             </div>
                             <div class="flex-1">
                                 <div class="flex items-center justify-between">
-                                    <h3 class="text-lg font-semibold text-gray-900">Lời mời tham gia nhóm</h3>
-                                    <span class="text-sm text-gray-500">15 phút trước</span>
+                                    <h3 class="text-lg font-semibold text-gray-900">Group Invitation</h3>
+                                    <span class="text-sm text-gray-500">15 minutes ago</span>
                                 </div>
-                                <p class="text-gray-600 mt-2">Bạn được mời tham gia dự án "Hệ thống Quản lý Thư viện" bởi Nguyễn Văn A</p>
+                                <p class="text-gray-600 mt-2">You are invited to join the project "Library Management System" by Nguyen Van A</p>
                                 <div class="flex items-center space-x-2 mt-4">
                                     <button class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-600 transition-colors">
                                         <i class="fas fa-check mr-2"></i>
-                                        Xác nhận
+                                        Accept
                                     </button>
                                     <button class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-600 transition-colors">
                                         <i class="fas fa-times mr-2"></i>
-                                        Từ chối
+                                        Decline
                                     </button>
                                     <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
                                         <i class="fas fa-eye mr-2"></i>
-                                        Xem chi tiết
+                                        View Details
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Task Due Soon -->
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0">
@@ -315,25 +294,24 @@
                             </div>
                             <div class="flex-1">
                                 <div class="flex items-center justify-between">
-                                    <h3 class="text-lg font-semibold text-gray-900">Nhiệm vụ sắp đến hạn</h3>
-                                    <span class="text-sm text-gray-500">1 giờ trước</span>
+                                    <h3 class="text-lg font-semibold text-gray-900">Task Due Soon</h3>
+                                    <span class="text-sm text-gray-500">1 hour ago</span>
                                 </div>
-                                <p class="text-gray-600 mt-2">Nhiệm vụ "Viết tài liệu API" sẽ hết hạn trong 1 ngày</p>
+                                <p class="text-gray-600 mt-2">The task "Write API Documentation" is due in 1 day</p>
                                 <div class="flex items-center space-x-2 mt-4">
                                     <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
                                         <i class="fas fa-eye mr-2"></i>
-                                        Xem chi tiết
+                                        View Details
                                     </button>
                                     <button class="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-600 transition-colors">
                                         <i class="fas fa-check mr-2"></i>
-                                        Đánh dấu đã đọc
+                                        Mark as Read
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Task Completed -->
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0">
@@ -343,25 +321,24 @@
                             </div>
                             <div class="flex-1">
                                 <div class="flex items-center justify-between">
-                                    <h3 class="text-lg font-semibold text-gray-900">Nhiệm vụ đã hoàn thành</h3>
-                                    <span class="text-sm text-gray-500">3 giờ trước</span>
-                                </div>
-                                <p class="text-gray-600 mt-2">Nhiệm vụ "Fix bug login" đã được hoàn thành bởi bạn</p>
+                                    <h3 class="text-lg font-semibold text-gray-900">Task Completed</h3>
+                                    <span class="text-sm text-gray-500">3 hours ago</span>
+                                個個</div>
+                                <p class="text-gray-600 mt-2">The task "Fix login bug" has been completed by you</p>
                                 <div class="flex items-center space-x-2 mt-4">
                                     <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
                                         <i class="fas fa-eye mr-2"></i>
-                                        Xem chi tiết
+                                        View Details
                                     </button>
                                     <button class="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-600 transition-colors">
                                         <i class="fas fa-check mr-2"></i>
-                                        Đánh dấu đã đọc
+                                        Mark as Read
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Comment Mention -->
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0">
@@ -371,18 +348,18 @@
                             </div>
                             <div class="flex-1">
                                 <div class="flex items-center justify-between">
-                                    <h3 class="text-lg font-semibold text-gray-900">Bạn được tag trong bình luận</h3>
-                                    <span class="text-sm text-gray-500">5 giờ trước</span>
+                                    <h3 class="text-lg font-semibold text-gray-900">You were mentioned in a comment</h3>
+                                    <span class="text-sm text-gray-500">5 hours ago</span>
                                 </div>
-                                <p class="text-gray-600 mt-2">@Hồ Du Tuấn Đạt: "Bạn có thể review code này không? Tôi cần ý kiến của bạn về phần authentication."</p>
+                                <p class="text-gray-600 mt-2">@Ho Du Tuan Dat: "Can you review this code? I need your opinion on the authentication part."</p>
                                 <div class="flex items-center space-x-2 mt-4">
                                     <button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
                                         <i class="fas fa-eye mr-2"></i>
-                                        Xem bình luận
+                                        View Comment
                                     </button>
                                     <button class="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-600 transition-colors">
                                         <i class="fas fa-check mr-2"></i>
-                                        Đánh dấu đã đọc
+                                        Mark as Read
                                     </button>
                                 </div>
                             </div>
@@ -390,10 +367,9 @@
                     </div>
                 </div>
 
-                <!-- Pagination -->
                 <div class="flex items-center justify-between mt-8">
                     <div class="text-sm text-gray-600">
-                        Hiển thị 1-5 của 15 thông báo
+                        Showing 1-5 of 15 notifications
                     </div>
                     <div class="flex items-center space-x-2">
                         <button class="px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50" disabled>
@@ -443,7 +419,7 @@
                     // Handle accept action
                     console.log('Accepted notification');
                     // Here you would typically send an API request
-                    alert('Đã xác nhận!');
+                    alert('Confirmed!');
                 });
             });
 
@@ -452,7 +428,7 @@
                     // Handle reject action
                     console.log('Rejected notification');
                     // Here you would typically send an API request
-                    alert('Đã từ chối!');
+                    alert('Declined!');
                 });
             });
 
@@ -461,10 +437,10 @@
                     // Handle view details action
                     console.log('Viewing notification details');
                     // Here you would typically navigate to the relevant page
-                    alert('Đang chuyển đến trang chi tiết...');
+                    alert('Navigating to details page...');
                 });
             });
         });
     </script>
 </body>
-</html> 
+</html>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông báo - VLUTaskMate</title>
+    <title>Notifications - VLUTaskMate</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/style.css">
@@ -20,7 +20,6 @@
     </script>
 </head>
 <body class="bg-gray-50">
-    <!-- Header -->
     <header class="bg-white shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
@@ -28,26 +27,21 @@
                     <h1 class="text-2xl font-bold text-vlu-red">VLUTaskMate</h1>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <!-- Notification Bell with Dropdown -->
                     <div class="relative">
                         <button id="notificationBtn" class="relative p-2 text-gray-600 hover:text-gray-900">
                             <i class="fas fa-bell"></i>
                             <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-vlu-red"></span>
                         </button>
                         
-                        <!-- Notification Dropdown -->
                         <div id="notificationDropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
-                            <!-- Header -->
                             <div class="flex items-center justify-between p-4 border-b border-gray-200">
-                                <h3 class="text-lg font-semibold text-gray-900">Thông báo</h3>
+                                <h3 class="text-lg font-semibold text-gray-900">Notifications</h3>
                                 <button id="closeNotifications" class="text-gray-400 hover:text-gray-600">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
                             
-                            <!-- Notification List -->
                             <div class="max-h-96 overflow-y-auto">
-                                <!-- Project Update Notification -->
                                 <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
                                     <div class="flex items-start space-x-3">
                                         <div class="flex-shrink-0">
@@ -56,19 +50,18 @@
                                             </div>
                                         </div>
                                         <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-medium text-gray-900">Cập nhật tiến độ dự án</p>
-                                            <p class="text-sm text-gray-500 mt-1">Nhóm K47-CNTT đã hoàn thành 75% dự án</p>
-                                            <p class="text-xs text-gray-400 mt-1">2 giờ trước</p>
+                                            <p class="text-sm font-medium text-gray-900">Project Progress Update</p>
+                                            <p class="text-sm text-gray-500 mt-1">Group K47-CNTT has completed 75% of the project</p>
+                                            <p class="text-xs text-gray-400 mt-1">2 hours ago</p>
                                         </div>
                                         <div class="flex flex-col space-y-1">
                                             <button class="bg-blue-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-blue-600 transition-colors">
-                                                Xem
+                                                View
                                             </button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Evaluation Complete Notification -->
                                 <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
                                     <div class="flex items-start space-x-3">
                                         <div class="flex-shrink-0">
@@ -77,23 +70,22 @@
                                             </div>
                                         </div>
                                         <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-medium text-gray-900">Đánh giá hoàn thành</p>
-                                            <p class="text-sm text-gray-500 mt-1">Nhóm K47-CNTT đã hoàn thành peer evaluation</p>
-                                            <p class="text-xs text-gray-400 mt-1">1 ngày trước</p>
+                                            <p class="text-sm font-medium text-gray-900">Evaluation Completed</p>
+                                            <p class="text-sm text-gray-500 mt-1">Group K47-CNTT has completed peer evaluation</p>
+                                            <p class="text-xs text-gray-400 mt-1">1 day ago</p>
                                         </div>
                                         <div class="flex flex-col space-y-1">
                                             <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
-                                                Xem
+                                                View
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- Footer -->
                             <div class="p-4 border-t border-gray-200">
                                 <button onclick="window.location.href='notifications.html'" class="w-full text-center text-sm text-vlu-red hover:text-red-700 font-medium">
-                                    Xem tất cả thông báo
+                                    View all notifications
                                 </button>
                             </div>
                         </div>
@@ -102,20 +94,19 @@
                     <div class="relative">
                         <button id="userMenuBtn" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
                             <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
-                            <span class="text-sm font-medium">TS. Nguyễn Văn A</span>
+                            <span class="text-sm font-medium">Dr. Nguyen Van A</span>
                             <i class="fas fa-chevron-down text-xs"></i>
                         </button>
                         
-                        <!-- User Menu Dropdown -->
                         <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
                             <div class="py-1">
                                 <button onclick="window.location.href='profile.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     <i class="fas fa-user mr-3"></i>
-                                    Hồ sơ
+                                    Profile
                                 </button>
                                 <a href="../logout.html" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     <i class="fas fa-sign-out-alt mr-3"></i>
-                                    Đăng xuất
+                                    Log out
                                 </a>
                             </div>
                         </div>
@@ -125,9 +116,7 @@
         </div>
     </header>
 
-    <!-- Main Layout -->
     <div class="flex h-screen bg-gray-50">
-        <!-- Sidebar -->
         <aside class="w-64 bg-white shadow-sm border-r border-gray-200">
             <div class="p-6">
                 <div class="px-4 space-y-2">
@@ -137,62 +126,57 @@
                     </a>
                     <a href="course-detail.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
                         <i class="fas fa-book mr-3"></i>
-                        Học phần
+                        Courses
                     </a>
                     <a href="notifications.html" class="flex items-center px-4 py-3 text-vlu-red bg-vlu-light-red rounded-lg font-medium">
                         <i class="fas fa-bell mr-3"></i>
-                        Thông báo
+                        Notifications
                     </a>
                 </div>
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="flex-1 overflow-y-auto">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <!-- Page Header -->
                 <div class="mb-8">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h2 class="text-3xl font-bold text-gray-900">Thông báo</h2>
-                            <p class="text-gray-600 mt-2">Quản lý tất cả thông báo của bạn</p>
+                            <h2 class="text-3xl font-bold text-gray-900">Notifications</h2>
+                            <p class="text-gray-600 mt-2">Manage all your notifications</p>
                         </div>
                         <div class="flex items-center space-x-4">
                             <button onclick="markAllAsRead()" class="bg-vlu-red text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors">
                                 <i class="fas fa-check-double mr-2"></i>
-                                Đánh dấu tất cả đã đọc
+                                Mark all as read
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Filters -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
                     <div class="flex items-center space-x-4">
                         <div class="flex items-center space-x-2">
-                            <span class="text-sm font-medium text-gray-700">Lọc theo:</span>
+                            <span class="text-sm font-medium text-gray-700">Filter by:</span>
                         </div>
                         <button onclick="filterNotifications('all')" id="filter-all" class="px-4 py-2 bg-vlu-red text-white rounded-lg text-sm font-medium">
-                            Tất cả
+                            All
                         </button>
                         <button onclick="filterNotifications('unread')" id="filter-unread" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300">
-                            Chưa đọc
+                            Unread
                         </button>
                         <button onclick="filterNotifications('progress')" id="filter-progress" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300">
-                            Tiến độ
+                            Progress
                         </button>
                         <button onclick="filterNotifications('evaluation')" id="filter-evaluation" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300">
-                            Đánh giá
+                            Evaluation
                         </button>
                         <button onclick="filterNotifications('support')" id="filter-support" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300">
-                            Hỗ trợ
+                            Support
                         </button>
                     </div>
                 </div>
 
-                <!-- Notifications List -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200">
-                    <!-- Notification Item 1 - Progress Update -->
                     <div class="notification-item p-6 border-b border-gray-100 hover:bg-gray-50 transition-colors" data-type="progress" data-read="false">
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0">
@@ -202,27 +186,27 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center justify-between mb-2">
-                                    <h3 class="text-lg font-semibold text-gray-900">Cập nhật tiến độ dự án</h3>
+                                    <h3 class="text-lg font-semibold text-gray-900">Project Progress Update</h3>
                                     <div class="flex items-center space-x-2">
-                                        <span class="text-xs text-gray-500">2 giờ trước</span>
+                                        <span class="text-xs text-gray-500">2 hours ago</span>
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                            Tiến độ
+                                            Progress
                                         </span>
                                     </div>
                                 </div>
-                                <p class="text-gray-700 mb-3">Nhóm K47-CNTT-01 đã hoàn thành task "Thiết kế database" và cập nhật tiến độ dự án lên 75%.</p>
+                                <p class="text-gray-700 mb-3">Group K47-CNTT-01 has completed the task "Database Design" and updated project progress to 75%.</p>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                        <span><i class="fas fa-users mr-1"></i>Nhóm K47-CNTT-01</span>
-                                        <span><i class="fas fa-book mr-1"></i>Lập trình Web</span>
-                                        <span><i class="fas fa-tasks mr-1"></i>Task: Thiết kế database</span>
+                                        <span><i class="fas fa-users mr-1"></i>Group K47-CNTT-01</span>
+                                        <span><i class="fas fa-book mr-1"></i>Web Programming</span>
+                                        <span><i class="fas fa-tasks mr-1"></i>Task: Database Design</span>
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <button onclick="markAsRead(this)" class="text-gray-400 hover:text-gray-600">
                                             <i class="fas fa-check"></i>
                                         </button>
                                         <button onclick="window.location.href='group-detail.html'" class="bg-blue-500 text-white px-3 py-1 rounded text-sm font-medium hover:bg-blue-600 transition-colors">
-                                            Xem chi tiết
+                                            View Details
                                         </button>
                                     </div>
                                 </div>
@@ -230,7 +214,6 @@
                         </div>
                     </div>
 
-                    <!-- Notification Item 2 - Evaluation Complete -->
                     <div class="notification-item p-6 border-b border-gray-100 hover:bg-gray-50 transition-colors" data-type="evaluation" data-read="false">
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0">
@@ -240,27 +223,27 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center justify-between mb-2">
-                                    <h3 class="text-lg font-semibold text-gray-900">Đánh giá hoàn thành</h3>
+                                    <h3 class="text-lg font-semibold text-gray-900">Evaluation Completed</h3>
                                     <div class="flex items-center space-x-2">
-                                        <span class="text-xs text-gray-500">4 giờ trước</span>
+                                        <span class="text-xs text-gray-500">4 hours ago</span>
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            Đánh giá
+                                            Evaluation
                                         </span>
                                     </div>
                                 </div>
-                                <p class="text-gray-700 mb-3">Nhóm K47-CNTT-02 đã hoàn thành peer evaluation. Tất cả thành viên đã gửi đánh giá lẫn nhau.</p>
+                                <p class="text-gray-700 mb-3">Group K47-CNTT-02 has completed peer evaluation. All members have submitted their assessments.</p>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                        <span><i class="fas fa-users mr-1"></i>Nhóm K47-CNTT-02</span>
-                                        <span><i class="fas fa-book mr-1"></i>Cơ sở dữ liệu</span>
-                                        <span><i class="fas fa-user-check mr-1"></i>5/5 đánh giá</span>
+                                        <span><i class="fas fa-users mr-1"></i>Group K47-CNTT-02</span>
+                                        <span><i class="fas fa-book mr-1"></i>Database Fundamentals</span>
+                                        <span><i class="fas fa-user-check mr-1"></i>5/5 evaluations</span>
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <button onclick="markAsRead(this)" class="text-gray-400 hover:text-gray-600">
                                             <i class="fas fa-check"></i>
                                         </button>
                                         <button onclick="window.location.href='group-detail.html'" class="bg-green-500 text-white px-3 py-1 rounded text-sm font-medium hover:bg-green-600 transition-colors">
-                                            Xem kết quả
+                                            View Results
                                         </button>
                                     </div>
                                 </div>
@@ -268,7 +251,6 @@
                         </div>
                     </div>
 
-                    <!-- Notification Item 3 - Support Request -->
                     <div class="notification-item p-6 border-b border-gray-100 hover:bg-gray-50 transition-colors" data-type="support" data-read="false">
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0">
@@ -278,27 +260,27 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center justify-between mb-2">
-                                    <h3 class="text-lg font-semibold text-gray-900">Yêu cầu hỗ trợ</h3>
+                                    <h3 class="text-lg font-semibold text-gray-900">Support Request</h3>
                                     <div class="flex items-center space-x-2">
-                                        <span class="text-xs text-gray-500">1 ngày trước</span>
+                                        <span class="text-xs text-gray-500">1 day ago</span>
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                            Hỗ trợ
+                                            Support
                                         </span>
                                     </div>
                                 </div>
-                                <p class="text-gray-700 mb-3">Nhóm K47-CNTT-03 gặp khó khăn với task "Deploy ứng dụng". Cần hỗ trợ kỹ thuật.</p>
+                                <p class="text-gray-700 mb-3">Group K47-CNTT-03 is having difficulty with the task "Deploy Application". Technical support is needed.</p>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                        <span><i class="fas fa-users mr-1"></i>Nhóm K47-CNTT-03</span>
-                                        <span><i class="fas fa-book mr-1"></i>Lập trình Mobile</span>
-                                        <span><i class="fas fa-exclamation-triangle mr-1"></i>Khẩn cấp</span>
+                                        <span><i class="fas fa-users mr-1"></i>Group K47-CNTT-03</span>
+                                        <span><i class="fas fa-book mr-1"></i>Mobile Programming</span>
+                                        <span><i class="fas fa-exclamation-triangle mr-1"></i>Urgent</span>
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <button onclick="markAsRead(this)" class="text-gray-400 hover:text-gray-600">
                                             <i class="fas fa-check"></i>
                                         </button>
                                         <button onclick="window.location.href='group-detail.html'" class="bg-yellow-500 text-white px-3 py-1 rounded text-sm font-medium hover:bg-yellow-600 transition-colors">
-                                            Hỗ trợ ngay
+                                            Provide Support Now
                                         </button>
                                     </div>
                                 </div>
@@ -306,7 +288,6 @@
                         </div>
                     </div>
 
-                    <!-- Notification Item 4 - Project Completed -->
                     <div class="notification-item p-6 border-b border-gray-100 hover:bg-gray-50 transition-colors" data-type="progress" data-read="true">
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0">
@@ -316,27 +297,27 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center justify-between mb-2">
-                                    <h3 class="text-lg font-semibold text-gray-900">Dự án hoàn thành</h3>
+                                    <h3 class="text-lg font-semibold text-gray-900">Project Completed</h3>
                                     <div class="flex items-center space-x-2">
-                                        <span class="text-xs text-gray-500">2 ngày trước</span>
+                                        <span class="text-xs text-gray-500">2 days ago</span>
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                                            Hoàn thành
+                                            Completed
                                         </span>
                                     </div>
                                 </div>
-                                <p class="text-gray-700 mb-3">Nhóm K47-CNTT-04 đã hoàn thành dự án "Blog System" với điểm đánh giá 4.7/5.</p>
+                                <p class="text-gray-700 mb-3">Group K47-CNTT-04 has completed the "Blog System" project with an evaluation score of 4.7/5.</p>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                        <span><i class="fas fa-users mr-1"></i>Nhóm K47-CNTT-04</span>
-                                        <span><i class="fas fa-book mr-1"></i>Lập trình Web</span>
-                                        <span><i class="fas fa-star mr-1"></i>4.7/5 điểm</span>
+                                        <span><i class="fas fa-users mr-1"></i>Group K47-CNTT-04</span>
+                                        <span><i class="fas fa-book mr-1"></i>Web Programming</span>
+                                        <span><i class="fas fa-star mr-1"></i>4.7/5 score</span>
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <button onclick="markAsRead(this)" class="text-gray-400 hover:text-gray-600">
                                             <i class="fas fa-check"></i>
                                         </button>
                                         <button onclick="window.location.href='group-detail.html'" class="bg-purple-500 text-white px-3 py-1 rounded text-sm font-medium hover:bg-purple-600 transition-colors">
-                                            Xem chi tiết
+                                            View Details
                                         </button>
                                     </div>
                                 </div>
@@ -344,7 +325,6 @@
                         </div>
                     </div>
 
-                    <!-- Notification Item 5 - Deadline Warning -->
                     <div class="notification-item p-6 border-b border-gray-100 hover:bg-gray-50 transition-colors" data-type="progress" data-read="false">
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0">
@@ -354,27 +334,27 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center justify-between mb-2">
-                                    <h3 class="text-lg font-semibold text-gray-900">Cảnh báo deadline</h3>
+                                    <h3 class="text-lg font-semibold text-gray-900">Deadline Warning</h3>
                                     <div class="flex items-center space-x-2">
-                                        <span class="text-xs text-gray-500">3 ngày trước</span>
+                                        <span class="text-xs text-gray-500">3 days ago</span>
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                                            Khẩn cấp
+                                            Urgent
                                         </span>
                                     </div>
                                 </div>
-                                <p class="text-gray-700 mb-3">Nhóm K47-CNTT-05 có 3 task sắp đến deadline trong 2 ngày tới. Cần theo dõi sát sao.</p>
+                                <p class="text-gray-700 mb-3">Group K47-CNTT-05 has 3 tasks approaching their deadline in the next 2 days. Close monitoring is needed.</p>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                        <span><i class="fas fa-users mr-1"></i>Nhóm K47-CNTT-05</span>
-                                        <span><i class="fas fa-book mr-1"></i>Lập trình Web</span>
-                                        <span><i class="fas fa-exclamation-triangle mr-1"></i>3 task trễ hạn</span>
+                                        <span><i class="fas fa-users mr-1"></i>Group K47-CNTT-05</span>
+                                        <span><i class="fas fa-book mr-1"></i>Web Programming</span>
+                                        <span><i class="fas fa-exclamation-triangle mr-1"></i>3 overdue tasks</span>
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <button onclick="markAsRead(this)" class="text-gray-400 hover:text-gray-600">
                                             <i class="fas fa-check"></i>
                                         </button>
                                         <button onclick="window.location.href='group-detail.html'" class="bg-red-500 text-white px-3 py-1 rounded text-sm font-medium hover:bg-red-600 transition-colors">
-                                            Kiểm tra ngay
+                                            Check Now
                                         </button>
                                     </div>
                                 </div>
@@ -382,7 +362,6 @@
                         </div>
                     </div>
 
-                    <!-- Notification Item 6 - New Student Added -->
                     <div class="notification-item p-6 border-b border-gray-100 hover:bg-gray-50 transition-colors" data-type="progress" data-read="true">
                         <div class="flex items-start space-x-4">
                             <div class="flex-shrink-0">
@@ -392,27 +371,27 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center justify-between mb-2">
-                                    <h3 class="text-lg font-semibold text-gray-900">Sinh viên mới tham gia</h3>
+                                    <h3 class="text-lg font-semibold text-gray-900">New Student Joined</h3>
                                     <div class="flex items-center space-x-2">
-                                        <span class="text-xs text-gray-500">1 tuần trước</span>
+                                        <span class="text-xs text-gray-500">1 week ago</span>
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
-                                            Thông tin
+                                            Information
                                         </span>
                                     </div>
                                 </div>
-                                <p class="text-gray-700 mb-3">Sinh viên Nguyễn Văn G đã được thêm vào nhóm K47-CNTT-06 trong môn Lập trình Web.</p>
+                                <p class="text-gray-700 mb-3">Student Nguyen Van G has been added to group K47-CNTT-06 in Web Programming course.</p>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                        <span><i class="fas fa-user mr-1"></i>Nguyễn Văn G</span>
-                                        <span><i class="fas fa-users mr-1"></i>Nhóm K47-CNTT-06</span>
-                                        <span><i class="fas fa-book mr-1"></i>Lập trình Web</span>
+                                        <span><i class="fas fa-user mr-1"></i>Nguyen Van G</span>
+                                        <span><i class="fas fa-users mr-1"></i>Group K47-CNTT-06</span>
+                                        <span><i class="fas fa-book mr-1"></i>Web Programming</span>
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <button onclick="markAsRead(this)" class="text-gray-400 hover:text-gray-600">
                                             <i class="fas fa-check"></i>
                                         </button>
                                         <button onclick="window.location.href='group-detail.html'" class="bg-indigo-500 text-white px-3 py-1 rounded text-sm font-medium hover:bg-indigo-600 transition-colors">
-                                            Xem nhóm
+                                            View Group
                                         </button>
                                     </div>
                                 </div>
@@ -421,14 +400,13 @@
                     </div>
                 </div>
 
-                <!-- Pagination -->
                 <div class="mt-6 flex items-center justify-between">
                     <div class="text-sm text-gray-700">
-                        Hiển thị <span class="font-medium">1</span> đến <span class="font-medium">6</span> của <span class="font-medium">12</span> thông báo
+                        Showing <span class="font-medium">1</span> to <span class="font-medium">6</span> of <span class="font-medium">12</span> notifications
                     </div>
                     <div class="flex items-center space-x-2">
                         <button class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
-                            Trước
+                            Previous
                         </button>
                         <button class="px-3 py-2 text-sm font-medium text-white bg-vlu-red border border-vlu-red rounded-md">
                             1
@@ -437,7 +415,7 @@
                             2
                         </button>
                         <button class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
-                            Sau
+                            Next
                         </button>
                     </div>
                 </div>
@@ -518,7 +496,7 @@
 
             const user = JSON.parse(userInfo);
             if (user.role !== 'teacher') {
-                alert('Bạn không có quyền truy cập trang này!');
+                alert('You do not have permission to access this page!');
                 window.location.href = '../login.html';
                 return;
             }
@@ -534,4 +512,4 @@
         });
     </script>
 </body>
-</html> 
+</html>

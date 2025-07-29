@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,6 @@
     </script>
 </head>
 <body class="bg-gray-50">
-    <!-- Header -->
     <header class="bg-white shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
@@ -28,96 +27,185 @@
                     <h1 class="text-2xl font-bold text-vlu-red">VLUTaskMate</h1>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button class="relative p-2 text-gray-600 hover:text-gray-900">
-                        <i class="fas fa-bell"></i>
-                        <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-vlu-red"></span>
-                    </button>
                     <div class="relative">
-                        <button class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                        <button id="notificationBtn" class="relative p-2 text-gray-600 hover:text-gray-900">
+                            <i class="fas fa-bell"></i>
+                            <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-vlu-red"></span>
+                        </button>
+                        
+                        <div id="notificationDropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                            <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                                <h3 class="text-lg font-semibold text-gray-900">Notifications</h3>
+                                <button id="closeNotifications" class="text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="max-h-96 overflow-y-auto">
+                                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-tasks text-blue-600 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900">You have a new task assigned</p>
+                                            <p class="text-sm text-gray-500 mt-1">"Design Interface" in the E-commerce Website project</p>
+                                            <p class="text-xs text-gray-400 mt-1">2 minutes ago</p>
+                                        </div>
+                                        <div class="flex flex-col space-y-1">
+                                            <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
+                                                Confirm
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-users text-purple-600 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900">Group Invitation</p>
+                                            <p class="text-sm text-gray-500 mt-1">You are invited to join the "Library Management System" project</p>
+                                            <p class="text-xs text-gray-400 mt-1">15 minutes ago</p>
+                                        </div>
+                                        <div class="flex flex-col space-y-1">
+                                            <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
+                                                Accept
+                                            </button>
+                                            <button class="bg-red-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-red-600 transition-colors">
+                                                Decline
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-4 border-t border-gray-200">
+                                <button onclick="window.location.href='notifications.html'" class="w-full text-center text-sm text-vlu-red hover:text-red-700 font-medium">
+                                    View all notifications
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <button id="userMenuBtn" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
                             <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
-                            <span class="text-sm font-medium">Hồ Du Tuấn Đạt</span>
+                            <span class="text-sm font-medium">Ho Du Tuan Dat</span>
                             <i class="fas fa-chevron-down text-xs"></i>
                         </button>
+                        
+                        <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                            <div class="py-1">
+                                <button onclick="window.location.href='profile.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-user mr-3"></i>
+                                    Profile
+                                </button>
+                                <a href="../logout.html" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-sign-out-alt mr-3"></i>
+                                    Log out
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    
+    <aside class="w-64 bg-white shadow-sm">
+        <nav class="mt-8">
+            <div class="px-4 space-y-2">
+                <a href="index.html" class="flex items-center px-4 py-3 text-vlu-red bg-red-50 rounded-lg font-medium">
+                    <i class="fas fa-folder mr-3"></i>
+                    My Groups
+                </a>
+                <a href="my-tasks.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                    <i class="fas fa-tasks mr-3"></i>
+                    My Tasks
+                </a>
+                <a href="notifications.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                    <i class="fas fa-bell mr-3"></i>
+                    Notifications
+                </a>
+            </div>
+        </nav>
+    </aside>
 
-    <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Project Header -->
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
             <div class="flex items-start justify-between mb-4">
                 <div class="flex-1">
                     <div class="flex items-center space-x-3 mb-2">
-                        <h1 class="text-2xl font-bold text-gray-900">Website E-commerce</h1>
+                        <h1 class="text-2xl font-bold text-gray-900">E-commerce Website</h1>
                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                             <i class="fas fa-crown mr-1"></i>
                             Leader
                         </span>
                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                            Đã hoàn tất
+                            Completed
                         </span>
                     </div>
                     
                     <div class="text-gray-600 space-y-1">
-                        <p><i class="fas fa-graduation-cap mr-2"></i>Học kỳ 1 - Năm học 2024-2025</p>
-                        <p><i class="fas fa-users mr-2"></i>Lớp CNTT-K15</p>
-                        <p><i class="fas fa-chalkboard-teacher mr-2"></i>GV: ThS. Trần Thị B</p>
-                        <p><i class="fas fa-calendar mr-2"></i>01/11/2024 đến 10/11/2024</p>
+                        <p><i class="fas fa-graduation-cap mr-2"></i>Semester 1 - Academic Year 2024-2025</p>
+                        <p><i class="fas fa-users mr-2"></i>Class CNTT-K15</p>
+                        <p><i class="fas fa-chalkboard-teacher mr-2"></i>Lecturer: Ms. Tran Thi B</p>
+                        <p><i class="fas fa-calendar mr-2"></i>01/11/2024 to 10/11/2024</p>
                     </div>
                     
                     <p class="text-gray-700 mt-3">
-                        Xây dựng website thương mại điện tử hoàn chỉnh với các tính năng đăng ký, đăng nhập, 
-                        quản lý sản phẩm, giỏ hàng, thanh toán và quản lý đơn hàng.
+                        Develop a complete e-commerce website with features for registration, login, 
+                        product management, shopping cart, payment, and order management.
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
             <div class="border-b border-gray-200">
                 <nav class="-mb-px flex space-x-8 px-6">
                     <button class="tab-btn active py-4 px-1 border-b-2 border-vlu-red text-vlu-red font-medium" data-tab="members">
                         <i class="fas fa-users mr-2"></i>
-                        Thành viên nhóm
+                        Group Members
                     </button>
                     <button class="tab-btn py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" data-tab="tasks">
                         <i class="fas fa-tasks mr-2"></i>
-                        Nhiệm vụ
+                        Tasks
                     </button>
                     <button class="tab-btn py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" data-tab="evaluation">
                         <i class="fas fa-chart-bar mr-2"></i>
-                        Đánh giá
+                        Evaluation
                     </button>
                     <button class="tab-btn py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" data-tab="close">
                         <i class="fas fa-lock mr-2"></i>
-                        Đóng dự án
+                        Close Project
                     </button>
                 </nav>
             </div>
 
-            <!-- Tab Content -->
             <div id="tabContent">
-                <!-- Members Tab -->
                 <div id="members" class="tab-content active" data-tab-content="members">
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-gray-900">Thành viên nhóm</h3>
+                            <h3 class="text-lg font-semibold text-gray-900">Group Members</h3>
                         </div>
                         
                         <div class="space-y-4">
-                            <!-- Member 1 - Leader -->
                             <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                                 <div class="flex items-center space-x-4">
                                     <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="Member">
                                     <div>
-                                        <h4 class="font-medium text-gray-900">Hồ Du Tuấn Đạt</h4>
+                                        <h4 class="font-medium text-gray-900">Ho Du Tuan Dat</h4>
                                         <p class="text-sm text-gray-500">2374802010097 - 72K29CNTT01</p>
                                     </div>
-                                </div>
+                                個個</div>
                                 <div class="flex items-center space-x-3">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                         Leader
@@ -125,12 +213,11 @@
                                 </div>
                             </div>
 
-                            <!-- Member 2 -->
                             <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                                 <div class="flex items-center space-x-4">
                                     <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="Member">
                                     <div>
-                                        <h4 class="font-medium text-gray-900">Nguyễn Văn A</h4>
+                                        <h4 class="font-medium text-gray-900">Nguyen Van A</h4>
                                         <p class="text-sm text-gray-500">2374802010098 - 72K29CNTT01</p>
                                     </div>
                                 </div>
@@ -141,12 +228,11 @@
                                 </div>
                             </div>
 
-                            <!-- Member 3 -->
                             <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                                 <div class="flex items-center space-x-4">
                                     <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="Member">
                                     <div>
-                                        <h4 class="font-medium text-gray-900">Trần Thị B</h4>
+                                        <h4 class="font-medium text-gray-900">Tran Thi B</h4>
                                         <p class="text-sm text-gray-500">2374802010099 - 72K29CNTT01</p>
                                     </div>
                                 </div>
@@ -157,12 +243,11 @@
                                 </div>
                             </div>
 
-                            <!-- Member 4 -->
                             <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                                 <div class="flex items-center space-x-4">
                                     <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="Member">
                                     <div>
-                                        <h4 class="font-medium text-gray-900">Lê Văn C</h4>
+                                        <h4 class="font-medium text-gray-900">Le Van C</h4>
                                         <p class="text-sm text-gray-500">2374802010100 - 72K29CNTT01</p>
                                     </div>
                                 </div>
@@ -173,12 +258,11 @@
                                 </div>
                             </div>
 
-                            <!-- Member 5 -->
                             <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                                 <div class="flex items-center space-x-4">
                                     <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="Member">
                                     <div>
-                                        <h4 class="font-medium text-gray-900">Phạm Thị D</h4>
+                                        <h4 class="font-medium text-gray-900">Pham Thi D</h4>
                                         <p class="text-sm text-gray-500">2374802010101 - 72K29CNTT01</p>
                                     </div>
                                 </div>
@@ -189,12 +273,11 @@
                                 </div>
                             </div>
 
-                            <!-- Member 6 -->
                             <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                                 <div class="flex items-center space-x-4">
                                     <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="Member">
                                     <div>
-                                        <h4 class="font-medium text-gray-900">Vũ Văn E</h4>
+                                        <h4 class="font-medium text-gray-900">Vu Van E</h4>
                                         <p class="text-sm text-gray-500">2374802010102 - 72K29CNTT01</p>
                                     </div>
                                 </div>
@@ -208,109 +291,98 @@
                     </div>
                 </div>
 
-                <!-- Tasks Tab -->
                 <div id="tasks" class="tab-content hidden" data-tab-content="tasks">
                     <div class="bg-gray-50 rounded-lg p-6">
                         <div class="text-center py-8">
                             <i class="fas fa-check-circle text-4xl text-green-500 mb-4"></i>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Tất cả nhiệm vụ đã hoàn thành</h3>
-                            <p class="text-gray-600">Dự án đã hoàn thành tất cả các nhiệm vụ được giao</p>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">All tasks completed</h3>
+                            <p class="text-gray-600">The project has completed all assigned tasks</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Evaluation Tab -->
                 <div id="evaluation" class="tab-content hidden" data-tab-content="evaluation">
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-gray-900">Đánh giá thành viên</h3>
+                            <h3 class="text-lg font-semibold text-gray-900">Member Evaluation</h3>
                         </div>
 
-                        <!-- Project Status Check -->
                         <div id="evaluationStatus" class="mb-6">
                             <div class="bg-green-50 border border-green-200 rounded-lg p-4">
                                 <div class="flex items-center">
                                     <i class="fas fa-check-circle text-green-500 mr-3"></i>
                                     <div>
-                                        <h4 class="font-medium text-green-900">Dự án đã hoàn thành</h4>
-                                        <p class="text-sm text-green-700">Bạn có thể tiến hành đánh giá thành viên</p>
+                                        <h4 class="font-medium text-green-900">Project completed</h4>
+                                        <p class="text-sm text-green-700">You can proceed with member evaluation</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="space-y-6" id="evaluationContent">
-                            <!-- Team Members List for Evaluation -->
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                <!-- Member 1 - Leader -->
-                                <div class="evaluation-member-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-vlu-red hover:shadow-md transition-all" data-member="Hồ Du Tuấn Đạt" data-role="Leader">
+                                <div class="evaluation-member-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-vlu-red hover:shadow-md transition-all" data-member="Ho Du Tuan Dat" data-role="Leader">
                                     <div class="text-center">
                                         <img class="h-16 w-16 rounded-full bg-gray-300 mx-auto mb-3" src="https://via.placeholder.com/64" alt="Member">
-                                        <h4 class="font-medium text-gray-900">Hồ Du Tuấn Đạt</h4>
+                                        <h4 class="font-medium text-gray-900">Ho Du Tuan Dat</h4>
                                         <p class="text-sm text-gray-500">Leader</p>
                                         <p class="text-xs text-gray-400 mt-1">2374802010097</p>
                                     </div>
                                 </div>
 
-                                <!-- Member 2 -->
-                                <div class="evaluation-member-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-vlu-red hover:shadow-md transition-all" data-member="Nguyễn Văn A" data-role="Member">
+                                <div class="evaluation-member-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-vlu-red hover:shadow-md transition-all" data-member="Nguyen Van A" data-role="Member">
                                     <div class="text-center">
                                         <img class="h-16 w-16 rounded-full bg-gray-300 mx-auto mb-3" src="https://via.placeholder.com/64" alt="Member">
-                                        <h4 class="font-medium text-gray-900">Nguyễn Văn A</h4>
+                                        <h4 class="font-medium text-gray-900">Nguyen Van A</h4>
                                         <p class="text-sm text-gray-500">Member</p>
                                         <p class="text-xs text-gray-400 mt-1">2374802010098</p>
                                     </div>
                                 </div>
 
-                                <!-- Member 3 -->
-                                <div class="evaluation-member-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-vlu-red hover:shadow-md transition-all" data-member="Trần Thị B" data-role="Member">
+                                <div class="evaluation-member-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-vlu-red hover:shadow-md transition-all" data-member="Tran Thi B" data-role="Member">
                                     <div class="text-center">
                                         <img class="h-16 w-16 rounded-full bg-gray-300 mx-auto mb-3" src="https://via.placeholder.com/64" alt="Member">
-                                        <h4 class="font-medium text-gray-900">Trần Thị B</h4>
+                                        <h4 class="font-medium text-gray-900">Tran Thi B</h4>
                                         <p class="text-sm text-gray-500">Member</p>
                                         <p class="text-xs text-gray-400 mt-1">2374802010099</p>
                                     </div>
                                 </div>
 
-                                <!-- Member 4 -->
-                                <div class="evaluation-member-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-vlu-red hover:shadow-md transition-all" data-member="Lê Văn C" data-role="Member">
+                                <div class="evaluation-member-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-vlu-red hover:shadow-md transition-all" data-member="Le Van C" data-role="Member">
                                     <div class="text-center">
                                         <img class="h-16 w-16 rounded-full bg-gray-300 mx-auto mb-3" src="https://via.placeholder.com/64" alt="Member">
-                                        <h4 class="font-medium text-gray-900">Lê Văn C</h4>
+                                        <h4 class="font-medium text-gray-900">Le Van C</h4>
                                         <p class="text-sm text-gray-500">Member</p>
                                         <p class="text-xs text-gray-400 mt-1">2374802010100</p>
                                     </div>
                                 </div>
 
-                                <!-- Member 5 -->
-                                <div class="evaluation-member-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-vlu-red hover:shadow-md transition-all" data-member="Phạm Thị D" data-role="Member">
+                                <div class="evaluation-member-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-vlu-red hover:shadow-md transition-all" data-member="Pham Thi D" data-role="Member">
                                     <div class="text-center">
                                         <img class="h-16 w-16 rounded-full bg-gray-300 mx-auto mb-3" src="https://via.placeholder.com/64" alt="Member">
-                                        <h4 class="font-medium text-gray-900">Phạm Thị D</h4>
+                                        <h4 class="font-medium text-gray-900">Pham Thi D</h4>
                                         <p class="text-sm text-gray-500">Member</p>
                                         <p class="text-xs text-gray-400 mt-1">2374802010101</p>
                                     </div>
                                 </div>
 
-                                <!-- Member 6 -->
-                                <div class="evaluation-member-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-vlu-red hover:shadow-md transition-all" data-member="Vũ Văn E" data-role="Member">
+                                <div class="evaluation-member-card border border-gray-200 rounded-lg p-4 cursor-pointer hover:border-vlu-red hover:shadow-md transition-all" data-member="Vu Van E" data-role="Member">
                                     <div class="text-center">
                                         <img class="h-16 w-16 rounded-full bg-gray-300 mx-auto mb-3" src="https://via.placeholder.com/64" alt="Member">
-                                        <h4 class="font-medium text-gray-900">Vũ Văn E</h4>
+                                        <h4 class="font-medium text-gray-900">Vu Van E</h4>
                                         <p class="text-sm text-gray-500">Member</p>
                                         <p class="text-xs text-gray-400 mt-1">2374802010102</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Evaluation Results -->
                             <div class="border border-gray-200 rounded-lg p-6">
-                                <h4 class="font-medium text-gray-900 mb-4">Kết quả đánh giá của bạn</h4>
+                                <h4 class="font-medium text-gray-900 mb-4">Your Evaluation Results</h4>
                                 <div class="space-y-4">
                                     <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                         <div>
-                                            <h5 class="font-medium text-gray-900">Nguyễn Văn A</h5>
-                                            <p class="text-sm text-gray-600">Điểm trung bình: 4.5/5</p>
+                                            <h5 class="font-medium text-gray-900">Nguyen Van A</h5>
+                                            <p class="text-sm text-gray-600">Average Score: 4.5/5</p>
                                         </div>
                                         <div class="flex items-center space-x-1">
                                             <i class="fas fa-star text-yellow-400"></i>
@@ -322,8 +394,8 @@
                                     </div>
                                     <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                         <div>
-                                            <h5 class="font-medium text-gray-900">Trần Thị B</h5>
-                                            <p class="text-sm text-gray-600">Điểm trung bình: 4.2/5</p>
+                                            <h5 class="font-medium text-gray-900">Tran Thi B</h5>
+                                            <p class="text-sm text-gray-600">Average Score: 4.2/5</p>
                                         </div>
                                         <div class="flex items-center space-x-1">
                                             <i class="fas fa-star text-yellow-400"></i>
@@ -339,26 +411,25 @@
                     </div>
                 </div>
 
-                <!-- Close Project Tab -->
                 <div id="close" class="tab-content hidden" data-tab-content="close">
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div class="text-center">
                             <i class="fas fa-check-circle text-4xl text-green-500 mb-4"></i>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Dự án đã hoàn thành</h3>
-                            <p class="text-gray-600 mb-6">Dự án Website E-commerce đã được hoàn thành thành công</p>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Project completed</h3>
+                            <p class="text-gray-600 mb-6">The E-commerce Website project has been successfully completed</p>
                             
                             <div class="space-y-4 mb-6">
                                 <div class="flex items-center justify-between p-4 border border-green-200 rounded-lg bg-green-50">
                                     <div class="flex items-center">
                                         <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                                        <span class="text-gray-900">Tất cả task đã hoàn thành</span>
+                                        <span class="text-gray-900">All tasks completed</span>
                                     </div>
                                     <span class="text-green-600 font-medium">✓</span>
-                                </div>
+                                個個</div>
                                 <div class="flex items-center justify-between p-4 border border-green-200 rounded-lg bg-green-50">
                                     <div class="flex items-center">
                                         <i class="fas fa-check-circle text-green-500 mr-3"></i>
-                                        <span class="text-gray-900">Tất cả đánh giá đã gửi</span>
+                                        <span class="text-gray-900">All evaluations submitted</span>
                                     </div>
                                     <span class="text-green-600 font-medium">✓</span>
                                 </div>
@@ -366,7 +437,7 @@
                             
                             <button class="bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors">
                                 <i class="fas fa-check mr-2"></i>
-                                Dự án đã hoàn thành
+                                Project Completed
                             </button>
                         </div>
                     </div>
@@ -375,30 +446,25 @@
         </div>
     </main>
 
-    <!-- Evaluation Popup Modal -->
     <div id="evaluationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
-            <!-- Header -->
             <div class="flex items-center justify-between p-4 border-b border-gray-200">
                 <button id="closeEvaluationModal" class="text-red-500 hover:text-red-700">
                     <i class="fas fa-times text-xl"></i>
                 </button>
-                <h3 class="text-lg font-bold text-gray-900">Đánh giá thành viên</h3>
+                <h3 class="text-lg font-bold text-gray-900">Evaluate Member</h3>
                 <button class="text-blue-500 hover:text-blue-700 text-sm font-medium">
-                    Hỗ trợ
+                    Support
                 </button>
             </div>
 
-            <!-- Content -->
             <div class="p-6">
-                <!-- Member Profile -->
                 <div class="text-center mb-6">
                     <img id="memberAvatar" class="h-20 w-20 rounded-full bg-gray-300 mx-auto mb-3" src="https://via.placeholder.com/80" alt="Member">
-                    <h4 id="memberName" class="text-lg font-medium text-gray-900">Nguyễn Ngọc Quang Huy</h4>
+                    <h4 id="memberName" class="text-lg font-medium text-gray-900">Nguyen Ngoc Quang Huy</h4>
                     <p id="memberRole" class="text-sm text-gray-500">Member</p>
                 </div>
 
-                <!-- Rating Stars -->
                 <div class="flex justify-center space-x-2 mb-6">
                     <i class="star-rating far fa-star text-2xl text-yellow-400 cursor-pointer hover:text-yellow-500" data-rating="1"></i>
                     <i class="star-rating far fa-star text-2xl text-yellow-400 cursor-pointer hover:text-yellow-500" data-rating="2"></i>
@@ -407,159 +473,154 @@
                     <i class="star-rating far fa-star text-2xl text-yellow-400 cursor-pointer hover:text-yellow-500" data-rating="5"></i>
                 </div>
 
-                <!-- Comment Section -->
                 <div class="mb-6">
-                    <textarea id="evaluationComment" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent resize-none" rows="4" placeholder="Thêm đánh giá"></textarea>
+                    <textarea id="evaluationComment" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent resize-none" rows="4" placeholder="Add evaluation comments"></textarea>
                 </div>
 
-                <!-- Tag Selection -->
                 <div class="mb-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-3">Chọn tag:</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Select tags:</label>
                     
-                    <!-- Positive Tags -->
                     <div class="mb-4">
                         <h5 class="text-sm font-medium text-green-700 mb-2 flex items-center">
                             <i class="fas fa-plus-circle mr-1"></i>
-                            Tag Tích Cực
+                            Positive Tags
                         </h5>
                         <div class="grid grid-cols-1 gap-2">
-                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Đúng hạn" data-description="Luôn hoàn thành đúng thời gian">
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="On Time" data-description="Always completes on time">
                                 <div class="flex justify-between items-center">
-                                    <span>Đúng hạn</span>
-                                    <span class="text-xs text-gray-500">Luôn hoàn thành đúng thời gian</span>
+                                    <span>On Time</span>
+                                    <span class="text-xs text-gray-500">Always completes on time</span>
                                 </div>
                             </button>
-                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Có trách nhiệm" data-description="Nhận nhiệm vụ và làm đến cùng">
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Responsible" data-description="Takes on tasks and finishes them">
                                 <div class="flex justify-between items-center">
-                                    <span>Có trách nhiệm</span>
-                                    <span class="text-xs text-gray-500">Nhận nhiệm vụ và làm đến cùng</span>
+                                    <span>Responsible</span>
+                                    <span class="text-xs text-gray-500">Takes on tasks and finishes them</span>
                                 </div>
                             </button>
-                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Hỗ trợ tốt" data-description="Luôn sẵn sàng hỗ trợ bạn nhóm">
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Good Support" data-description="Always ready to help teammates">
                                 <div class="flex justify-between items-center">
-                                    <span>Hỗ trợ tốt</span>
-                                    <span class="text-xs text-gray-500">Luôn sẵn sàng hỗ trợ bạn nhóm</span>
+                                    <span>Good Support</span>
+                                    <span class="text-xs text-gray-500">Always ready to help teammates</span>
                                 </div>
                             </button>
-                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Lắng nghe" data-description="Biết tiếp thu ý kiến, lắng nghe góp ý">
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Good Listener" data-description="Open to feedback, listens to suggestions">
                                 <div class="flex justify-between items-center">
-                                    <span>Lắng nghe</span>
-                                    <span class="text-xs text-gray-500">Biết tiếp thu ý kiến, lắng nghe góp ý</span>
+                                    <span>Good Listener</span>
+                                    <span class="text-xs text-gray-500">Open to feedback, listens to suggestions</span>
                                 </div>
                             </button>
-                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Giao tiếp tốt" data-description="Giao tiếp rõ ràng, hiệu quả">
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Good Communicator" data-description="Clear and effective communication">
                                 <div class="flex justify-between items-center">
-                                    <span>Giao tiếp tốt</span>
-                                    <span class="text-xs text-gray-500">Giao tiếp rõ ràng, hiệu quả</span>
+                                    <span>Good Communicator</span>
+                                    <span class="text-xs text-gray-500">Clear and effective communication</span>
                                 </div>
                             </button>
-                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Linh hoạt" data-description="Dễ thích nghi, đổi kế hoạch phù hợp">
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Flexible" data-description="Easily adaptable, changes plans accordingly">
                                 <div class="flex justify-between items-center">
-                                    <span>Linh hoạt</span>
-                                    <span class="text-xs text-gray-500">Dễ thích nghi, đổi kế hoạch phù hợp</span>
+                                    <span>Flexible</span>
+                                    <span class="text-xs text-gray-500">Easily adaptable, changes plans accordingly</span>
                                 </div>
                             </button>
-                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Tư duy phản biện" data-description="Có góc nhìn phản biện tích cực">
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Critical Thinker" data-description="Has a positive critical perspective">
                                 <div class="flex justify-between items-center">
-                                    <span>Tư duy phản biện</span>
-                                    <span class="text-xs text-gray-500">Có góc nhìn phản biện tích cực</span>
+                                    <span>Critical Thinker</span>
+                                    <span class="text-xs text-gray-500">Has a positive critical perspective</span>
                                 </div>
                             </button>
-                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Sáng tạo" data-description="Đưa ra ý tưởng hay, khác biệt">
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Creative" data-description="Comes up with good, unique ideas">
                                 <div class="flex justify-between items-center">
-                                    <span>Sáng tạo</span>
-                                    <span class="text-xs text-gray-500">Đưa ra ý tưởng hay, khác biệt</span>
+                                    <span>Creative</span>
+                                    <span class="text-xs text-gray-500">Comes up with good, unique ideas</span>
                                 </div>
                             </button>
-                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Gắn kết nhóm" data-description="Kết nối và duy trì tinh thần nhóm">
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Team Player" data-description="Connects and maintains team spirit">
                                 <div class="flex justify-between items-center">
-                                    <span>Gắn kết nhóm</span>
-                                    <span class="text-xs text-gray-500">Kết nối và duy trì tinh thần nhóm</span>
+                                    <span>Team Player</span>
+                                    <span class="text-xs text-gray-500">Connects and maintains team spirit</span>
                                 </div>
                             </button>
-                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Kiên trì" data-description="Không bỏ cuộc giữa chừng">
+                            <button class="tag-btn positive-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-green-500 hover:text-green-700 transition-colors" data-tag="Persistent" data-description="Doesn't give up halfway through">
                                 <div class="flex justify-between items-center">
-                                    <span>Kiên trì</span>
-                                    <span class="text-xs text-gray-500">Không bỏ cuộc giữa chừng</span>
+                                    <span>Persistent</span>
+                                    <span class="text-xs text-gray-500">Doesn't give up halfway through</span>
                                 </div>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Negative Tags -->
                     <div>
                         <h5 class="text-sm font-medium text-red-700 mb-2 flex items-center">
                             <i class="fas fa-minus-circle mr-1"></i>
-                            Tag Tiêu Cực
+                            Negative Tags
                         </h5>
                         <div class="grid grid-cols-1 gap-2">
-                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Thiếu trách nhiệm" data-description="Nhận task nhưng không hoàn thành">
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Irresponsible" data-description="Takes on tasks but doesn't complete them">
                                 <div class="flex justify-between items-center">
-                                    <span>Thiếu trách nhiệm</span>
-                                    <span class="text-xs text-gray-500">Nhận task nhưng không hoàn thành</span>
+                                    <span>Irresponsible</span>
+                                    <span class="text-xs text-gray-500">Takes on tasks but doesn't complete them</span>
                                 </div>
                             </button>
-                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Không phản hồi" data-description="Không trả lời khi trao đổi nhóm">
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Unresponsive" data-description="Doesn't reply during group discussions">
                                 <div class="flex justify-between items-center">
-                                    <span>Không phản hồi</span>
-                                    <span class="text-xs text-gray-500">Không trả lời khi trao đổi nhóm</span>
+                                    <span>Unresponsive</span>
+                                    <span class="text-xs text-gray-500">Doesn't reply during group discussions</span>
                                 </div>
                             </button>
-                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Giao tiếp kém" data-description="Truyền đạt không rõ, gây hiểu lầm">
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Poor Communication" data-description="Communicates unclearly, causes misunderstandings">
                                 <div class="flex justify-between items-center">
-                                    <span>Giao tiếp kém</span>
-                                    <span class="text-xs text-gray-500">Truyền đạt không rõ, gây hiểu lầm</span>
+                                    <span>Poor Communication</span>
+                                    <span class="text-xs text-gray-500">Communicates unclearly, causes misunderstandings</span>
                                 </div>
                             </button>
-                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Tự ý quyết định" data-description="Làm việc không bàn bạc">
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Makes Solo Decisions" data-description="Works without consulting others">
                                 <div class="flex justify-between items-center">
-                                    <span>Tự ý quyết định</span>
-                                    <span class="text-xs text-gray-500">Làm việc không bàn bạc</span>
+                                    <span>Makes Solo Decisions</span>
+                                    <span class="text-xs text-gray-500">Works without consulting others</span>
                                 </div>
                             </button>
-                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Không đúng tiến độ" data-description="Thường xuyên trễ deadline">
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Behind Schedule" data-description="Frequently misses deadlines">
                                 <div class="flex justify-between items-center">
-                                    <span>Không đúng tiến độ</span>
-                                    <span class="text-xs text-gray-500">Thường xuyên trễ deadline</span>
+                                    <span>Behind Schedule</span>
+                                    <span class="text-xs text-gray-500">Frequently misses deadlines</span>
                                 </div>
                             </button>
-                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Mất kết nối" data-description="Biến mất giữa dự án, không tương tác">
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Disconnected" data-description="Disappears during the project, no interaction">
                                 <div class="flex justify-between items-center">
-                                    <span>Mất kết nối</span>
-                                    <span class="text-xs text-gray-500">Biến mất giữa dự án, không tương tác</span>
+                                    <span>Disconnected</span>
+                                    <span class="text-xs text-gray-500">Disappears during the project, no interaction</span>
                                 </div>
                             </button>
-                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Thiếu linh hoạt" data-description="Cứng nhắc, khó thích nghi">
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Inflexible" data-description="Rigid, difficult to adapt">
                                 <div class="flex justify-between items-center">
-                                    <span>Thiếu linh hoạt</span>
-                                    <span class="text-xs text-gray-500">Cứng nhắc, khó thích nghi</span>
+                                    <span>Inflexible</span>
+                                    <span class="text-xs text-gray-500">Rigid, difficult to adapt</span>
                                 </div>
                             </button>
-                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Phản ứng tiêu cực" data-description="Hay phàn nàn, tiêu cực khi làm việc">
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Negative Attitude" data-description="Complains a lot, negative while working">
                                 <div class="flex justify-between items-center">
-                                    <span>Phản ứng tiêu cực</span>
-                                    <span class="text-xs text-gray-500">Hay phàn nàn, tiêu cực khi làm việc</span>
+                                    <span>Negative Attitude</span>
+                                    <span class="text-xs text-gray-500">Complains a lot, negative while working</span>
                                 </div>
                             </button>
-                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Làm việc đơn lẻ" data-description="Không phối hợp với các thành viên khác">
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Works Alone" data-description="Doesn't collaborate with other members">
                                 <div class="flex justify-between items-center">
-                                    <span>Làm việc đơn lẻ</span>
-                                    <span class="text-xs text-gray-500">Không phối hợp với các thành viên khác</span>
+                                    <span>Works Alone</span>
+                                    <span class="text-xs text-gray-500">Doesn't collaborate with other members</span>
                                 </div>
                             </button>
-                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Vi phạm nội quy" data-description="Không tuân thủ nguyên tắc nhóm">
+                            <button class="tag-btn negative-tag px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:border-red-500 hover:text-red-700 transition-colors" data-tag="Violates Rules" data-description="Doesn't follow group rules">
                                 <div class="flex justify-between items-center">
-                                    <span>Vi phạm nội quy</span>
-                                    <span class="text-xs text-gray-500">Không tuân thủ nguyên tắc nhóm</span>
+                                    <span>Violates Rules</span>
+                                    <span class="text-xs text-gray-500">Doesn't follow group rules</span>
                                 </div>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Submit Button -->
                 <button id="submitEvaluation" class="w-full bg-vlu-red text-white py-3 rounded-lg font-medium hover:bg-red-700 transition-colors">
-                    Gửi đánh giá
+                    Submit Evaluation
                 </button>
             </div>
         </div>
@@ -702,26 +763,26 @@
             // Submit evaluation
             submitEvaluation.addEventListener('click', function() {
                 if (currentRating === 0) {
-                    alert('Vui lòng chọn điểm đánh giá!');
+                    alert('Please select a rating score!');
                     return;
                 }
 
                 if (evaluationComment.value.trim() === '') {
-                    alert('Vui lòng nhập nhận xét!');
+                    alert('Please enter comments!');
                     return;
                 }
 
                 if (selectedTags.length === 0) {
-                    alert('Vui lòng chọn ít nhất một tag!');
+                    alert('Please select at least one tag!');
                     return;
                 }
 
                 // Here you would typically send the evaluation to the server
                 const tagsText = selectedTags.join(', ');
-                alert(`Đã gửi đánh giá cho ${selectedMember} với ${currentRating} sao!\nTags: ${tagsText}`);
+                alert(`Evaluation submitted for ${selectedMember} with ${currentRating} stars!\nTags: ${tagsText}`);
                 evaluationModal.classList.add('hidden');
             });
         });
     </script>
 </body>
-</html> 
+</html>

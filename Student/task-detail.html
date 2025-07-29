@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VLUTaskMate - Chi tiết Task</title>
+    <title>VLUTaskMate - Task Details</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/style.css">
@@ -22,28 +22,99 @@
     </script>
 </head>
 <body class="bg-gray-50">
-    <!-- Header -->
     <header class="bg-white shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
+            <div class="flex justify-between items-center py-4">
                 <div class="flex items-center">
-                    <a href="index.html" class="text-2xl font-bold text-vlu-red">VLUTaskMate</a>
-                    <span class="mx-4 text-gray-400">/</span>
-                    <a href="project.html" class="text-gray-600 hover:text-vlu-red">Hệ thống Quản lý Thư viện</a>
-                    <span class="mx-4 text-gray-400">/</span>
-                    <span class="text-lg font-medium text-gray-900">Thiết kế Database</span>
+                    <h1 class="text-2xl font-bold text-vlu-red">VLUTaskMate</h1>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button class="relative p-2 text-gray-600 hover:text-vlu-red">
-                        <i class="fas fa-bell text-xl"></i>
-                        <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">1</span>
-                    </button>
                     <div class="relative">
-                        <button class="flex items-center space-x-2 text-gray-700 hover:text-vlu-red">
+                        <button id="notificationBtn" class="relative p-2 text-gray-600 hover:text-gray-900">
+                            <i class="fas fa-bell"></i>
+                            <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-vlu-red"></span>
+                        </button>
+                        
+                        <div id="notificationDropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                            <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                                <h3 class="text-lg font-semibold text-gray-900">Notifications</h3>
+                                <button id="closeNotifications" class="text-gray-400 hover:text-gray-600">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="max-h-96 overflow-y-auto">
+                                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-tasks text-blue-600 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900">You have a new task assigned</p>
+                                            <p class="text-sm text-gray-500 mt-1">"Interface Design" in the E-commerce Website project</p>
+                                            <p class="text-xs text-gray-400 mt-1">2 minutes ago</p>
+                                        </div>
+                                        <div class="flex flex-col space-y-1">
+                                            <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
+                                                Confirm
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                    <div class="flex items-start space-x-3">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-users text-purple-600 text-sm"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-sm font-medium text-gray-900">Group Invitation</p>
+                                            <p class="text-sm text-gray-500 mt-1">You are invited to join the "Library Management System" project</p>
+                                            <p class="text-xs text-gray-400 mt-1">15 minutes ago</p>
+                                        </div>
+                                        <div class="flex flex-col space-y-1">
+                                            <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
+                                                Accept
+                                            </button>
+                                            <button class="bg-red-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-red-600 transition-colors">
+                                                Decline
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-4 border-t border-gray-200">
+                                <button onclick="window.location.href='notifications.html'" class="w-full text-center text-sm text-vlu-red hover:text-red-700 font-medium">
+                                    View all notifications
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <button id="userMenuBtn" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
                             <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
-                            <span class="text-sm font-medium">Hồ Du Tuấn Đạt</span>
+                            <span class="text-sm font-medium">Ho Du Tuan Dat</span>
                             <i class="fas fa-chevron-down text-xs"></i>
                         </button>
+                        
+                        <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                            <div class="py-1">
+                                <button onclick="window.location.href='profile.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-user mr-3"></i>
+                                    Profile
+                                </button>
+                                <a href="../logout.html" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-sign-out-alt mr-3"></i>
+                                    Log out
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,58 +122,99 @@
     </header>
 
     <div class="flex h-screen bg-gray-50">
-        <!-- Sidebar -->
         <aside class="w-64 bg-white shadow-sm">
             <nav class="mt-8">
                 <div class="px-4 space-y-2">
-                    <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                    <a href="index.html" class="flex items-center px-4 py-3 text-vlu-red bg-red-50 rounded-lg font-medium">
                         <i class="fas fa-folder mr-3"></i>
-                        Dự án của tôi
+                        My Groups
                     </a>
-                    <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                    <a href="my-tasks.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
                         <i class="fas fa-tasks mr-3"></i>
-                        Nhiệm vụ của tôi
+                        My Tasks
                     </a>
-                    <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                    <a href="notifications.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
                         <i class="fas fa-bell mr-3"></i>
-                        Thông báo
-                    </a>
-                    <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
-                        <i class="fas fa-user mr-3"></i>
-                        Tài khoản
+                        Notifications
                     </a>
                 </div>
             </nav>
         </aside>
 
-        <!-- Main Content -->
         <main class="flex-1 overflow-y-auto">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <!-- Task Header -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
                     <div class="flex items-start justify-between mb-4">
                         <div class="flex-1">
-                            <h1 class="text-2xl font-bold text-gray-900 mb-2">Thiết kế Database</h1>
-                            <p class="text-gray-600 mb-4">Thiết kế cấu trúc database cho hệ thống quản lý thư viện bao gồm các bảng sách, độc giả, mượn trả, và báo cáo.</p>
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h1 id="taskTitle" class="text-2xl font-bold text-gray-900">Database Design</h1>
+                                    <button id="editTitleBtn" class="text-vlu-red hover:text-red-700 text-sm">
+                                        <i class="fas fa-edit mr-1"></i>
+                                        Edit
+                                    </button>
+                                </div>
+                                <div id="titleEditSection" class="hidden">
+                                    <textarea id="titleTextarea" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent text-xl font-bold" rows="1">Database Design</textarea>
+                                    <div class="flex justify-end space-x-2 mt-2">
+                                        <button id="cancelEditTitle" class="px-3 py-1 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50 text-sm">Cancel</button>
+                                        <button id="saveTitle" class="px-3 py-1 bg-vlu-red text-white rounded-md hover:bg-red-700 text-sm">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between mb-2">
+                                    <h3 class="text-lg font-semibold text-gray-900">Description</h3>
+                                    <button id="editDescriptionBtn" class="text-vlu-red hover:text-red-700 text-sm">
+                                        <i class="fas fa-edit mr-1"></i>
+                                        Edit
+                                    </button>
+                                </div>
+                                <div id="descriptionContent" class="bg-gray-50 p-4 rounded-lg">
+                                    <p id="taskDescription" class="text-gray-600">Design the database structure for the library management system including tables for books, readers, loans/returns, and reports.</p>
+                                </div>
+                                <div id="descriptionEditSection" class="hidden">
+                                    <textarea id="descriptionTextarea" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3">Design the database structure for the library management system including tables for books, readers, loans/returns, and reports.</textarea>
+                                    <div class="flex justify-end space-x-2 mt-2">
+                                        <button id="cancelEditDescription" class="px-3 py-1 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50 text-sm">Cancel</button>
+                                        <button id="saveDescription" class="px-3 py-1 bg-vlu-red text-white rounded-md hover:bg-red-700 text-sm">Save</button>
+                                    </div>
+                                </div>
+                            </div>
                             
-                            <div class="flex items-center space-x-6 text-sm text-gray-500">
-                                <div class="flex items-center">
-                                    <i class="fas fa-user mr-2"></i>
-                                    <span>Giao cho: Nguyễn Văn A</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-calendar mr-2"></i>
-                                    <span>Deadline: 15/12/2024</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-clock mr-2"></i>
-                                    <span>Còn 5 ngày</span>
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex items-center space-x-2">
+                                            <i class="fas fa-user-circle text-blue-600 text-lg"></i>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-900">Assignee:</p>
+                                                <p class="text-lg font-semibold text-blue-800 assignee-name">Nguyen Van A</p>
+                                                <p class="text-xs text-gray-500">Student ID: 2374802010098 - Class: 72K29CNTT01</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <i class="fas fa-calendar-alt text-green-600 text-lg"></i>
+                                            <div>
+                                                <p class="text-sm font-medium text-gray-900">Deadline:</p>
+                                                <p class="text-lg font-semibold text-green-800">15/12/2024</p>
+                                                <p class="text-xs text-gray-500">5 days left</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                            <i class="fas fa-check-circle mr-1"></i>
+                                            Accepted
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-3">
-                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                                Cao
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800 task-priority">
+                                High
                             </span>
                             <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
                                 In Progress
@@ -111,22 +223,61 @@
                     </div>
                 </div>
 
-                <!-- Task Content -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <!-- Main Content -->
                     <div class="lg:col-span-2 space-y-6">
-                        <!-- Subtasks -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Assignee Information</h3>
+                                <button id="changeAssigneeBtn" class="bg-vlu-red text-white px-3 py-1 rounded text-sm font-medium hover:bg-red-700 transition-colors">
+                                    <i class="fas fa-user-edit mr-1"></i>
+                                    Change
+                                </button>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                                <img class="h-16 w-16 rounded-full bg-blue-500 text-white text-lg flex items-center justify-center" src="https://via.placeholder.com/64" alt="User">
+                                <div class="flex-1">
+                                    <h4 class="text-lg font-semibold text-gray-900 assignee-name">Nguyen Van A</h4>
+                                    <p class="text-sm text-gray-600">Student ID: 2374802010098</p>
+                                    <p class="text-sm text-gray-600">Class: 72K29CNTT01</p>
+                                    <p class="text-sm text-gray-600">Email: nguyenvana@vlu.edu.vn</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                        <i class="fas fa-check-circle mr-1"></i>
+                                        Task Accepted
+                                    </span>
+                                    <p class="text-xs text-gray-500 mt-1">Accepted on: 01/12/2024 10:30</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="text-center p-3 bg-blue-50 rounded-lg">
+                                    <p class="text-2xl font-bold text-blue-600">5</p>
+                                    <p class="text-sm text-gray-600">Tasks Completed</p>
+                                </div>
+                                <div class="text-center p-3 bg-green-50 rounded-lg">
+                                    <p class="text-2xl font-bold text-green-600">85%</p>
+                                    <p class="text-sm text-gray-600">Completion Rate</p>
+                                </div>
+                                <div class="text-center p-3 bg-yellow-50 rounded-lg">
+                                    <p class="text-2xl font-bold text-yellow-600">2</p>
+                                    <p class="text-sm text-gray-600">Tasks In Progress</p>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-lg font-semibold text-gray-900">Subtasks</h3>
                                 <div class="flex items-center space-x-2">
                                     <button id="saveSubtasksBtn" class="bg-green-600 text-white px-3 py-1 rounded text-sm font-medium hover:bg-green-700 transition-colors">
                                         <i class="fas fa-save mr-1"></i>
-                                        Lưu thay đổi
+                                        Save Changes
                                     </button>
                                     <button id="addSubtaskBtn" class="bg-vlu-red text-white px-3 py-1 rounded text-sm font-medium hover:bg-red-700 transition-colors">
                                         <i class="fas fa-plus mr-1"></i>
-                                        Thêm
+                                        Add
                                     </button>
                                 </div>
                             </div>
@@ -134,88 +285,84 @@
                             <div class="space-y-3">
                                 <div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg">
                                     <input type="checkbox" class="h-4 w-4 text-vlu-red focus:ring-vlu-red border-gray-300 rounded" checked>
-                                    <span class="flex-1 text-gray-900 line-through">Tạo ERD diagram</span>
-                                    <span class="text-xs text-gray-500">Hoàn thành</span>
+                                    <span class="flex-1 text-gray-900 line-through">Create ERD diagram</span>
+                                    <span class="text-xs text-gray-500">Completed</span>
                                 </div>
                                 
                                 <div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg">
                                     <input type="checkbox" class="h-4 w-4 text-vlu-red focus:ring-vlu-red border-gray-300 rounded">
-                                    <span class="flex-1 text-gray-900">Thiết kế các bảng chính</span>
-                                    <span class="text-xs text-gray-500">Đang làm</span>
+                                    <span class="flex-1 text-gray-900">Design main tables</span>
+                                    <span class="text-xs text-gray-500">In Progress</span>
                                 </div>
                                 
                                 <div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg">
                                     <input type="checkbox" class="h-4 w-4 text-vlu-red focus:ring-vlu-red border-gray-300 rounded">
-                                    <span class="flex-1 text-gray-900">Tạo script SQL</span>
-                                    <span class="text-xs text-gray-500">Chưa bắt đầu</span>
+                                    <span class="flex-1 text-gray-900">Create SQL script</span>
+                                    <span class="text-xs text-gray-500">Not Started</span>
                                 </div>
                                 
                                 <div class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg">
                                     <input type="checkbox" class="h-4 w-4 text-vlu-red focus:ring-vlu-red border-gray-300 rounded">
-                                    <span class="flex-1 text-gray-900">Viết tài liệu database</span>
-                                    <span class="text-xs text-gray-500">Chưa bắt đầu</span>
+                                    <span class="flex-1 text-gray-900">Write database documentation</span>
+                                    <span class="text-xs text-gray-500">Not Started</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Comments -->
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-lg font-semibold text-gray-900">Bình luận</h3>
+                                <h3 class="text-lg font-semibold text-gray-900">Comments</h3>
                                 <button id="saveCommentsBtn" class="bg-green-600 text-white px-3 py-1 rounded text-sm font-medium hover:bg-green-700 transition-colors">
                                     <i class="fas fa-save mr-1"></i>
-                                    Lưu thay đổi
+                                    Save Changes
                                 </button>
                             </div>
                             
                             <div class="space-y-4 mb-6">
-                                <!-- Comment 1 -->
                                 <div class="flex space-x-3">
                                     <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
                                     <div class="flex-1">
                                         <div class="flex items-center space-x-2 mb-1">
-                                            <span class="font-medium text-gray-900">Nguyễn Văn A</span>
-                                            <span class="text-xs text-gray-500">2 giờ trước</span>
+                                            <span class="font-medium text-gray-900">Nguyen Van A</span>
+                                            <span class="text-xs text-gray-500">2 hours ago</span>
                                         </div>
-                                        <p class="text-gray-700 mb-2">ERD diagram đã hoàn thành. Bạn có thể xem trong file đính kèm.</p>
+                                        <p class="text-gray-700 mb-2">ERD diagram is complete. You can view it in the attached file.</p>
                                         <div class="flex items-center space-x-4 text-xs text-gray-500">
-                                            <button class="hover:text-vlu-red">Trả lời</button>
-                                            <button class="hover:text-vlu-red">Chỉnh sửa</button>
-                                            <button class="hover:text-red-600">Xóa</button>
+                                            <button class="hover:text-vlu-red">Reply</button>
+                                            <button class="hover:text-vlu-red">Edit</button>
+                                            <button class="hover:text-red-600">Delete</button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Comment 2 -->
                                 <div class="flex space-x-3">
                                     <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
                                     <div class="flex-1">
                                         <div class="flex items-center space-x-2 mb-1">
-                                            <span class="font-medium text-gray-900">Hồ Du Tuấn Đạt</span>
-                                            <span class="text-xs text-gray-500">1 giờ trước</span>
+                                            <span class="font-medium text-gray-900">Ho Du Tuan Dat</span>
+                                            <span class="text-xs text-gray-500">1 hour ago</span>
                                         </div>
-                                        <p class="text-gray-700 mb-2">Cảm ơn! Tôi sẽ review và cho feedback sớm nhất.</p>
+                                        <p class="text-gray-700 mb-2">Thanks! I will review and give feedback as soon as possible.</p>
                                         <div class="flex items-center space-x-4 text-xs text-gray-500">
-                                            <button class="hover:text-vlu-red">Trả lời</button>
-                                            <button class="hover:text-vlu-red">Chỉnh sửa</button>
-                                            <button class="hover:text-red-600">Xóa</button>
+                                            <button class="hover:text-vlu-red">Reply</button>
+                                            <button class="hover:text-vlu-red">Edit</button>
+                                            <button class="hover:text-red-600">Delete</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Add Comment -->
                             <div class="border-t pt-4">
                                 <div class="flex space-x-3">
                                     <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
                                     <div class="flex-1">
-                                        <textarea id="commentInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3" placeholder="Thêm bình luận..."></textarea>
+                                        <textarea id="commentInput" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3" placeholder="Add a comment..."></textarea>
                                         <div class="flex items-center justify-between mt-2">
                                             <div class="flex items-center space-x-2 text-sm text-gray-500">
-                                                <span>Hỗ trợ @mention</span>
+                                                <span>Supports @mention</span>
                                             </div>
                                             <button id="submitComment" class="bg-vlu-red text-white px-4 py-2 rounded text-sm font-medium hover:bg-red-700 transition-colors">
-                                                Gửi bình luận
+                                                Submit Comment
                                             </button>
                                         </div>
                                     </div>
@@ -224,31 +371,40 @@
                         </div>
                     </div>
 
-                    <!-- Sidebar -->
                     <div class="space-y-6">
-                        <!-- Task Info -->
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <div class="flex items-center justify-between mb-4">
-                                <h3 class="text-lg font-semibold text-gray-900">Thông tin Task</h3>
+                                <h3 class="text-lg font-semibold text-gray-900">Task Information</h3>
                                 <button id="saveTaskInfoBtn" class="bg-green-600 text-white px-3 py-1 rounded text-sm font-medium hover:bg-green-700 transition-colors">
                                     <i class="fas fa-save mr-1"></i>
-                                    Lưu thay đổi
+                                    Save Changes
                                 </button>
                             </div>
                             
                             <div class="space-y-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Người tạo</label>
-                                    <p class="text-gray-900">Hồ Du Tuấn Đạt</p>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Creator</label>
+                                    <p class="text-gray-900">Ho Du Tuan Dat</p>
                                 </div>
                                 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Ngày tạo</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Assignee</label>
+                                    <div class="flex items-center space-x-2">
+                                        <img class="h-6 w-6 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center" src="https://via.placeholder.com/24" alt="User">
+                                        <div>
+                                            <p class="text-sm font-medium text-gray-900 assignee-name">Nguyen Van A</p>
+                                            <p class="text-xs text-gray-500">2374802010098</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Creation Date</label>
                                     <p class="text-gray-900">01/12/2024</p>
                                 </div>
                                 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Trạng thái</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
                                     <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
                                         <option>To Do</option>
                                         <option selected>In Progress</option>
@@ -258,11 +414,11 @@
                                 </div>
                                 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Độ ưu tiên</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
                                     <select class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
-                                        <option selected>Cao</option>
-                                        <option>Trung bình</option>
-                                        <option>Thấp</option>
+                                        <option selected>High</option>
+                                        <option>Medium</option>
+                                        <option>Low</option>
                                     </select>
                                 </div>
                                 
@@ -280,15 +436,35 @@
                             </div>
                         </div>
 
-                        <!-- Activity History -->
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Lịch sử hoạt động</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Options</h3>
+                            
+                            <div class="space-y-2">
+                                <button id="addDatesBtn" class="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-sm transition-colors">
+                                    <i class="fas fa-calendar mr-2"></i>
+                                    Dates
+                                </button>
+                                
+                                <button id="addMembersBtn" class="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-sm transition-colors">
+                                    <i class="fas fa-users mr-2"></i>
+                                    Members
+                                </button>
+                                
+                                <button id="addAttachmentBtn" class="w-full text-left px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-sm transition-colors">
+                                    <i class="fas fa-paperclip mr-2"></i>
+                                    Attachment
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Activity History</h3>
                             
                             <div class="space-y-4">
                                 <div class="flex items-start space-x-3">
                                     <div class="w-2 h-2 bg-vlu-red rounded-full mt-2"></div>
                                     <div class="flex-1">
-                                        <p class="text-sm text-gray-900">Task được tạo</p>
+                                        <p class="text-sm text-gray-900">Task created</p>
                                         <p class="text-xs text-gray-500">01/12/2024 09:00</p>
                                     </div>
                                 </div>
@@ -296,7 +472,7 @@
                                 <div class="flex items-start space-x-3">
                                     <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
                                     <div class="flex-1">
-                                        <p class="text-sm text-gray-900">Chuyển sang "In Progress"</p>
+                                        <p class="text-sm text-gray-900">Changed to "In Progress"</p>
                                         <p class="text-xs text-gray-500">02/12/2024 14:30</p>
                                     </div>
                                 </div>
@@ -304,7 +480,7 @@
                                 <div class="flex items-start space-x-3">
                                     <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
                                     <div class="flex-1">
-                                        <p class="text-sm text-gray-900">Subtask "Tạo ERD diagram" hoàn thành</p>
+                                        <p class="text-sm text-gray-900">Subtask "Create ERD diagram" completed</p>
                                         <p class="text-xs text-gray-500">03/12/2024 11:15</p>
                                     </div>
                                 </div>
@@ -312,31 +488,30 @@
                                 <div class="flex items-start space-x-3">
                                     <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
                                     <div class="flex-1">
-                                        <p class="text-sm text-gray-900">Bình luận được thêm</p>
+                                        <p class="text-sm text-gray-900">Comment added</p>
                                         <p class="text-xs text-gray-500">03/12/2024 16:45</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Actions -->
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Hành động</h3>
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Actions</h3>
                             
                             <div class="space-y-3">
                                 <button class="w-full bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
                                     <i class="fas fa-check mr-2"></i>
-                                    Hoàn thành Task
+                                    Complete Task
                                 </button>
                                 
                                 <button class="w-full bg-gray-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-600 transition-colors">
                                     <i class="fas fa-edit mr-2"></i>
-                                    Chỉnh sửa Task
+                                    Edit Task
                                 </button>
                                 
                                 <button class="w-full bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
                                     <i class="fas fa-trash mr-2"></i>
-                                    Xóa Task
+                                    Delete Task
                                 </button>
                             </div>
                         </div>
@@ -346,28 +521,151 @@
         </main>
     </div>
 
-    <!-- Add Subtask Modal -->
     <div id="addSubtaskModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-medium text-gray-900">Thêm Subtask</h3>
+                    <h3 class="text-lg font-medium text-gray-900">Add Subtask</h3>
                     <button id="closeSubtaskModal" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <form>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tên subtask</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Subtask Name</label>
                         <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Mô tả</label>
-                        <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3"></textarea>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Description (optional)</label>
+                        <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="2"></textarea>
                     </div>
                     <div class="flex justify-end space-x-3">
-                        <button type="button" id="cancelSubtask" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Hủy</button>
-                        <button type="submit" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700">Thêm Subtask</button>
+                        <button type="button" id="cancelSubtask" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors">Add Subtask</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="addDatesModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-900">Set Deadline</h3>
+                    <button id="closeDatesModal" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="addDatesForm">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Deadline</label>
+                        <input type="date" id="deadline" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
+                        <p class="text-xs text-gray-500 mt-1">Select the task completion deadline</p>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button type="button" id="cancelDates" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors">Save Deadline</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="addMembersModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-900">Add Members</h3>
+                    <button id="closeMembersModal" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="addMembersForm">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Member Email</label>
+                        <input type="email" id="memberEmail" placeholder="enter email..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
+                        <select id="memberRole" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
+                            <option value="member">Member</option>
+                            <option value="reviewer">Reviewer</option>
+                            <option value="watcher">Watcher</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Current Members</label>
+                        <div id="currentMembers" class="space-y-2 max-h-32 overflow-y-auto">
+                            <div class="flex items-center justify-between p-2 bg-gray-50 rounded">
+                                <div class="flex items-center">
+                                    <img class="h-6 w-6 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center mr-2" src="https://via.placeholder.com/24" alt="User">
+                                    <span class="text-sm">Ho Du Tuan Dat</span>
+                                </div>
+                                <button type="button" class="text-red-500 hover:text-red-700 text-xs">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button type="button" id="cancelMembers" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors">Add Member</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="addAttachmentModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-900">Add Attachment</h3>
+                    <button id="closeAttachmentModal" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="addAttachmentForm">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Select file</label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                            <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+                            <p class="text-sm text-gray-600">Drag and drop files here or click to select</p>
+                            <input type="file" id="fileInput" class="hidden" multiple>
+                            <button type="button" id="browseFiles" class="mt-2 px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors text-sm">
+                                Choose File
+                            </button>
+                        </div>
+                    </div>
+                    <div id="selectedFiles" class="mb-4 space-y-2">
+                        </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Current Attachments</label>
+                        <div id="currentAttachments" class="space-y-2 max-h-32 overflow-y-auto">
+                            <div class="flex items-center justify-between p-2 bg-gray-50 rounded">
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-pdf text-red-500 mr-2"></i>
+                                    <span class="text-sm">document.pdf</span>
+                                </div>
+                                <button type="button" class="text-red-500 hover:text-red-700 text-xs">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center justify-between p-2 bg-gray-50 rounded">
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-image text-green-500 mr-2"></i>
+                                    <span class="text-sm">screenshot.png</span>
+                                </div>
+                                <button type="button" class="text-red-500 hover:text-red-700 text-xs">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button type="button" id="cancelAttachment" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors">Upload</button>
                     </div>
                 </form>
             </div>
@@ -428,20 +726,20 @@
                     id: index + 1,
                     text: subtaskText,
                     completed: checkbox.checked,
-                    status: checkbox.checked ? 'Hoàn thành' : 'Chưa hoàn thành'
+                    status: checkbox.checked ? 'Completed' : 'Not Completed'
                 });
             });
             
             // Simulate saving to server
             setTimeout(() => {
-                showNotification('Thành công', 'Đã lưu thay đổi subtasks!');
+                showNotification('Success', 'Subtask changes saved!');
                 console.log('Subtasks saved:', subtaskData);
                 
                 // Update status text for completed subtasks
                 subtaskCheckboxes.forEach((checkbox, index) => {
                     const statusElement = checkbox.parentElement.querySelector('.text-xs');
                     if (statusElement) {
-                        statusElement.textContent = checkbox.checked ? 'Hoàn thành' : 'Chưa hoàn thành';
+                        statusElement.textContent = checkbox.checked ? 'Completed' : 'Not Completed';
                         statusElement.className = checkbox.checked ? 
                             'text-xs text-green-600 font-medium' : 
                             'text-xs text-gray-500';
@@ -459,17 +757,17 @@
             
             const taskData = {
                 status: statusSelect ? statusSelect.value : 'In Progress',
-                priority: prioritySelect ? prioritySelect.value : 'Cao',
-                lastModified: new Date().toLocaleString('vi-VN')
+                priority: prioritySelect ? prioritySelect.value : 'High',
+                lastModified: new Date().toLocaleString('en-US')
             };
             
             // Simulate saving to server
             setTimeout(() => {
-                showNotification('Thành công', 'Đã lưu thông tin task!');
+                showNotification('Success', 'Task information saved!');
                 console.log('Task info saved:', taskData);
                 
                 // Update activity history
-                addActivityHistory('Thông tin task được cập nhật', 'blue');
+                addActivityHistory('Task information updated', 'blue');
             }, 1000);
         }
 
@@ -491,14 +789,14 @@
                         commentInput.value = '';
                     }
                     
-                    showNotification('Thành công', 'Đã lưu bình luận!');
+                    showNotification('Success', 'Comment saved!');
                     console.log('Comment saved:', commentText);
                     
                     // Update activity history
-                    addActivityHistory('Bình luận mới được thêm', 'yellow');
+                    addActivityHistory('New comment added', 'yellow');
                 }, 1000);
             } else {
-                showNotification('Thông báo', 'Vui lòng nhập nội dung bình luận!');
+                showNotification('Notice', 'Please enter comment content!');
             }
         }
 
@@ -512,14 +810,14 @@
                 <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
                 <div class="flex-1">
                     <div class="flex items-center space-x-2 mb-1">
-                        <span class="font-medium text-gray-900">Hồ Du Tuấn Đạt</span>
-                        <span class="text-xs text-gray-500">Vừa xong</span>
+                        <span class="font-medium text-gray-900">Ho Du Tuan Dat</span>
+                        <span class="text-xs text-gray-500">Just now</span>
                     </div>
                     <p class="text-gray-700 mb-2">${commentText}</p>
                     <div class="flex items-center space-x-4 text-xs text-gray-500">
-                        <button class="hover:text-vlu-red">Trả lời</button>
-                        <button class="hover:text-vlu-red">Chỉnh sửa</button>
-                        <button class="hover:text-red-600">Xóa</button>
+                        <button class="hover:text-vlu-red">Reply</button>
+                        <button class="hover:text-vlu-red">Edit</button>
+                        <button class="hover:text-red-600">Delete</button>
                     </div>
                 </div>
             `;
@@ -538,7 +836,7 @@
                 <div class="w-2 h-2 bg-${color}-500 rounded-full mt-2"></div>
                 <div class="flex-1">
                     <p class="text-sm text-gray-900">${activity}</p>
-                    <p class="text-xs text-gray-500">${new Date().toLocaleString('vi-VN')}</p>
+                    <p class="text-xs text-gray-500">${new Date().toLocaleString('en-US')}</p>
                 </div>
             `;
             
@@ -606,8 +904,735 @@
                 });
             }
 
+            // Initialize edit functionality for task title and description
+            initializeEditFunctionality();
+
             console.log('Existing features initialized');
         }
+
+        function initializeEditFunctionality() {
+            // Edit Title functionality
+            const editTitleBtn = document.getElementById('editTitleBtn');
+            const titleEditSection = document.getElementById('titleEditSection');
+            const titleTextarea = document.getElementById('titleTextarea');
+            const cancelEditTitle = document.getElementById('cancelEditTitle');
+            const saveTitle = document.getElementById('saveTitle');
+            const taskTitle = document.getElementById('taskTitle');
+
+            if (editTitleBtn) {
+                editTitleBtn.addEventListener('click', function() {
+                    // Show edit section and hide title
+                    titleEditSection.classList.remove('hidden');
+                    taskTitle.classList.add('hidden');
+                    editTitleBtn.classList.add('hidden');
+                    
+                    // Focus on textarea
+                    titleTextarea.focus();
+                    titleTextarea.select();
+                });
+            }
+
+            if (cancelEditTitle) {
+                cancelEditTitle.addEventListener('click', function() {
+                    // Hide edit section and show title
+                    titleEditSection.classList.add('hidden');
+                    taskTitle.classList.remove('hidden');
+                    editTitleBtn.classList.remove('hidden');
+                    
+                    // Reset textarea value to original
+                    titleTextarea.value = taskTitle.textContent;
+                });
+            }
+
+            if (saveTitle) {
+                saveTitle.addEventListener('click', function() {
+                    const newTitle = titleTextarea.value.trim();
+                    if (newTitle) {
+                        // Update title
+                        taskTitle.textContent = newTitle;
+                        
+                        // Hide edit section and show title
+                        titleEditSection.classList.add('hidden');
+                        taskTitle.classList.remove('hidden');
+                        editTitleBtn.classList.remove('hidden');
+                        
+                        // Show success notification
+                        showNotification('Success', 'Task name updated!');
+                        
+                        // Add activity history
+                        addActivityHistory('Task name updated', 'blue');
+                    } else {
+                        showNotification('Error', 'Task name cannot be empty!');
+                    }
+                });
+            }
+
+            // Edit Description functionality
+            const editDescriptionBtn = document.getElementById('editDescriptionBtn');
+            const descriptionEditSection = document.getElementById('descriptionEditSection');
+            const descriptionTextarea = document.getElementById('descriptionTextarea');
+            const cancelEditDescription = document.getElementById('cancelEditDescription');
+            const saveDescription = document.getElementById('saveDescription');
+            const descriptionContent = document.getElementById('descriptionContent');
+            const taskDescription = document.getElementById('taskDescription');
+
+            if (editDescriptionBtn) {
+                editDescriptionBtn.addEventListener('click', function() {
+                    // Show edit section and hide content
+                    descriptionEditSection.classList.remove('hidden');
+                    descriptionContent.classList.add('hidden');
+                    editDescriptionBtn.classList.add('hidden');
+                    
+                    // Focus on textarea
+                    descriptionTextarea.focus();
+                    descriptionTextarea.select();
+                });
+            }
+
+            if (cancelEditDescription) {
+                cancelEditDescription.addEventListener('click', function() {
+                    // Hide edit section and show content
+                    descriptionEditSection.classList.add('hidden');
+                    descriptionContent.classList.remove('hidden');
+                    editDescriptionBtn.classList.remove('hidden');
+                    
+                    // Reset textarea value to original
+                    descriptionTextarea.value = taskDescription.textContent;
+                });
+            }
+
+            if (saveDescription) {
+                saveDescription.addEventListener('click', function() {
+                    const newDescription = descriptionTextarea.value.trim();
+                    if (newDescription) {
+                        // Update description
+                        taskDescription.textContent = newDescription;
+                        
+                        // Hide edit section and show content
+                        descriptionEditSection.classList.add('hidden');
+                        descriptionContent.classList.remove('hidden');
+                        editDescriptionBtn.classList.remove('hidden');
+                        
+                        // Show success notification
+                        showNotification('Success', 'Task description updated!');
+                        
+                        // Add activity history
+                        addActivityHistory('Task description updated', 'blue');
+                    } else {
+                        showNotification('Error', 'Task description cannot be empty!');
+                    }
+                });
+            }
+
+            // Add keyboard shortcuts for save (Ctrl+S or Cmd+S)
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    
+                    // Check which edit section is active and save accordingly
+                    if (!titleEditSection.classList.contains('hidden')) {
+                        saveTitle.click();
+                    } else if (!descriptionEditSection.classList.contains('hidden')) {
+                        saveDescription.click();
+                    }
+                }
+                
+                // Escape key to cancel edit
+                if (e.key === 'Escape') {
+                    if (!titleEditSection.classList.contains('hidden')) {
+                        cancelEditTitle.click();
+                    } else if (!descriptionEditSection.classList.contains('hidden')) {
+                        cancelEditDescription.click();
+                    }
+                }
+            });
+
+            console.log('Edit functionality initialized');
+        }
+
+        // Initialize Dates, Members, and Attachment functionality
+        function initializeTaskFeatures() {
+            // Initialize Dates functionality
+            initializeDatesFeature();
+            
+            // Initialize Members functionality
+            initializeMembersFeature();
+            
+            // Initialize Attachment functionality
+            initializeAttachmentFeature();
+            
+            console.log('Task features initialized');
+        }
+
+        function initializeDatesFeature() {
+            const addDatesBtn = document.getElementById('addDatesBtn');
+            const addDatesModal = document.getElementById('addDatesModal');
+            const closeDatesModal = document.getElementById('closeDatesModal');
+            const cancelDates = document.getElementById('cancelDates');
+            const addDatesForm = document.getElementById('addDatesForm');
+
+            if (addDatesBtn && addDatesModal) {
+                addDatesBtn.addEventListener('click', function() {
+                    addDatesModal.classList.remove('hidden');
+                });
+            }
+
+            if (closeDatesModal && addDatesModal) {
+                closeDatesModal.addEventListener('click', function() {
+                    addDatesModal.classList.add('hidden');
+                });
+            }
+
+            if (cancelDates && addDatesModal) {
+                cancelDates.addEventListener('click', function() {
+                    addDatesModal.classList.add('hidden');
+                });
+            }
+
+            if (addDatesForm) {
+                addDatesForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const deadline = document.getElementById('deadline').value;
+                    
+                    if (deadline) {
+                        // Save dates
+                        saveTaskDates(deadline);
+                        addDatesModal.classList.add('hidden');
+                        showNotification('Success', 'Task dates updated!');
+                        addActivityHistory('Task dates updated', 'blue');
+                    } else {
+                        showNotification('Error', 'Please fill in all date information!');
+                    }
+                });
+            }
+        }
+
+        function initializeMembersFeature() {
+            const addMembersBtn = document.getElementById('addMembersBtn');
+            const addMembersModal = document.getElementById('addMembersModal');
+            const closeMembersModal = document.getElementById('closeMembersModal');
+            const cancelMembers = document.getElementById('cancelMembers');
+            const addMembersForm = document.getElementById('addMembersForm');
+
+            if (addMembersBtn && addMembersModal) {
+                addMembersBtn.addEventListener('click', function() {
+                    addMembersModal.classList.remove('hidden');
+                });
+            }
+
+            if (closeMembersModal && addMembersModal) {
+                closeMembersModal.addEventListener('click', function() {
+                    addMembersModal.classList.add('hidden');
+                });
+            }
+
+            if (cancelMembers && addMembersModal) {
+                cancelMembers.addEventListener('click', function() {
+                    addMembersModal.classList.add('hidden');
+                });
+            }
+
+            if (addMembersForm) {
+                addMembersForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const memberEmail = document.getElementById('memberEmail').value;
+                    const memberRole = document.getElementById('memberRole').value;
+                    
+                    if (memberEmail) {
+                        // Add member
+                        addTaskMember(memberEmail, memberRole);
+                        addMembersModal.classList.add('hidden');
+                        document.getElementById('memberEmail').value = '';
+                        showNotification('Success', 'Member added to task!');
+                        addActivityHistory('New member added', 'green');
+                    } else {
+                        showNotification('Error', 'Please enter member email!');
+                    }
+                });
+            }
+
+            // Handle remove member buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('#currentMembers button')) {
+                    const memberElement = e.target.closest('.flex.items-center.justify-between');
+                    const memberName = memberElement.querySelector('span').textContent;
+                    
+                    if (confirm(`Are you sure you want to remove ${memberName} from the task?`)) {
+                        memberElement.remove();
+                        showNotification('Success', `${memberName} removed from task!`);
+                        addActivityHistory(`${memberName} removed from task`, 'red');
+                    }
+                }
+            });
+        }
+
+        function initializeAttachmentFeature() {
+            const addAttachmentBtn = document.getElementById('addAttachmentBtn');
+            const addAttachmentModal = document.getElementById('addAttachmentModal');
+            const closeAttachmentModal = document.getElementById('closeAttachmentModal');
+            const cancelAttachment = document.getElementById('cancelAttachment');
+            const addAttachmentForm = document.getElementById('addAttachmentForm');
+            const browseFiles = document.getElementById('browseFiles');
+            const fileInput = document.getElementById('fileInput');
+            const selectedFiles = document.getElementById('selectedFiles');
+
+            if (addAttachmentBtn && addAttachmentModal) {
+                addAttachmentBtn.addEventListener('click', function() {
+                    addAttachmentModal.classList.remove('hidden');
+                });
+            }
+
+            if (closeAttachmentModal && addAttachmentModal) {
+                closeAttachmentModal.addEventListener('click', function() {
+                    addAttachmentModal.classList.add('hidden');
+                });
+            }
+
+            if (cancelAttachment && addAttachmentModal) {
+                cancelAttachment.addEventListener('click', function() {
+                    addAttachmentModal.classList.add('hidden');
+                });
+            }
+
+            if (browseFiles && fileInput) {
+                browseFiles.addEventListener('click', function() {
+                    fileInput.click();
+                });
+            }
+
+            if (fileInput) {
+                fileInput.addEventListener('change', function() {
+                    handleFileSelection(this.files);
+                });
+            }
+
+            if (addAttachmentForm) {
+                addAttachmentForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const files = fileInput.files;
+                    if (files.length > 0) {
+                        // Upload files
+                        uploadTaskFiles(files);
+                        addAttachmentModal.classList.add('hidden');
+                        fileInput.value = '';
+                        selectedFiles.innerHTML = '';
+                        showNotification('Success', 'Attachments uploaded!');
+                        addActivityHistory('Attachments uploaded', 'purple');
+                    } else {
+                        showNotification('Error', 'Please select a file to upload!');
+                    }
+                });
+            }
+
+            // Handle remove attachment buttons
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('#currentAttachments button')) {
+                    const attachmentElement = e.target.closest('.flex.items-center.justify-between');
+                    const fileName = attachmentElement.querySelector('span').textContent;
+                    
+                    if (confirm(`Are you sure you want to delete file ${fileName}?`)) {
+                        attachmentElement.remove();
+                        showNotification('Success', `File ${fileName} deleted!`);
+                        addActivityHistory(`File ${fileName} deleted`, 'red');
+                    }
+                }
+            });
+        }
+
+        function saveTaskDates(deadline) {
+            // Simulate saving dates to server
+            console.log('Saving task deadline:', { deadline });
+            
+            // Update UI to show the deadline
+            const dateInfo = document.querySelector('.flex.items-center.space-x-6');
+            if (dateInfo) {
+                const deadlineElement = dateInfo.querySelector('.flex.items-center:nth-child(2) span');
+                if (deadlineElement) {
+                    deadlineElement.textContent = `Deadline: ${formatDate(deadline)}`;
+                }
+            }
+        }
+
+        function addTaskMember(email, role) {
+            // Simulate adding member to server
+            console.log('Adding task member:', { email, role });
+            
+            // Add member to UI
+            const currentMembers = document.getElementById('currentMembers');
+            if (currentMembers) {
+                const memberElement = document.createElement('div');
+                memberElement.className = 'flex items-center justify-between p-2 bg-gray-50 rounded';
+                memberElement.innerHTML = `
+                    <div class="flex items-center">
+                        <img class="h-6 w-6 rounded-full bg-green-500 text-white text-xs flex items-center justify-center mr-2" src="https://via.placeholder.com/24" alt="User">
+                        <span class="text-sm">${email} (${role})</span>
+                    </div>
+                    <button type="button" class="text-red-500 hover:text-red-700 text-xs">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                currentMembers.appendChild(memberElement);
+            }
+        }
+
+        function handleFileSelection(files) {
+            const selectedFiles = document.getElementById('selectedFiles');
+            if (!selectedFiles) return;
+            
+            selectedFiles.innerHTML = '';
+            
+            Array.from(files).forEach(file => {
+                const fileElement = document.createElement('div');
+                fileElement.className = 'flex items-center justify-between p-2 bg-gray-50 rounded';
+                fileElement.innerHTML = `
+                    <div class="flex items-center">
+                        <i class="fas fa-file text-blue-500 mr-2"></i>
+                        <span class="text-sm">${file.name}</span>
+                        <span class="text-xs text-gray-500 ml-2">(${formatFileSize(file.size)})</span>
+                    </div>
+                    <button type="button" class="text-red-500 hover:text-red-700 text-xs remove-file">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                selectedFiles.appendChild(fileElement);
+            });
+
+            // Handle remove file buttons
+            selectedFiles.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-file')) {
+                    e.target.closest('.flex.items-center.justify-between').remove();
+                }
+            });
+        }
+
+        function uploadTaskFiles(files) {
+            // Simulate uploading files to server
+            console.log('Uploading files:', files);
+            
+            // Add files to current attachments
+            const currentAttachments = document.getElementById('currentAttachments');
+            if (currentAttachments) {
+                Array.from(files).forEach(file => {
+                    const fileElement = document.createElement('div');
+                    fileElement.className = 'flex items-center justify-between p-2 bg-gray-50 rounded';
+                    
+                    const fileIcon = getFileIcon(file.name);
+                    fileElement.innerHTML = `
+                        <div class="flex items-center">
+                            <i class="${fileIcon} mr-2"></i>
+                            <span class="text-sm">${file.name}</span>
+                        </div>
+                        <button type="button" class="text-red-500 hover:text-red-700 text-xs">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    currentAttachments.appendChild(fileElement);
+                });
+            }
+        }
+
+        function getFileIcon(fileName) {
+            const extension = fileName.split('.').pop().toLowerCase();
+            const iconMap = {
+                'pdf': 'fas fa-file-pdf text-red-500',
+                'doc': 'fas fa-file-word text-blue-500',
+                'docx': 'fas fa-file-word text-blue-500',
+                'xls': 'fas fa-file-excel text-green-500',
+                'xlsx': 'fas fa-file-excel text-green-500',
+                'ppt': 'fas fa-file-powerpoint text-orange-500',
+                'pptx': 'fas fa-file-powerpoint text-orange-500',
+                'jpg': 'fas fa-file-image text-green-500',
+                'jpeg': 'fas fa-file-image text-green-500',
+                'png': 'fas fa-file-image text-green-500',
+                'gif': 'fas fa-file-image text-green-500',
+                'zip': 'fas fa-file-archive text-purple-500',
+                'rar': 'fas fa-file-archive text-purple-500',
+                'txt': 'fas fa-file-alt text-gray-500'
+            };
+            return iconMap[extension] || 'fas fa-file text-gray-500';
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US');
+        }
+
+        // Call initializeTaskFeatures when DOM is loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeTaskFeatures);
+        } else {
+            initializeTaskFeatures();
+        }
+
+        // Initialize change assignee functionality
+        function initializeChangeAssignee() {
+            const changeAssigneeBtn = document.getElementById('changeAssigneeBtn');
+            const changeAssigneeModal = document.getElementById('changeAssigneeModal');
+            const closeChangeAssigneeModal = document.getElementById('closeChangeAssigneeModal');
+            const cancelChangeAssignee = document.getElementById('cancelChangeAssignee');
+            const changeAssigneeForm = document.getElementById('changeAssigneeForm');
+
+            if (changeAssigneeBtn && changeAssigneeModal) {
+                changeAssigneeBtn.addEventListener('click', function() {
+                    changeAssigneeModal.classList.remove('hidden');
+                });
+            }
+
+            if (closeChangeAssigneeModal && changeAssigneeModal) {
+                closeChangeAssigneeModal.addEventListener('click', function() {
+                    changeAssigneeModal.classList.add('hidden');
+                });
+            }
+
+            if (cancelChangeAssignee && changeAssigneeModal) {
+                cancelChangeAssignee.addEventListener('click', function() {
+                    changeAssigneeModal.classList.add('hidden');
+                });
+            }
+
+            if (changeAssigneeForm) {
+                changeAssigneeForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const newAssignee = document.getElementById('newAssignee').value;
+                    
+                    if (newAssignee) {
+                        // Update assignee
+                        updateTaskAssignee(newAssignee);
+                        changeAssigneeModal.classList.add('hidden');
+                        showNotification('Success', 'Assignee changed!');
+                        addActivityHistory('Assignee changed', 'blue');
+                    } else {
+                        showNotification('Error', 'Please select a new assignee!');
+                    }
+                });
+            }
+        }
+
+        function updateTaskAssignee(newAssignee) {
+            console.log('Updating task assignee:', newAssignee);
+            
+            // Update UI elements
+            const assigneeElements = document.querySelectorAll('.assignee-name');
+            assigneeElements.forEach(element => {
+                element.textContent = newAssignee;
+            });
+            
+            // Update assignment info section
+            const assignmentInfo = document.querySelector('.bg-blue-50 .text-lg.font-semibold.text-blue-800');
+            if (assignmentInfo) {
+                assignmentInfo.textContent = newAssignee;
+            }
+            
+            // Add activity history
+            addActivityHistory(`Assignee changed to ${newAssignee}`, 'blue');
+        }
+
+        function showNotification(title, message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-transform duration-300';
+            notification.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <div class="font-medium">${title}</div>
+                        <div class="text-sm">${message}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        function addActivityHistory(activity, color) {
+            const activityContainer = document.querySelector('.space-y-4');
+            if (!activityContainer) return;
+            
+            const newActivity = document.createElement('div');
+            newActivity.className = 'flex items-start space-x-3';
+            newActivity.innerHTML = `
+                <div class="w-2 h-2 bg-${color}-500 rounded-full mt-2"></div>
+                <div class="flex-1">
+                    <p class="text-sm text-gray-900">${activity}</p>
+                    <p class="text-xs text-gray-500">${new Date().toLocaleString('en-US')}</p>
+                </div>
+            `;
+            
+            activityContainer.insertBefore(newActivity, activityContainer.firstChild);
+        }
+
+        // Load task data from localStorage
+        function loadTaskData() {
+            const taskDataString = localStorage.getItem('currentTaskData');
+            if (taskDataString) {
+                try {
+                    const taskData = JSON.parse(taskDataString);
+                    console.log('Loading task data:', taskData);
+                    
+                    // Update page title
+                    document.title = `${taskData.title} - VLUTaskMate`;
+                    
+                    // Update breadcrumb
+                    const projectLink = document.querySelector('a[href="project.html"]');
+                    if (projectLink) {
+                        projectLink.textContent = taskData.projectName;
+                    }
+                    
+                    const taskTitleBreadcrumb = document.querySelector('.text-lg.font-medium.text-gray-900');
+                    if (taskTitleBreadcrumb) {
+                        taskTitleBreadcrumb.textContent = taskData.title;
+                    }
+                    
+                    // Update task title
+                    const taskTitleElement = document.getElementById('taskTitle');
+                    if (taskTitleElement) {
+                        taskTitleElement.textContent = taskData.title;
+                    }
+                    
+                    // Update task description
+                    const taskDescriptionElement = document.getElementById('taskDescription');
+                    if (taskDescriptionElement) {
+                        taskDescriptionElement.textContent = taskData.description;
+                    }
+                    
+                    // Update task type and priority in sidebar
+                    updateTaskInfo(taskData);
+                    
+                    // Update assignee info based on task data
+                    updateAssigneeInfo(taskData);
+                    
+                } catch (error) {
+                    console.error('Error parsing task data:', error);
+                    showNoTaskDataMessage();
+                }
+            } else {
+                console.log('No task data found in localStorage');
+                showNoTaskDataMessage();
+            }
+        }
+
+        // Show message when no task data is available
+        function showNoTaskDataMessage() {
+            const mainContent = document.querySelector('main .max-w-4xl');
+            if (mainContent) {
+                mainContent.innerHTML = `
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+                        <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-exclamation-triangle text-2xl text-gray-400"></i>
+                        </div>
+                        <h2 class="text-xl font-semibold text-gray-900 mb-2">Task information not found</h2>
+                        <p class="text-gray-600 mb-6">Please go back to the project page and select a task to view details.</p>
+                        <div class="space-x-4">
+                            <a href="project.html" class="bg-vlu-red text-white px-6 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors">
+                                <i class="fas fa-arrow-left mr-2"></i>
+                                Back to project
+                            </a>
+                            <a href="index.html" class="bg-gray-500 text-white px-6 py-2 rounded-lg font-medium hover:bg-gray-600 transition-colors">
+                                <i class="fas fa-home mr-2"></i>
+                                Home
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Update task info in sidebar
+        function updateTaskInfo(taskData) {
+            // Update task type
+            const taskTypeElements = document.querySelectorAll('.task-type');
+            taskTypeElements.forEach(element => {
+                element.textContent = taskData.type;
+            });
+            
+            // Update task priority
+            const taskPriorityElements = document.querySelectorAll('.task-priority');
+            taskPriorityElements.forEach(element => {
+                element.textContent = taskData.priority;
+            });
+        }
+
+        // Update assignee info based on task data
+        function updateAssigneeInfo(taskData) {
+            // This function can be customized based on task data
+            // For now, we'll keep the default assignee info
+            console.log('Updating assignee info for task:', taskData.id);
+        }
+
+        // Call initializeChangeAssignee when DOM is loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                loadTaskData();
+                initializeChangeAssignee();
+            });
+        } else {
+            loadTaskData();
+            initializeChangeAssignee();
+        }
     </script>
+
+    <div id="changeAssigneeModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-900">Change Assignee</h3>
+                    <button id="closeChangeAssigneeModal" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="changeAssigneeForm">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Current Assignee</label>
+                        <div class="flex items-center space-x-2 p-3 bg-gray-50 rounded-lg">
+                            <img class="h-8 w-8 rounded-full bg-blue-500 text-white text-xs flex items-center justify-center" src="https://via.placeholder.com/32" alt="User">
+                            <div>
+                                <p class="text-sm font-medium text-gray-900">Nguyen Van A</p>
+                                <p class="text-xs text-gray-500">2374802010098</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Select New Assignee</label>
+                        <select id="newAssignee" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
+                            <option value="">-- Select member --</option>
+                            <option value="Tran Thi B">Tran Thi B (2374802010099)</option>
+                            <option value="Le Van C">Le Van C (2374802010100)</option>
+                            <option value="Pham Thi D">Pham Thi D (2374802010101)</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Reason for Change</label>
+                        <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="3" placeholder="Enter reason for changing assignee..."></textarea>
+                    </div>
+                    <div class="flex justify-end space-x-3">
+                        <button type="button" id="cancelChangeAssignee" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors">Change</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
-</html> 
+</html>

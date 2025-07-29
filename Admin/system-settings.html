@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VLUTaskMate - Cài đặt hệ thống</title>
+    <title>VLUTaskMate - System Settings</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
@@ -19,7 +19,6 @@
     </script>
 </head>
 <body class="bg-gray-50">
-    <!-- Header -->
     <header class="bg-white shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
@@ -34,7 +33,6 @@
                             <span class="text-sm font-medium" id="userName">Admin</span>
                             <i class="fas fa-chevron-down text-xs"></i>
                         </button>
-                        <!-- User Menu Dropdown -->
                         <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
                             <div class="px-4 py-2 text-sm text-gray-700 border-b">
                                 <div id="userEmail">admin@adminvlu.vn</div>
@@ -42,7 +40,7 @@
                             </div>
                             <a href="../logout.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                 <i class="fas fa-sign-out-alt mr-2"></i>
-                                Đăng xuất
+                                Log out
                             </a>
                         </div>
                     </div>
@@ -51,13 +49,11 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <div class="flex">
-        <!-- Sidebar -->
         <aside class="w-64 bg-white shadow-sm min-h-screen">
             <nav class="mt-8">
                 <div class="px-4 py-2">
-                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Quản trị hệ thống</h3>
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">System Administration</h3>
                 </div>
                 <div class="mt-2">
                     <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900">
@@ -66,39 +62,36 @@
                     </a>
                     <a href="#" class="flex items-center px-4 py-3 text-gray-700 bg-gray-100 border-r-2 border-vlu-red">
                         <i class="fas fa-cog mr-3"></i>
-                        <span class="font-medium">Cài đặt hệ thống</span>
+                        <span class="font-medium">System Settings</span>
                     </a>
                     <a href="student-accounts.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                         <i class="fas fa-users mr-3"></i>
-                        <span>Quản lý sinh viên</span>
+                        <span>Student Management</span>
                     </a>
                     <a href="group-monitoring.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                         <i class="fas fa-chart-line mr-3"></i>
-                        <span>Giám sát nhóm</span>
+                        <span>Group Monitoring</span>
                     </a>
                     <a href="evaluation-overview.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                         <i class="fas fa-star mr-3"></i>
-                        <span>Đánh giá tổng hợp</span>
+                        <span>Aggregate Evaluation</span>
                     </a>
                 </div>
             </nav>
         </aside>
 
-        <!-- Main Content Area -->
         <main class="flex-1 p-8">
-            <!-- Page Header -->
             <div class="mb-8">
-                <h1 class="text-3xl font-bold text-gray-900">Cài đặt hệ thống</h1>
-                <p class="text-gray-600 mt-2">Quản lý học kỳ và phân quyền người dùng</p>
+                <h1 class="text-3xl font-bold text-gray-900">System Settings</h1>
+                <p class="text-gray-600 mt-2">Manage academic terms and user roles</p>
             </div>
 
-            <!-- Academic Terms Management -->
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-xl font-semibold text-gray-900">Quản lý học kỳ</h2>
+                    <h2 class="text-xl font-semibold text-gray-900">Academic Term Management</h2>
                     <button onclick="openAddTermModal()" class="bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
                         <i class="fas fa-plus mr-2"></i>
-                        Thêm học kỳ mới
+                        Add new term
                     </button>
                 </div>
 
@@ -107,57 +100,57 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Học kỳ
+                                    Term
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Thời gian
+                                    Time
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Trạng thái
+                                    Status
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Số nhóm
+                                    No. of Groups
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Thao tác
+                                    Actions
                                 </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">Học kỳ 1 - 2024-2025</div>
+                                    <div class="text-sm font-medium text-gray-900">Semester 1 - 2024-2025</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">01/09/2024 - 15/01/2025</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                        Đang hoạt động
+                                        Active
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">89</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="text-vlu-red hover:text-red-700 mr-3">Sửa</button>
-                                    <button class="text-gray-600 hover:text-gray-900">Xem chi tiết</button>
+                                    <button class="text-vlu-red hover:text-red-700 mr-3">Edit</button>
+                                    <button class="text-gray-600 hover:text-gray-900">View Details</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">Học kỳ 2 - 2023-2024</div>
+                                    <div class="text-sm font-medium text-gray-900">Semester 2 - 2023-2024</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm text-gray-900">15/02/2024 - 30/06/2024</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                                        Đã kết thúc
+                                        Ended
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">156</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <button class="text-vlu-red hover:text-red-700 mr-3">Sửa</button>
-                                    <button class="text-gray-600 hover:text-gray-900">Xem chi tiết</button>
+                                    <button class="text-vlu-red hover:text-red-700 mr-3">Edit</button>
+                                    <button class="text-gray-600 hover:text-gray-900">View Details</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -165,18 +158,16 @@
                 </div>
             </div>
 
-            <!-- User Role Management -->
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-xl font-semibold text-gray-900">Phân quyền người dùng</h2>
+                    <h2 class="text-xl font-semibold text-gray-900">User Role Management</h2>
                     <button onclick="saveRoleSettings()" class="bg-vlu-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
                         <i class="fas fa-save mr-2"></i>
-                        Lưu thay đổi
+                        Save Changes
                     </button>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Leader Role -->
                     <div class="border border-gray-200 rounded-lg p-6">
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center">
@@ -185,7 +176,7 @@
                                 </div>
                                 <div class="ml-3">
                                     <h3 class="text-lg font-medium text-gray-900">Leader</h3>
-                                    <p class="text-sm text-gray-500">Trưởng nhóm dự án</p>
+                                    <p class="text-sm text-gray-500">Project Team Leader</p>
                                 </div>
                             </div>
                             <label class="relative inline-flex items-center cursor-pointer">
@@ -196,24 +187,23 @@
                         <div class="space-y-2">
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-check text-green-500 mr-2"></i>
-                                Tạo và quản lý dự án
+                                Create and manage projects
                             </div>
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-check text-green-500 mr-2"></i>
-                                Phân công nhiệm vụ
+                                Assign tasks
                             </div>
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-check text-green-500 mr-2"></i>
-                                Đánh giá thành viên
+                                Evaluate members
                             </div>
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-check text-green-500 mr-2"></i>
-                                Xuất báo cáo
+                                Export reports
                             </div>
                         </div>
                     </div>
 
-                    <!-- Member Role -->
                     <div class="border border-gray-200 rounded-lg p-6">
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center">
@@ -222,7 +212,7 @@
                                 </div>
                                 <div class="ml-3">
                                     <h3 class="text-lg font-medium text-gray-900">Member</h3>
-                                    <p class="text-sm text-gray-500">Thành viên nhóm</p>
+                                    <p class="text-sm text-gray-500">Team Member</p>
                                 </div>
                             </div>
                             <label class="relative inline-flex items-center cursor-pointer">
@@ -233,32 +223,31 @@
                         <div class="space-y-2">
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-check text-green-500 mr-2"></i>
-                                Xem dự án và nhiệm vụ
+                                View projects and tasks
                             </div>
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-check text-green-500 mr-2"></i>
-                                Cập nhật tiến độ
+                                Update progress
                             </div>
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-check text-green-500 mr-2"></i>
-                                Tham gia đánh giá
+                                Participate in evaluations
                             </div>
                             <div class="flex items-center text-sm text-gray-600">
                                 <i class="fas fa-check text-green-500 mr-2"></i>
-                                Xem báo cáo nhóm
+                                View group reports
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- System Logs -->
             <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-xl font-semibold text-gray-900">Lịch sử thay đổi hệ thống</h2>
+                    <h2 class="text-xl font-semibold text-gray-900">System Change History</h2>
                     <button class="text-vlu-red hover:text-red-700 text-sm font-medium">
                         <i class="fas fa-download mr-2"></i>
-                        Xuất log
+                        Export Log
                     </button>
                 </div>
 
@@ -267,16 +256,16 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Thời gian
+                                    Time
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Hành động
+                                    Action
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Người thực hiện
+                                    Performed By
                                 </th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Chi tiết
+                                    Details
                                 </th>
                             </tr>
                         </thead>
@@ -285,31 +274,31 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">15/12/2024 14:30</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                        Cập nhật phân quyền
+                                        Permission Update
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">admin@adminvlu.vn</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Bật quyền Leader cho tất cả nhóm</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Enable Leader permission for all groups</td>
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">14/12/2024 09:15</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                        Thêm học kỳ
+                                        Add Term
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">admin@adminvlu.vn</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Tạo học kỳ 2 - 2024-2025</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Create Semester 2 - 2024-2025</td>
                             </tr>
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">13/12/2024 16:45</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                        Cấu hình hệ thống
+                                        System Configuration
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">admin@adminvlu.vn</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Cập nhật cài đặt email thông báo</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Update notification email settings</td>
                             </tr>
                         </tbody>
                     </table>
@@ -318,30 +307,29 @@
         </main>
     </div>
 
-    <!-- Add Term Modal -->
     <div id="addTermModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div class="mt-3">
-                <h3 class="text-lg font-medium text-gray-900 mb-4">Thêm học kỳ mới</h3>
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Add New Term</h3>
                 <form>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tên học kỳ</label>
-                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red" placeholder="VD: Học kỳ 1 - 2024-2025">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Term Name</label>
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red" placeholder="e.g., Semester 1 - 2024-2025">
                     </div>
                     <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Ngày bắt đầu</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Start Date</label>
                         <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red">
                     </div>
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Ngày kết thúc</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">End Date</label>
                         <input type="date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red">
                     </div>
                     <div class="flex justify-end space-x-3">
                         <button type="button" onclick="closeAddTermModal()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">
-                            Hủy
+                            Cancel
                         </button>
                         <button type="submit" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700">
-                            Thêm học kỳ
+                            Add Term
                         </button>
                     </div>
                 </form>
@@ -351,4 +339,4 @@
 
     <script src="admin-script.js"></script>
 </body>
-</html> 
+</html>

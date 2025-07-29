@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi tiết Nhóm - VLUTaskMate</title>
+    <title>Group Details - VLUTaskMate</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../assets/style.css">
@@ -20,7 +20,6 @@
     </script>
 </head>
 <body class="bg-gray-50">
-    <!-- Header -->
     <header class="bg-white shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
@@ -28,26 +27,21 @@
                     <h1 class="text-2xl font-bold text-vlu-red">VLUTaskMate</h1>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <!-- Notification Bell with Dropdown -->
                     <div class="relative">
                         <button id="notificationBtn" class="relative p-2 text-gray-600 hover:text-gray-900">
                             <i class="fas fa-bell"></i>
                             <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-vlu-red"></span>
                         </button>
                         
-                        <!-- Notification Dropdown -->
                         <div id="notificationDropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
-                            <!-- Header -->
                             <div class="flex items-center justify-between p-4 border-b border-gray-200">
-                                <h3 class="text-lg font-semibold text-gray-900">Thông báo</h3>
+                                <h3 class="text-lg font-semibold text-gray-900">Notifications</h3>
                                 <button id="closeNotifications" class="text-gray-400 hover:text-gray-600">
                                     <i class="fas fa-times"></i>
                                 </button>
                             </div>
                             
-                            <!-- Notification List -->
                             <div class="max-h-96 overflow-y-auto">
-                                <!-- Project Update Notification -->
                                 <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
                                     <div class="flex items-start space-x-3">
                                         <div class="flex-shrink-0">
@@ -56,19 +50,18 @@
                                             </div>
                                         </div>
                                         <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-medium text-gray-900">Cập nhật tiến độ dự án</p>
-                                            <p class="text-sm text-gray-500 mt-1">Nhóm K47-CNTT đã hoàn thành 75% dự án</p>
-                                            <p class="text-xs text-gray-400 mt-1">2 giờ trước</p>
+                                            <p class="text-sm font-medium text-gray-900">Project Progress Update</p>
+                                            <p class="text-sm text-gray-500 mt-1">Group K47-CNTT has completed 75% of the project</p>
+                                            <p class="text-xs text-gray-400 mt-1">2 hours ago</p>
                                         </div>
                                         <div class="flex flex-col space-y-1">
                                             <button class="bg-blue-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-blue-600 transition-colors">
-                                                Xem
+                                                View
                                             </button>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Evaluation Complete Notification -->
                                 <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
                                     <div class="flex items-start space-x-3">
                                         <div class="flex-shrink-0">
@@ -77,23 +70,22 @@
                                             </div>
                                         </div>
                                         <div class="flex-1 min-w-0">
-                                            <p class="text-sm font-medium text-gray-900">Đánh giá hoàn thành</p>
-                                            <p class="text-sm text-gray-500 mt-1">Nhóm K47-CNTT đã hoàn thành peer evaluation</p>
-                                            <p class="text-xs text-gray-400 mt-1">1 ngày trước</p>
+                                            <p class="text-sm font-medium text-gray-900">Evaluation Completed</p>
+                                            <p class="text-sm text-gray-500 mt-1">Group K47-CNTT has completed peer evaluation</p>
+                                            <p class="text-xs text-gray-400 mt-1">1 day ago</p>
                                         </div>
                                         <div class="flex flex-col space-y-1">
                                             <button class="bg-green-500 text-white px-3 py-1 rounded text-xs font-medium hover:bg-green-600 transition-colors">
-                                                Xem
+                                                View
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- Footer -->
                             <div class="p-4 border-t border-gray-200">
                                 <button onclick="window.location.href='notifications.html'" class="w-full text-center text-sm text-vlu-red hover:text-red-700 font-medium">
-                                    Xem tất cả thông báo
+                                    View all notifications
                                 </button>
                             </div>
                         </div>
@@ -102,20 +94,19 @@
                     <div class="relative">
                         <button id="userMenuBtn" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
                             <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
-                            <span class="text-sm font-medium">TS. Nguyễn Văn A</span>
+                            <span class="text-sm font-medium">Dr. Nguyen Van A</span>
                             <i class="fas fa-chevron-down text-xs"></i>
                         </button>
                         
-                        <!-- User Menu Dropdown -->
                         <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
                             <div class="py-1">
                                 <button onclick="window.location.href='profile.html'" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     <i class="fas fa-user mr-3"></i>
-                                    Hồ sơ
+                                    Profile
                                 </button>
                                 <a href="../logout.html" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     <i class="fas fa-sign-out-alt mr-3"></i>
-                                    Đăng xuất
+                                    Log out
                                 </a>
                             </div>
                         </div>
@@ -125,9 +116,7 @@
         </div>
     </header>
 
-    <!-- Main Layout -->
     <div class="flex h-screen bg-gray-50">
-        <!-- Sidebar -->
         <aside class="w-64 bg-white shadow-sm border-r border-gray-200">
             <div class="p-6">
                 <div class="px-4 space-y-2">
@@ -137,20 +126,18 @@
                     </a>
                     <a href="index.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
                         <i class="fas fa-book mr-3"></i>
-                        Học phần
+                        Courses
                     </a>
                     <a href="notifications.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
                         <i class="fas fa-bell mr-3"></i>
-                        Thông báo
+                        Notifications
                     </a>
                 </div>
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="flex-1 overflow-y-auto">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <!-- Page Header -->
                 <div class="mb-8">
                     <div class="flex items-center justify-between">
                         <div>
@@ -158,13 +145,13 @@
                                 <button onclick="window.location.href='course-detail.html'" class="text-gray-500 hover:text-gray-700">
                                     <i class="fas fa-arrow-left"></i>
                                 </button>
-                                <h2 class="text-3xl font-bold text-gray-900">Nhóm 1 - Website E-commerce</h2>
+                                <h2 class="text-3xl font-bold text-gray-900">Group 1 - E-commerce Website</h2>
                             </div>
-                            <p class="text-gray-600">Lập trình Web • CNTT-K47-01 • Học kỳ 1 - Năm học 2024-2025</p>
+                            <p class="text-gray-600">Web Programming • CNTT-K47-01 • Semester 1 - Academic Year 2024-2025</p>
                         </div>
                         <div class="flex items-center space-x-4">
                             <div class="text-right">
-                                <p class="text-sm text-gray-600">Tiến độ dự án</p>
+                                <p class="text-sm text-gray-600">Project Progress</p>
                                 <p class="text-2xl font-bold text-vlu-red">80%</p>
                             </div>
                             <div class="w-32 bg-gray-200 rounded-full h-3">
@@ -174,47 +161,42 @@
                     </div>
                 </div>
 
-                <!-- Tab Navigation -->
                 <div class="border-b border-gray-200 mb-8">
                     <nav class="-mb-px flex space-x-8">
                         <button id="overview-tab" class="border-b-2 border-vlu-red py-2 px-1 text-sm font-medium text-vlu-red">
-                            Tổng quan
+                            Overview
                         </button>
                         <button id="tasks-tab" class="border-b-2 border-transparent py-2 px-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">
-                            Nhiệm vụ
+                            Tasks
                         </button>
                         <button id="comments-tab" class="border-b-2 border-transparent py-2 px-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">
-                            Bình luận
+                            Comments
                         </button>
                         <button id="evaluations-tab" class="border-b-2 border-transparent py-2 px-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300">
-                            Đánh giá
+                            Evaluations
                         </button>
                     </nav>
                 </div>
 
-                <!-- Tab Content -->
-                <!-- Overview Tab -->
                 <div id="overview-content" class="tab-content active">
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <!-- Project Overview -->
                         <div class="lg:col-span-2">
                             <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Tổng quan dự án</h3>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Project Overview</h3>
                                 
-                                <!-- Project Info -->
                                 <div class="grid grid-cols-2 gap-4 mb-6">
                                     <div>
-                                        <p class="text-sm font-medium text-gray-600">Tên dự án</p>
-                                        <p class="text-gray-900">Website E-commerce</p>
+                                        <p class="text-sm font-medium text-gray-600">Project Name</p>
+                                        <p class="text-gray-900">E-commerce Website</p>
                                     </div>
                                     <div>
-                                        <p class="text-sm font-medium text-gray-600">Trạng thái</p>
+                                        <p class="text-sm font-medium text-gray-600">Status</p>
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            Đang hoạt động
+                                            Active
                                         </span>
                                     </div>
                                     <div>
-                                        <p class="text-sm font-medium text-gray-600">Ngày bắt đầu</p>
+                                        <p class="text-sm font-medium text-gray-600">Start Date</p>
                                         <p class="text-gray-900">01/11/2024</p>
                                     </div>
                                     <div>
@@ -223,12 +205,11 @@
                                     </div>
                                 </div>
 
-                                <!-- Progress Chart -->
                                 <div class="mb-6">
-                                    <h4 class="text-sm font-medium text-gray-900 mb-3">Tiến độ theo tuần</h4>
+                                    <h4 class="text-sm font-medium text-gray-900 mb-3">Weekly Progress</h4>
                                     <div class="space-y-3">
                                         <div class="flex items-center justify-between">
-                                            <span class="text-sm text-gray-600">Tuần 1</span>
+                                            <span class="text-sm text-gray-600">Week 1</span>
                                             <div class="flex items-center space-x-2">
                                                 <div class="w-24 bg-gray-200 rounded-full h-2">
                                                     <div class="bg-green-500 h-2 rounded-full" style="width: 20%"></div>
@@ -237,7 +218,7 @@
                                             </div>
                                         </div>
                                         <div class="flex items-center justify-between">
-                                            <span class="text-sm text-gray-600">Tuần 2</span>
+                                            <span class="text-sm text-gray-600">Week 2</span>
                                             <div class="flex items-center space-x-2">
                                                 <div class="w-24 bg-gray-200 rounded-full h-2">
                                                     <div class="bg-green-500 h-2 rounded-full" style="width: 45%"></div>
@@ -246,7 +227,7 @@
                                             </div>
                                         </div>
                                         <div class="flex items-center justify-between">
-                                            <span class="text-sm text-gray-600">Tuần 3</span>
+                                            <span class="text-sm text-gray-600">Week 3</span>
                                             <div class="flex items-center space-x-2">
                                                 <div class="w-24 bg-gray-200 rounded-full h-2">
                                                     <div class="bg-green-500 h-2 rounded-full" style="width: 65%"></div>
@@ -255,7 +236,7 @@
                                             </div>
                                         </div>
                                         <div class="flex items-center justify-between">
-                                            <span class="text-sm text-gray-600">Tuần 4</span>
+                                            <span class="text-sm text-gray-600">Week 4</span>
                                             <div class="flex items-center space-x-2">
                                                 <div class="w-24 bg-gray-200 rounded-full h-2">
                                                     <div class="bg-green-500 h-2 rounded-full" style="width: 80%"></div>
@@ -266,41 +247,39 @@
                                     </div>
                                 </div>
 
-                                <!-- Task Statistics -->
                                 <div>
-                                    <h4 class="text-sm font-medium text-gray-900 mb-3">Thống kê nhiệm vụ</h4>
+                                    <h4 class="text-sm font-medium text-gray-900 mb-3">Task Statistics</h4>
                                     <div class="grid grid-cols-4 gap-4">
                                         <div class="text-center">
                                             <p class="text-2xl font-bold text-blue-600">30</p>
-                                            <p class="text-xs text-gray-600">Tổng task</p>
+                                            <p class="text-xs text-gray-600">Total Tasks</p>
                                         </div>
                                         <div class="text-center">
                                             <p class="text-2xl font-bold text-green-600">24</p>
-                                            <p class="text-xs text-gray-600">Hoàn thành</p>
+                                            <p class="text-xs text-gray-600">Completed</p>
                                         </div>
                                         <div class="text-center">
                                             <p class="text-2xl font-bold text-yellow-600">4</p>
-                                            <p class="text-xs text-gray-600">Đang làm</p>
+                                            <p class="text-xs text-gray-600">In Progress</p>
                                         </div>
                                         <div class="text-center">
                                             <p class="text-2xl font-bold text-red-600">2</p>
-                                            <p class="text-xs text-gray-600">Trễ hạn</p>
+                                            <p class="text-xs text-gray-600">Overdue</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Team Members -->
                         <div class="lg:col-span-1">
                             <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Thành viên nhóm</h3>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Team Members</h3>
                                 <div class="space-y-3">
                                     <div class="flex items-center space-x-3">
                                         <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="User">
                                         <div class="flex-1">
-                                            <p class="text-sm font-medium text-gray-900">Hồ Du Tuấn Đạt</p>
-                                            <p class="text-xs text-gray-500">Trưởng nhóm</p>
+                                            <p class="text-sm font-medium text-gray-900">Ho Du Tuan Dat</p>
+                                            <p class="text-xs text-gray-500">Team Leader</p>
                                         </div>
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                             Leader
@@ -309,7 +288,7 @@
                                     <div class="flex items-center space-x-3">
                                         <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="User">
                                         <div class="flex-1">
-                                            <p class="text-sm font-medium text-gray-900">Nguyễn Thị B</p>
+                                            <p class="text-sm font-medium text-gray-900">Nguyen Thi B</p>
                                             <p class="text-xs text-gray-500">Frontend Developer</p>
                                         </div>
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -319,7 +298,7 @@
                                     <div class="flex items-center space-x-3">
                                         <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="User">
                                         <div class="flex-1">
-                                            <p class="text-sm font-medium text-gray-900">Trần Văn C</p>
+                                            <p class="text-sm font-medium text-gray-900">Tran Van C</p>
                                             <p class="text-xs text-gray-500">Backend Developer</p>
                                         </div>
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -329,7 +308,7 @@
                                     <div class="flex items-center space-x-3">
                                         <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="User">
                                         <div class="flex-1">
-                                            <p class="text-sm font-medium text-gray-900">Lê Thị D</p>
+                                            <p class="text-sm font-medium text-gray-900">Le Thi D</p>
                                             <p class="text-xs text-gray-500">UI/UX Designer</p>
                                         </div>
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -339,7 +318,7 @@
                                     <div class="flex items-center space-x-3">
                                         <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="User">
                                         <div class="flex-1">
-                                            <p class="text-sm font-medium text-gray-900">Phạm Văn E</p>
+                                            <p class="text-sm font-medium text-gray-900">Pham Van E</p>
                                             <p class="text-xs text-gray-500">Tester</p>
                                         </div>
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -349,7 +328,7 @@
                                     <div class="flex items-center space-x-3">
                                         <img class="h-10 w-10 rounded-full bg-gray-300" src="https://via.placeholder.com/40" alt="User">
                                         <div class="flex-1">
-                                            <p class="text-sm font-medium text-gray-900">Vũ Thị F</p>
+                                            <p class="text-sm font-medium text-gray-900">Vu Thi F</p>
                                             <p class="text-xs text-gray-500">Documentation</p>
                                         </div>
                                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -362,14 +341,13 @@
                     </div>
                 </div>
 
-                <!-- Tasks Tab -->
                 <div id="tasks-content" class="tab-content hidden">
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-gray-900">Danh sách nhiệm vụ</h3>
+                            <h3 class="text-lg font-semibold text-gray-900">Task List</h3>
                             <div class="flex items-center space-x-2">
                                 <select class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent">
-                                    <option value="">Tất cả trạng thái</option>
+                                    <option value="">All Status</option>
                                     <option value="todo">To Do</option>
                                     <option value="in-progress">In Progress</option>
                                     <option value="review">Review</option>
@@ -379,89 +357,84 @@
                         </div>
                         
                         <div class="space-y-4">
-                            <!-- Task 1 -->
                             <div class="border border-gray-200 rounded-lg p-4">
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1">
                                         <div class="flex items-center space-x-2 mb-2">
-                                            <h4 class="font-semibold text-gray-900">Thiết kế giao diện trang chủ</h4>
+                                            <h4 class="font-semibold text-gray-900">Design Homepage Interface</h4>
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                                 Done
                                             </span>
                                         </div>
-                                        <p class="text-sm text-gray-600 mb-2">Thiết kế giao diện responsive cho trang chủ website e-commerce</p>
+                                        <p class="text-sm text-gray-600 mb-2">Design responsive interface for the e-commerce website homepage</p>
                                         <div class="flex items-center space-x-4 text-xs text-gray-500">
-                                            <span><i class="fas fa-user mr-1"></i>Nguyễn Thị B</span>
+                                            <span><i class="fas fa-user mr-1"></i>Nguyen Thi B</span>
                                             <span><i class="fas fa-calendar mr-1"></i>Deadline: 05/12/2024</span>
                                             <span><i class="fas fa-flag mr-1"></i>High Priority</span>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Subtasks -->
                                 <div class="mt-3 ml-6 space-y-2">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-check-circle text-green-500 text-sm"></i>
-                                        <span class="text-sm text-gray-600">Thiết kế header và navigation</span>
+                                        <span class="text-sm text-gray-600">Design header and navigation</span>
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-check-circle text-green-500 text-sm"></i>
-                                        <span class="text-sm text-gray-600">Thiết kế banner chính</span>
+                                        <span class="text-sm text-gray-600">Design main banner</span>
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-check-circle text-green-500 text-sm"></i>
-                                        <span class="text-sm text-gray-600">Thiết kế danh sách sản phẩm</span>
+                                        <span class="text-sm text-gray-600">Design product list</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Task 2 -->
                             <div class="border border-gray-200 rounded-lg p-4">
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1">
                                         <div class="flex items-center space-x-2 mb-2">
-                                            <h4 class="font-semibold text-gray-900">Xây dựng API backend</h4>
+                                            <h4 class="font-semibold text-gray-900">Build Backend API</h4>
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                                 In Progress
                                             </span>
                                         </div>
-                                        <p class="text-sm text-gray-600 mb-2">Phát triển RESTful API cho hệ thống quản lý sản phẩm</p>
+                                        <p class="text-sm text-gray-600 mb-2">Develop RESTful API for product management system</p>
                                         <div class="flex items-center space-x-4 text-xs text-gray-500">
-                                            <span><i class="fas fa-user mr-1"></i>Trần Văn C</span>
+                                            <span><i class="fas fa-user mr-1"></i>Tran Van C</span>
                                             <span><i class="fas fa-calendar mr-1"></i>Deadline: 12/12/2024</span>
                                             <span><i class="fas fa-flag mr-1"></i>High Priority</span>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Subtasks -->
                                 <div class="mt-3 ml-6 space-y-2">
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-check-circle text-green-500 text-sm"></i>
-                                        <span class="text-sm text-gray-600">Thiết kế database schema</span>
+                                        <span class="text-sm text-gray-600">Design database schema</span>
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-circle text-blue-500 text-sm"></i>
-                                        <span class="text-sm text-gray-600">API quản lý sản phẩm</span>
+                                        <span class="text-sm text-gray-600">Product management API</span>
                                     </div>
                                     <div class="flex items-center space-x-2">
                                         <i class="fas fa-circle text-gray-400 text-sm"></i>
-                                        <span class="text-sm text-gray-600">API quản lý đơn hàng</span>
+                                        <span class="text-sm text-gray-600">Order management API</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Task 3 -->
                             <div class="border border-gray-200 rounded-lg p-4">
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1">
                                         <div class="flex items-center space-x-2 mb-2">
-                                            <h4 class="font-semibold text-gray-900">Tích hợp thanh toán</h4>
+                                            <h4 class="font-semibold text-gray-900">Integrate Payment</h4>
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
                                                 Review
                                             </span>
                                         </div>
-                                        <p class="text-sm text-gray-600 mb-2">Tích hợp cổng thanh toán VNPay và Momo</p>
+                                        <p class="text-sm text-gray-600 mb-2">Integrate VNPay and Momo payment gateways</p>
                                         <div class="flex items-center space-x-4 text-xs text-gray-500">
-                                            <span><i class="fas fa-user mr-1"></i>Hồ Du Tuấn Đạt</span>
+                                            <span><i class="fas fa-user mr-1"></i>Ho Du Tuan Dat</span>
                                             <span><i class="fas fa-calendar mr-1"></i>Deadline: 15/12/2024</span>
                                             <span><i class="fas fa-flag mr-1"></i>Medium Priority</span>
                                         </div>
@@ -469,19 +442,18 @@
                                 </div>
                             </div>
 
-                            <!-- Task 4 -->
                             <div class="border border-gray-200 rounded-lg p-4">
                                 <div class="flex items-start justify-between">
                                     <div class="flex-1">
                                         <div class="flex items-center space-x-2 mb-2">
-                                            <h4 class="font-semibold text-gray-900">Testing và Debug</h4>
+                                            <h4 class="font-semibold text-gray-900">Testing and Debugging</h4>
                                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                                                 Overdue
                                             </span>
                                         </div>
-                                        <p class="text-sm text-gray-600 mb-2">Kiểm thử toàn bộ hệ thống và sửa lỗi</p>
+                                        <p class="text-sm text-gray-600 mb-2">Test the entire system and fix bugs</p>
                                         <div class="flex items-center space-x-4 text-xs text-gray-500">
-                                            <span><i class="fas fa-user mr-1"></i>Phạm Văn E</span>
+                                            <span><i class="fas fa-user mr-1"></i>Pham Van E</span>
                                             <span><i class="fas fa-calendar mr-1"></i>Deadline: 10/12/2024</span>
                                             <span><i class="fas fa-flag mr-1"></i>High Priority</span>
                                         </div>
@@ -492,75 +464,70 @@
                     </div>
                 </div>
 
-                <!-- Comments Tab -->
                 <div id="comments-content" class="tab-content hidden">
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Lịch sử bình luận</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Comment History</h3>
                         
                         <div class="space-y-4">
-                            <!-- Comment 1 -->
                             <div class="border-b border-gray-100 pb-4">
                                 <div class="flex items-start space-x-3">
                                     <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
                                     <div class="flex-1">
                                         <div class="flex items-center space-x-2 mb-1">
-                                            <span class="text-sm font-medium text-gray-900">Hồ Du Tuấn Đạt</span>
-                                            <span class="text-xs text-gray-500">2 giờ trước</span>
+                                            <span class="text-sm font-medium text-gray-900">Ho Du Tuan Dat</span>
+                                            <span class="text-xs text-gray-500">2 hours ago</span>
                                         </div>
-                                        <p class="text-sm text-gray-700 mb-2">Đã hoàn thành thiết kế giao diện trang chủ. Các bạn review và cho ý kiến nhé!</p>
+                                        <p class="text-sm text-gray-700 mb-2">The homepage interface design is complete. Please review and provide feedback!</p>
                                         <div class="text-xs text-gray-500">
-                                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Task: Thiết kế giao diện trang chủ</span>
+                                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Task: Design Homepage Interface</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Comment 2 -->
                             <div class="border-b border-gray-100 pb-4">
                                 <div class="flex items-start space-x-3">
                                     <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
                                     <div class="flex-1">
                                         <div class="flex items-center space-x-2 mb-1">
-                                            <span class="text-sm font-medium text-gray-900">Nguyễn Thị B</span>
-                                            <span class="text-xs text-gray-500">1 giờ trước</span>
+                                            <span class="text-sm font-medium text-gray-900">Nguyen Thi B</span>
+                                            <span class="text-xs text-gray-500">1 hour ago</span>
                                         </div>
-                                        <p class="text-sm text-gray-700 mb-2">Giao diện đẹp quá! Tôi thích phần banner và cách sắp xếp sản phẩm. Có thể thêm animation cho phần hover không?</p>
+                                        <p class="text-sm text-gray-700 mb-2">The interface is beautiful! I like the banner section and the product arrangement. Can we add hover animations?</p>
                                         <div class="text-xs text-gray-500">
-                                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Task: Thiết kế giao diện trang chủ</span>
+                                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Task: Design Homepage Interface</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Comment 3 -->
                             <div class="border-b border-gray-100 pb-4">
                                 <div class="flex items-start space-x-3">
                                     <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
                                     <div class="flex-1">
                                         <div class="flex items-center space-x-2 mb-1">
-                                            <span class="text-sm font-medium text-gray-900">Trần Văn C</span>
-                                            <span class="text-xs text-gray-500">30 phút trước</span>
+                                            <span class="text-sm font-medium text-gray-900">Tran Van C</span>
+                                            <span class="text-xs text-gray-500">30 minutes ago</span>
                                         </div>
-                                        <p class="text-sm text-gray-700 mb-2">API backend đã hoàn thành 70%. Cần thêm validation và error handling. Có ai test thử chưa?</p>
+                                        <p class="text-sm text-gray-700 mb-2">Backend API is 70% complete. Need to add validation and error handling. Has anyone tested it?</p>
                                         <div class="text-xs text-gray-500">
-                                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Task: Xây dựng API backend</span>
+                                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Task: Build Backend API</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Comment 4 -->
                             <div class="border-b border-gray-100 pb-4">
                                 <div class="flex items-start space-x-3">
                                     <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
                                     <div class="flex-1">
                                         <div class="flex items-center space-x-2 mb-1">
-                                            <span class="text-sm font-medium text-gray-900">Phạm Văn E</span>
-                                            <span class="text-xs text-gray-500">15 phút trước</span>
+                                            <span class="text-sm font-medium text-gray-900">Pham Van E</span>
+                                            <span class="text-xs text-gray-500">15 minutes ago</span>
                                         </div>
-                                        <p class="text-sm text-gray-700 mb-2">Tôi sẽ test API vào chiều nay. Có thể gửi cho tôi documentation không?</p>
+                                        <p class="text-sm text-gray-700 mb-2">I will test the API this afternoon. Can you send me the documentation?</p>
                                         <div class="text-xs text-gray-500">
-                                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Task: Xây dựng API backend</span>
+                                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Task: Build Backend API</span>
                                         </div>
                                     </div>
                                 </div>
@@ -569,33 +536,30 @@
                     </div>
                 </div>
 
-                <!-- Evaluations Tab -->
                 <div id="evaluations-content" class="tab-content hidden">
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Kết quả đánh giá thành viên</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Member Evaluation Results</h3>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Member 1 -->
                             <div class="border border-gray-200 rounded-lg p-4">
                                 <div class="flex items-center space-x-3 mb-4">
                                     <img class="h-12 w-12 rounded-full bg-gray-300" src="https://via.placeholder.com/48" alt="User">
                                     <div>
-                                        <h4 class="font-semibold text-gray-900">Hồ Du Tuấn Đạt</h4>
-                                        <p class="text-sm text-gray-600">Trưởng nhóm</p>
+                                        <h4 class="font-semibold text-gray-900">Ho Du Tuan Dat</h4>
+                                        <p class="text-sm text-gray-600">Team Leader</p>
                                     </div>
                                 </div>
                                 
                                 <div class="space-y-3">
                                     <div class="flex items-center justify-between">
-                                        <span class="text-sm text-gray-600">Điểm trung bình</span>
+                                        <span class="text-sm text-gray-600">Average Score</span>
                                         <span class="text-lg font-bold text-vlu-red">4.5/5</span>
                                     </div>
                                     <div class="flex items-center justify-between">
-                                        <span class="text-sm text-gray-600">Số người đánh giá</span>
+                                        <span class="text-sm text-gray-600">Number of Evaluators</span>
                                         <span class="text-sm text-gray-900">5</span>
                                     </div>
                                     
-                                    <!-- Star Rating -->
                                     <div class="flex items-center space-x-1">
                                         <i class="fas fa-star text-yellow-400"></i>
                                         <i class="fas fa-star text-yellow-400"></i>
@@ -604,48 +568,44 @@
                                         <i class="fas fa-star text-gray-300"></i>
                                     </div>
                                     
-                                    <!-- Tags -->
                                     <div class="flex flex-wrap gap-1">
                                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            Chủ động
+                                            Proactive
                                         </span>
                                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                            Hòa đồng
+                                            Sociable
                                         </span>
                                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                                            Tích cực
+                                            Positive
                                         </span>
                                     </div>
                                     
-                                    <!-- Comments -->
                                     <div class="text-sm text-gray-600">
-                                        <p>"Lãnh đạo nhóm rất tốt, luôn hỗ trợ thành viên"</p>
-                                        <p>"Giao tiếp rõ ràng và hiệu quả"</p>
+                                        <p>"Excellent team leadership, always supporting members"</p>
+                                        <p>"Clear and effective communication"</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Member 2 -->
                             <div class="border border-gray-200 rounded-lg p-4">
                                 <div class="flex items-center space-x-3 mb-4">
                                     <img class="h-12 w-12 rounded-full bg-gray-300" src="https://via.placeholder.com/48" alt="User">
                                     <div>
-                                        <h4 class="font-semibold text-gray-900">Nguyễn Thị B</h4>
+                                        <h4 class="font-semibold text-gray-900">Nguyen Thi B</h4>
                                         <p class="text-sm text-gray-600">Frontend Developer</p>
                                     </div>
                                 </div>
                                 
                                 <div class="space-y-3">
                                     <div class="flex items-center justify-between">
-                                        <span class="text-sm text-gray-600">Điểm trung bình</span>
+                                        <span class="text-sm text-gray-600">Average Score</span>
                                         <span class="text-lg font-bold text-vlu-red">4.2/5</span>
                                     </div>
                                     <div class="flex items-center justify-between">
-                                        <span class="text-sm text-gray-600">Số người đánh giá</span>
+                                        <span class="text-sm text-gray-600">Number of Evaluators</span>
                                         <span class="text-sm text-gray-900">5</span>
                                     </div>
                                     
-                                    <!-- Star Rating -->
                                     <div class="flex items-center space-x-1">
                                         <i class="fas fa-star text-yellow-400"></i>
                                         <i class="fas fa-star text-yellow-400"></i>
@@ -654,45 +614,41 @@
                                         <i class="fas fa-star text-gray-300"></i>
                                     </div>
                                     
-                                    <!-- Tags -->
                                     <div class="flex flex-wrap gap-1">
                                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            Thận thiện
+                                            Friendly
                                         </span>
                                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                            Hoạt bát
+                                            Active
                                         </span>
                                     </div>
                                     
-                                    <!-- Comments -->
                                     <div class="text-sm text-gray-600">
-                                        <p>"Có kỹ năng frontend rất tốt"</p>
-                                        <p>"Luôn hoàn thành task đúng hạn"</p>
+                                        <p>"Has very good frontend skills"</p>
+                                        <p>"Always completes tasks on time"</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Member 3 -->
                             <div class="border border-gray-200 rounded-lg p-4">
                                 <div class="flex items-center space-x-3 mb-4">
                                     <img class="h-12 w-12 rounded-full bg-gray-300" src="https://via.placeholder.com/48" alt="User">
                                     <div>
-                                        <h4 class="font-semibold text-gray-900">Trần Văn C</h4>
+                                        <h4 class="font-semibold text-gray-900">Tran Van C</h4>
                                         <p class="text-sm text-gray-600">Backend Developer</p>
                                     </div>
                                 </div>
                                 
                                 <div class="space-y-3">
                                     <div class="flex items-center justify-between">
-                                        <span class="text-sm text-gray-600">Điểm trung bình</span>
+                                        <span class="text-sm text-gray-600">Average Score</span>
                                         <span class="text-lg font-bold text-vlu-red">4.0/5</span>
                                     </div>
                                     <div class="flex items-center justify-between">
-                                        <span class="text-sm text-gray-600">Số người đánh giá</span>
+                                        <span class="text-sm text-gray-600">Number of Evaluators</span>
                                         <span class="text-sm text-gray-900">5</span>
                                     </div>
                                     
-                                    <!-- Star Rating -->
                                     <div class="flex items-center space-x-1">
                                         <i class="fas fa-star text-yellow-400"></i>
                                         <i class="fas fa-star text-yellow-400"></i>
@@ -701,45 +657,41 @@
                                         <i class="fas fa-star text-gray-300"></i>
                                     </div>
                                     
-                                    <!-- Tags -->
                                     <div class="flex flex-wrap gap-1">
                                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            Chủ động
+                                            Proactive
                                         </span>
                                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                            Trễ hạn
+                                            Overdue
                                         </span>
                                     </div>
                                     
-                                    <!-- Comments -->
                                     <div class="text-sm text-gray-600">
-                                        <p>"Có kiến thức backend tốt"</p>
-                                        <p>"Đôi khi hơi chậm deadline"</p>
+                                        <p>"Has good backend knowledge"</p>
+                                        <p>"Sometimes a bit slow on deadlines"</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Member 4 -->
                             <div class="border border-gray-200 rounded-lg p-4">
                                 <div class="flex items-center space-x-3 mb-4">
                                     <img class="h-12 w-12 rounded-full bg-gray-300" src="https://via.placeholder.com/48" alt="User">
                                     <div>
-                                        <h4 class="font-semibold text-gray-900">Lê Thị D</h4>
+                                        <h4 class="font-semibold text-gray-900">Le Thi D</h4>
                                         <p class="text-sm text-gray-600">UI/UX Designer</p>
                                     </div>
                                 </div>
                                 
                                 <div class="space-y-3">
                                     <div class="flex items-center justify-between">
-                                        <span class="text-sm text-gray-600">Điểm trung bình</span>
+                                        <span class="text-sm text-gray-600">Average Score</span>
                                         <span class="text-lg font-bold text-vlu-red">4.3/5</span>
                                     </div>
                                     <div class="flex items-center justify-between">
-                                        <span class="text-sm text-gray-600">Số người đánh giá</span>
+                                        <span class="text-sm text-gray-600">Number of Evaluators</span>
                                         <span class="text-sm text-gray-900">5</span>
                                     </div>
                                     
-                                    <!-- Star Rating -->
                                     <div class="flex items-center space-x-1">
                                         <i class="fas fa-star text-yellow-400"></i>
                                         <i class="fas fa-star text-yellow-400"></i>
@@ -748,20 +700,18 @@
                                         <i class="fas fa-star text-gray-300"></i>
                                     </div>
                                     
-                                    <!-- Tags -->
                                     <div class="flex flex-wrap gap-1">
                                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                            Sáng tạo
+                                            Creative
                                         </span>
                                         <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                            Hòa đồng
+                                            Sociable
                                         </span>
                                     </div>
                                     
-                                    <!-- Comments -->
                                     <div class="text-sm text-gray-600">
-                                        <p>"Có óc thẩm mỹ rất tốt"</p>
-                                        <p>"Thiết kế đẹp và chuyên nghiệp"</p>
+                                        <p>"Has excellent aesthetic sense"</p>
+                                        <p>"Designs are beautiful and professional"</p>
                                     </div>
                                 </div>
                             </div>
@@ -825,7 +775,7 @@
                 console.log('No user info found, creating mock teacher for testing...');
                 // Create mock teacher for testing
                 user = {
-                    name: 'TS. Nguyễn Văn A',
+                    name: 'Dr. Nguyen Van A',
                     email: 'teacher@vlu.edu.vn',
                     role: 'teacher'
                 };
@@ -845,7 +795,7 @@
                     console.error('Error parsing user info:', error);
                     // Create mock teacher if parsing fails
                     user = {
-                        name: 'TS. Nguyễn Văn A',
+                        name: 'Dr. Nguyen Van A',
                         email: 'teacher@vlu.edu.vn',
                         role: 'teacher'
                     };
@@ -902,4 +852,4 @@
         }
     </script>
 </body>
-</html> 
+</html>

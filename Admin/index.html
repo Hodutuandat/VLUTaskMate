@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,6 @@
     </script>
 </head>
 <body class="bg-gray-50">
-    <!-- Header -->
     <header class="bg-white shadow-sm border-b border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
@@ -34,7 +33,6 @@
                             <span class="text-sm font-medium" id="userName">Admin</span>
                             <i class="fas fa-chevron-down text-xs"></i>
                         </button>
-                        <!-- User Menu Dropdown -->
                         <div id="userMenu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-200">
                             <div class="px-4 py-2 text-sm text-gray-700 border-b">
                                 <div id="userEmail">admin@adminvlu.vn</div>
@@ -42,7 +40,7 @@
                             </div>
                             <a href="../logout.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                 <i class="fas fa-sign-out-alt mr-2"></i>
-                                Đăng xuất
+                                Log out
                             </a>
                         </div>
                     </div>
@@ -51,13 +49,11 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <div class="flex">
-        <!-- Sidebar -->
         <aside class="w-64 bg-white shadow-sm min-h-screen">
             <nav class="mt-8">
                 <div class="px-4 py-2">
-                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Quản trị hệ thống</h3>
+                    <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider">System Administration</h3>
                 </div>
                 <div class="mt-2">
                     <a href="#" class="flex items-center px-4 py-3 text-gray-700 bg-gray-100 border-r-2 border-vlu-red">
@@ -66,35 +62,31 @@
                     </a>
                     <a href="system-settings.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                         <i class="fas fa-cog mr-3"></i>
-                        <span>Cài đặt hệ thống</span>
+                        <span>System Settings</span>
                     </a>
                     <a href="student-accounts.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                         <i class="fas fa-users mr-3"></i>
-                        <span>Quản lý sinh viên</span>
+                        <span>Student Management</span>
                     </a>
                     <a href="group-monitoring.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                         <i class="fas fa-chart-line mr-3"></i>
-                        <span>Giám sát nhóm</span>
+                        <span>Group Monitoring</span>
                     </a>
                     <a href="evaluation-overview.html" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                         <i class="fas fa-star mr-3"></i>
-                        <span>Đánh giá tổng hợp</span>
+                        <span>Aggregate Evaluation</span>
                     </a>
                 </div>
             </nav>
         </aside>
 
-        <!-- Main Content Area -->
         <main class="flex-1 p-8">
-            <!-- Page Header -->
             <div class="mb-8">
                 <h1 class="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-                <p class="text-gray-600 mt-2">Quản trị hệ thống VLUTaskMate</p>
+                <p class="text-gray-600 mt-2">VLUTaskMate System Administration</p>
             </div>
 
-            <!-- Stats Overview -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <!-- Total Students -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
@@ -103,19 +95,18 @@
                             </div>
                         </div>
                         <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">Tổng sinh viên</p>
+                            <p class="text-sm font-medium text-gray-500">Total Students</p>
                             <p class="text-2xl font-bold text-gray-900">1,247</p>
                         </div>
                     </div>
                     <div class="mt-4">
                         <span class="text-sm text-green-600">
                             <i class="fas fa-arrow-up"></i>
-                            12% so với tháng trước
+                            12% from last month
                         </span>
                     </div>
                 </div>
 
-                <!-- Active Groups -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
@@ -124,19 +115,18 @@
                             </div>
                         </div>
                         <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">Nhóm đang hoạt động</p>
+                            <p class="text-sm font-medium text-gray-500">Active Groups</p>
                             <p class="text-2xl font-bold text-gray-900">89</p>
                         </div>
                     </div>
                     <div class="mt-4">
                         <span class="text-sm text-green-600">
                             <i class="fas fa-arrow-up"></i>
-                            8% so với tháng trước
+                            8% from last month
                         </span>
                     </div>
                 </div>
 
-                <!-- Completed Projects -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
@@ -145,19 +135,18 @@
                             </div>
                         </div>
                         <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">Dự án hoàn thành</p>
+                            <p class="text-sm font-medium text-gray-500">Completed Projects</p>
                             <p class="text-2xl font-bold text-gray-900">156</p>
                         </div>
                     </div>
                     <div class="mt-4">
                         <span class="text-sm text-green-600">
                             <i class="fas fa-arrow-up"></i>
-                            15% so với tháng trước
+                            15% from last month
                         </span>
                     </div>
                 </div>
 
-                <!-- System Health -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
@@ -166,8 +155,8 @@
                             </div>
                         </div>
                         <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-500">Tình trạng hệ thống</p>
-                            <p class="text-2xl font-bold text-green-600">Tốt</p>
+                            <p class="text-sm font-medium text-gray-500">System Status</p>
+                            <p class="text-2xl font-bold text-green-600">Good</p>
                         </div>
                     </div>
                     <div class="mt-4">
@@ -178,51 +167,48 @@
                 </div>
             </div>
 
-            <!-- Quick Actions -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- System Settings -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-lg font-semibold text-gray-900">Cài đặt hệ thống</h2>
+                        <h2 class="text-lg font-semibold text-gray-900">System Settings</h2>
                         <a href="system-settings.html" class="text-vlu-red hover:text-red-700 text-sm font-medium">
-                            Xem tất cả <i class="fas fa-arrow-right ml-1"></i>
+                            View all <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                     <div class="space-y-4">
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                             <div class="flex items-center">
                                 <i class="fas fa-calendar-alt text-blue-500 mr-3"></i>
-                                <span class="text-sm font-medium">Học kỳ hiện tại</span>
+                                <span class="text-sm font-medium">Current Semester</span>
                             </div>
-                            <span class="text-sm text-gray-600">Học kỳ 1 - 2024-2025</span>
+                            <span class="text-sm text-gray-600">Semester 1 - 2024-2025</span>
                         </div>
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                             <div class="flex items-center">
                                 <i class="fas fa-user-shield text-green-500 mr-3"></i>
-                                <span class="text-sm font-medium">Phân quyền Leader</span>
+                                <span class="text-sm font-medium">Leader Permissions</span>
                             </div>
                             <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                Đang hoạt động
+                                Active
                             </span>
                         </div>
                         <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                             <div class="flex items-center">
                                 <i class="fas fa-user text-blue-500 mr-3"></i>
-                                <span class="text-sm font-medium">Phân quyền Member</span>
+                                <span class="text-sm font-medium">Member Permissions</span>
                             </div>
                             <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                Đang hoạt động
+                                Active
                             </span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Recent Activities -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                     <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-lg font-semibold text-gray-900">Hoạt động gần đây</h2>
+                        <h2 class="text-lg font-semibold text-gray-900">Recent Activity</h2>
                         <a href="#" class="text-vlu-red hover:text-red-700 text-sm font-medium">
-                            Xem tất cả <i class="fas fa-arrow-right ml-1"></i>
+                            View all <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                     <div class="space-y-4">
@@ -231,8 +217,8 @@
                                 <i class="fas fa-user-plus text-blue-600 text-sm"></i>
                             </div>
                             <div class="flex-1">
-                                <p class="text-sm text-gray-900">Thêm 15 sinh viên mới vào hệ thống</p>
-                                <p class="text-xs text-gray-500">2 giờ trước</p>
+                                <p class="text-sm text-gray-900">Added 15 new students to the system</p>
+                                <p class="text-xs text-gray-500">2 hours ago</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
@@ -240,8 +226,8 @@
                                 <i class="fas fa-check text-green-600 text-sm"></i>
                             </div>
                             <div class="flex-1">
-                                <p class="text-sm text-gray-900">Dự án "Mobile Banking" đã hoàn thành</p>
-                                <p class="text-xs text-gray-500">4 giờ trước</p>
+                                <p class="text-sm text-gray-900">"Mobile Banking" project completed</p>
+                                <p class="text-xs text-gray-500">4 hours ago</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
@@ -249,8 +235,8 @@
                                 <i class="fas fa-exclamation-triangle text-yellow-600 text-sm"></i>
                             </div>
                             <div class="flex-1">
-                                <p class="text-sm text-gray-900">Cảnh báo: 3 nhóm chưa nộp đánh giá</p>
-                                <p class="text-xs text-gray-500">6 giờ trước</p>
+                                <p class="text-sm text-gray-900">Warning: 3 groups have not submitted evaluations</p>
+                                <p class="text-xs text-gray-500">6 hours ago</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
@@ -258,17 +244,16 @@
                                 <i class="fas fa-cog text-purple-600 text-sm"></i>
                             </div>
                             <div class="flex-1">
-                                <p class="text-sm text-gray-900">Cập nhật cài đặt phân quyền hệ thống</p>
-                                <p class="text-xs text-gray-500">1 ngày trước</p>
+                                <p class="text-sm text-gray-900">Updated system permission settings</p>
+                                <p class="text-xs text-gray-500">1 day ago</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Quick Access -->
             <div class="mt-8">
-                <h2 class="text-lg font-semibold text-gray-900 mb-4">Truy cập nhanh</h2>
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Quick Access</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <a href="student-accounts.html" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
                         <div class="flex items-center">
@@ -276,8 +261,8 @@
                                 <i class="fas fa-users text-blue-600 text-xl"></i>
                             </div>
                             <div class="ml-4">
-                                <h3 class="font-medium text-gray-900">Quản lý sinh viên</h3>
-                                <p class="text-sm text-gray-500">Tìm kiếm và quản lý tài khoản</p>
+                                <h3 class="font-medium text-gray-900">Student Management</h3>
+                                <p class="text-sm text-gray-500">Search and manage accounts</p>
                             </div>
                         </div>
                     </a>
@@ -287,8 +272,8 @@
                                 <i class="fas fa-chart-line text-green-600 text-xl"></i>
                             </div>
                             <div class="ml-4">
-                                <h3 class="font-medium text-gray-900">Giám sát nhóm</h3>
-                                <p class="text-sm text-gray-500">Theo dõi tiến độ dự án</p>
+                                <h3 class="font-medium text-gray-900">Group Monitoring</h3>
+                                <p class="text-sm text-gray-500">Track project progress</p>
                             </div>
                         </div>
                     </a>
@@ -298,8 +283,8 @@
                                 <i class="fas fa-star text-purple-600 text-xl"></i>
                             </div>
                             <div class="ml-4">
-                                <h3 class="font-medium text-gray-900">Đánh giá tổng hợp</h3>
-                                <p class="text-sm text-gray-500">Xem báo cáo và thống kê</p>
+                                <h3 class="font-medium text-gray-900">Aggregate Evaluation</h3>
+                                <p class="text-sm text-gray-500">View reports and statistics</p>
                             </div>
                         </div>
                     </a>
@@ -309,8 +294,8 @@
                                 <i class="fas fa-cog text-yellow-600 text-xl"></i>
                             </div>
                             <div class="ml-4">
-                                <h3 class="font-medium text-gray-900">Cài đặt hệ thống</h3>
-                                <p class="text-sm text-gray-500">Quản lý học kỳ và phân quyền</p>
+                                <h3 class="font-medium text-gray-900">System Settings</h3>
+                                <p class="text-sm text-gray-500">Manage academic terms and permissions</p>
                             </div>
                         </div>
                     </a>
@@ -321,4 +306,4 @@
 
     <script src="admin-script.js"></script>
 </body>
-</html> 
+</html>
