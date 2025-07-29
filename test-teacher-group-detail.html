@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test: Xem Chi Tiết Nhóm - Giảng Viên</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vlu-red': '#dc2626',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-6xl mx-auto p-8">
+        <h1 class="text-3xl font-bold text-vlu-red mb-8">Test: Xem Chi Tiết Nhóm - Giảng Viên</h1>
+        
+        <!-- Test Instructions -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">📋 Hướng dẫn test:</h2>
+            <div class="space-y-2 text-gray-600">
+                <p>🎯 <strong>Mục tiêu:</strong> Test chức năng xem chi tiết nhóm của giảng viên</p>
+                <p>✅ <strong>Bước 1:</strong> Mở file Teacher/group-detail.html</p>
+                <p>✅ <strong>Bước 2:</strong> Kiểm tra tab switching hoạt động</p>
+                <p>✅ <strong>Bước 3:</strong> Kiểm tra không có lỗi JavaScript</p>
+                <p>✅ <strong>Bước 4:</strong> Kiểm tra các link navigation</p>
+                <p>⚠️ <strong>Lưu ý:</strong> Cần đăng nhập với role 'teacher'</p>
+            </div>
+        </div>
+
+        <!-- Test Results -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">🔧 Các lỗi đã được sửa:</h3>
+            <div class="space-y-3 text-gray-600">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle text-green-500"></i>
+                    <span><strong>JavaScript Error:</strong> Loại bỏ việc cập nhật elements không tồn tại (userName, userEmail)</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle text-green-500"></i>
+                    <span><strong>Tab Switching:</strong> Cải thiện function showTab với error handling</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle text-green-500"></i>
+                    <span><strong>Event Listeners:</strong> Loại bỏ onclick để tránh xung đột</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle text-green-500"></i>
+                    <span><strong>Navigation Links:</strong> Sửa link courses.html thành index.html</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle text-green-500"></i>
+                    <span><strong>Initialization:</strong> Thêm function initializeTabs()</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Steps -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">🧪 Các bước test:</h3>
+            <div class="space-y-4">
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">1. Test Authentication</h4>
+                    <p class="text-sm text-gray-600">Mở Console và kiểm tra không có lỗi JavaScript khi load trang</p>
+                    <div class="mt-2 p-2 bg-gray-100 rounded text-xs font-mono">
+                        // Kiểm tra trong Console:<br>
+                        // - Không có lỗi "Cannot read property 'textContent' of null"<br>
+                        // - Có log "Initializing tabs..." và "Tabs initialized successfully"
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">2. Test Tab Switching</h4>
+                    <p class="text-sm text-gray-600">Click vào các tab và kiểm tra chuyển đổi hoạt động</p>
+                    <div class="mt-2 p-2 bg-gray-100 rounded text-xs font-mono">
+                        // Các tab cần test:<br>
+                        // - Tổng quan (overview)<br>
+                        // - Nhiệm vụ (tasks)<br>
+                        // - Bình luận (comments)<br>
+                        // - Đánh giá (evaluations)
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">3. Test Navigation</h4>
+                    <p class="text-sm text-gray-600">Kiểm tra các link trong sidebar hoạt động</p>
+                    <div class="mt-2 p-2 bg-gray-100 rounded text-xs font-mono">
+                        // Các link cần test:<br>
+                        // - Dashboard (index.html)<br>
+                        // - Học phần (index.html)<br>
+                        // - Thông báo (notifications.html)
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg p-4">
+                    <h4 class="font-medium text-gray-900 mb-2">4. Test Content Display</h4>
+                    <p class="text-sm text-gray-600">Kiểm tra nội dung hiển thị đúng trong mỗi tab</p>
+                    <div class="mt-2 p-2 bg-gray-100 rounded text-xs font-mono">
+                        // Nội dung cần kiểm tra:<br>
+                        // - Tab Overview: Thông tin dự án, tiến độ, thống kê<br>
+                        // - Tab Tasks: Danh sách nhiệm vụ<br>
+                        // - Tab Comments: Lịch sử bình luận<br>
+                        // - Tab Evaluations: Kết quả đánh giá
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Access -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-blue-900 mb-4">🚀 Truy cập nhanh:</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <a href="Teacher/group-detail.html" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-center hover:bg-blue-600 transition-colors">
+                    <i class="fas fa-external-link-alt mr-2"></i>
+                    Mở Group Detail
+                </a>
+                <a href="Teacher/index.html" class="bg-green-500 text-white px-4 py-2 rounded-lg text-center hover:bg-green-600 transition-colors">
+                    <i class="fas fa-home mr-2"></i>
+                    Mở Teacher Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock teacher login for testing
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create mock teacher user
+            const mockTeacher = {
+                name: 'TS. Nguyễn Văn A',
+                email: 'teacher@vlu.edu.vn',
+                role: 'teacher'
+            };
+            
+            // Store in localStorage for testing
+            localStorage.setItem('userInfo', JSON.stringify(mockTeacher));
+            
+            console.log('Mock teacher user created for testing');
+        });
+    </script>
+</body>
+</html> 

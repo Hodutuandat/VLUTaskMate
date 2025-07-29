@@ -2,6 +2,8 @@
 // Updated for centralized authentication system and mock data
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded - Initializing VLUTaskMate...');
+    
     // Check authentication first
     checkAuthentication();
     
@@ -21,33 +23,48 @@ document.addEventListener('DOMContentLoaded', function() {
     initTaskDetail();
     initTaskDetailControls();
     initAuthentication();
+    initProjectStatus(); // Initialize project status management
+    initLeaveGroup(); // Initialize leave group functionality
+    
+    console.log('VLUTaskMate initialization completed');
 });
 
 // Authentication System
 function checkAuthentication() {
+    console.log('Checking authentication...');
     const userInfo = localStorage.getItem('userInfo');
     if (!userInfo) {
+        console.log('No user info found, redirecting to login...');
         // Redirect to login if no user info
         if (window.location.pathname !== '/login.html' && !window.location.pathname.includes('login.html')) {
-            window.location.href = '../login.html';
+            // Temporarily disable redirect for testing
+            console.log('Would redirect to login, but disabled for testing');
+            // window.location.href = '../login.html';
         }
         return;
     }
 
-    const user = JSON.parse(userInfo);
-    const loginTime = new Date(user.loginTime);
-    const now = new Date();
-    const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
+    try {
+        const user = JSON.parse(userInfo);
+        const loginTime = new Date(user.loginTime);
+        const now = new Date();
+        const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
 
-    if (hoursDiff >= 24) {
-        // Session expired
-        localStorage.removeItem('userInfo');
-        window.location.href = '../login.html';
-        return;
+        if (hoursDiff >= 24) {
+            console.log('Session expired, redirecting to login...');
+            localStorage.removeItem('userInfo');
+            // Temporarily disable redirect for testing
+            console.log('Would redirect to login, but disabled for testing');
+            // window.location.href = '../login.html';
+            return;
+        }
+
+        console.log('User authenticated:', user.name);
+        // Update user info in header if elements exist
+        updateUserInfo(user);
+    } catch (error) {
+        console.error('Error parsing user info:', error);
     }
-
-    // Update user info in header if elements exist
-    updateUserInfo(user);
 }
 
 function updateUserInfo(user) {
@@ -274,22 +291,48 @@ function initModals() {
 
 // Tab Management
 function initTabs() {
-    const tabButtons = document.querySelectorAll('.tab-button, .project-detail-tab-button');
+    const tabButtons = document.querySelectorAll('.tab-btn, .tab-button, .project-detail-tab-button');
     const tabContents = document.querySelectorAll('.tab-content, .tab-content-pane');
 
+    if (tabButtons.length === 0) {
+        console.log('No tab buttons found');
+        return;
+    }
+
     tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
             const targetTab = button.getAttribute('data-tab');
             
-            // Remove active class from all buttons and contents
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
+            if (!targetTab) {
+                console.warn('Tab button missing data-tab attribute:', button);
+                return;
+            }
             
-            // Add active class to clicked button and target content
+            // Remove active class from all buttons and contents
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.remove('border-vlu-red', 'text-vlu-red');
+                btn.classList.add('border-transparent', 'text-gray-500');
+            });
+            
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                content.classList.add('hidden');
+            });
+            
+            // Add active class to clicked button
             button.classList.add('active');
+            button.classList.remove('border-transparent', 'text-gray-500');
+            button.classList.add('border-vlu-red', 'text-vlu-red');
+            
+            // Show target content
             const targetContent = document.querySelector(`[data-tab-content="${targetTab}"]`);
             if (targetContent) {
                 targetContent.classList.add('active');
+                targetContent.classList.remove('hidden');
+            } else {
+                console.warn(`Tab content not found for: ${targetTab}`);
             }
         });
     });
@@ -297,41 +340,87 @@ function initTabs() {
 
 // User Menu Management
 function initUserMenu() {
+    console.log('Initializing user menu...');
     const userMenuBtn = document.getElementById('userMenuBtn');
     const userMenuDropdown = document.getElementById('userMenuDropdown');
 
+    console.log('User menu elements:', { userMenuBtn, userMenuDropdown });
+
     if (userMenuBtn && userMenuDropdown) {
-        userMenuBtn.addEventListener('click', function(e) {
+        // Remove any existing event listeners
+        const newUserMenuBtn = userMenuBtn.cloneNode(true);
+        userMenuBtn.parentNode.replaceChild(newUserMenuBtn, userMenuBtn);
+        
+        newUserMenuBtn.addEventListener('click', function(e) {
+            console.log('User menu button clicked');
+            e.preventDefault();
             e.stopPropagation();
-            userMenuDropdown.classList.toggle('hidden');
+            
+            const isHidden = userMenuDropdown.classList.contains('hidden');
+            if (isHidden) {
+                userMenuDropdown.classList.remove('hidden');
+                console.log('User menu dropdown shown');
+            } else {
+                userMenuDropdown.classList.add('hidden');
+                console.log('User menu dropdown hidden');
+            }
         });
 
         // Close when clicking outside
         document.addEventListener('click', function(event) {
-            if (!userMenuBtn.contains(event.target) && !userMenuDropdown.contains(event.target)) {
+            if (!newUserMenuBtn.contains(event.target) && !userMenuDropdown.contains(event.target)) {
                 userMenuDropdown.classList.add('hidden');
+                console.log('User menu closed by outside click');
             }
         });
+        
+        console.log('User menu initialized successfully');
+    } else {
+        console.warn('User menu elements not found');
     }
 }
 
 // Notification Management
 function initNotifications() {
+    console.log('Initializing notifications...');
     const notificationBtn = document.getElementById('notificationBtn');
     const notificationDropdown = document.getElementById('notificationDropdown');
     const closeNotifications = document.getElementById('closeNotifications');
 
+    console.log('Notification elements:', { notificationBtn, notificationDropdown, closeNotifications });
+
     if (notificationBtn && notificationDropdown) {
-        notificationBtn.addEventListener('click', function(e) {
+        // Remove any existing event listeners
+        const newNotificationBtn = notificationBtn.cloneNode(true);
+        notificationBtn.parentNode.replaceChild(newNotificationBtn, notificationBtn);
+        
+        newNotificationBtn.addEventListener('click', function(e) {
+            console.log('Notification button clicked');
+            e.preventDefault();
             e.stopPropagation();
-            notificationDropdown.classList.toggle('hidden');
+            
+            const isHidden = notificationDropdown.classList.contains('hidden');
+            if (isHidden) {
+                notificationDropdown.classList.remove('hidden');
+                console.log('Notification dropdown shown');
+            } else {
+                notificationDropdown.classList.add('hidden');
+                console.log('Notification dropdown hidden');
+            }
         });
+    } else {
+        console.warn('Notification button or dropdown not found');
     }
 
     if (closeNotifications && notificationDropdown) {
-        closeNotifications.addEventListener('click', function() {
+        closeNotifications.addEventListener('click', function(e) {
+            console.log('Close notifications button clicked');
+            e.preventDefault();
+            e.stopPropagation();
             notificationDropdown.classList.add('hidden');
         });
+    } else {
+        console.warn('Close notifications button not found');
     }
 
     // Close when clicking outside
@@ -340,8 +429,11 @@ function initNotifications() {
             !notificationBtn.contains(event.target) && 
             !notificationDropdown.contains(event.target)) {
             notificationDropdown.classList.add('hidden');
+            console.log('Notification dropdown closed by outside click');
         }
     });
+    
+    console.log('Notifications initialized successfully');
 }
 
 // Drag and Drop for Kanban Board
@@ -576,83 +668,380 @@ function initKickMember() {
 
 // Add Card to Kanban
 function initAddCard() {
+    console.log('Initializing add card functionality...');
     const addCardBtns = document.querySelectorAll('.add-card-btn');
     
-    addCardBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+    console.log('Found add card buttons:', addCardBtns.length);
+    
+    addCardBtns.forEach((btn, index) => {
+        console.log(`Setting up add card button ${index + 1}:`, btn);
+        
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Add card button clicked:', btn);
+            
             const column = btn.closest('.kanban-column');
-            const status = column.getAttribute('data-status');
+            const status = column ? column.getAttribute('data-status') : btn.getAttribute('data-column');
+            
+            console.log('Column status:', status);
             showAddTaskModal(status);
         });
     });
+    
+    console.log('Add card functionality initialized successfully');
 }
 
 function showAddTaskModal(status) {
+    console.log('Showing add task modal with status:', status);
     const modal = document.getElementById('createTaskModal');
+    
     if (modal) {
         modal.classList.remove('hidden');
+        console.log('Modal shown successfully');
+        
         // Set default status
         const statusSelect = modal.querySelector('select[name="status"]');
-        if (statusSelect) {
+        if (statusSelect && status) {
             statusSelect.value = status;
+            console.log('Status set to:', status);
         }
+    } else {
+        console.warn('Create task modal not found!');
+        // Show a simple alert as fallback
+        alert('Modal không tìm thấy. Vui lòng thử lại.');
     }
 }
 
 // Task Detail Management
 function initTaskDetail() {
+    console.log('Initializing task detail functionality...');
     const taskCards = document.querySelectorAll('.task-card');
     
-    taskCards.forEach(card => {
+    console.log('Found task cards:', taskCards.length);
+    
+    taskCards.forEach((card, index) => {
+        console.log(`Setting up task card ${index + 1}:`, card);
+        
         card.addEventListener('click', (e) => {
-            if (!e.target.closest('.task-actions')) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Check if click is on task actions (ellipsis button)
+            if (!e.target.closest('.task-actions') && !e.target.closest('button')) {
+                console.log('Task card clicked:', card);
                 openTaskDetail(card);
             }
         });
     });
+    
+    console.log('Task detail functionality initialized successfully');
 }
 
 function openTaskDetail(card) {
+    console.log('Opening task detail for card:', card);
+    
     const taskId = card.getAttribute('data-task-id');
-    const task = mockData.tasks[taskId] || {
-        title: 'Task mới',
-        description: 'Mô tả task',
-        status: 'todo',
-        priority: 'medium',
-        assignee: 'Chưa phân công'
-    };
+    const taskTitle = card.getAttribute('data-task-title');
+    const taskDescription = card.getAttribute('data-task-description');
+    const taskType = card.getAttribute('data-task-type');
+    const taskPriority = card.getAttribute('data-task-priority');
+    
+    console.log('Task data:', { taskId, taskTitle, taskDescription, taskType, taskPriority });
     
     const modal = document.getElementById('taskDetailModal');
     if (modal) {
-        // Populate modal with task data
-        modal.querySelector('.task-title').textContent = task.title;
-        modal.querySelector('.task-description').textContent = task.description;
-        modal.querySelector('.task-status').textContent = task.status;
-        modal.querySelector('.task-priority').textContent = task.priority;
-        modal.querySelector('.task-assignee').textContent = task.assignee;
+        // Populate modal with task data using IDs
+        const titleElement = document.getElementById('taskDetailTitle');
+        const descriptionElement = document.getElementById('taskDescription');
+        
+        if (titleElement) {
+            titleElement.textContent = taskTitle || 'Task mới';
+            console.log('Title set to:', taskTitle);
+        }
+        
+        if (descriptionElement) {
+            descriptionElement.textContent = taskDescription || 'Mô tả task';
+            console.log('Description set to:', taskDescription);
+        }
+        
+        // Set status if available
+        const statusSelect = document.getElementById('taskStatus');
+        if (statusSelect) {
+            // You can set default status based on task data
+            console.log('Status select found');
+        }
         
         modal.classList.remove('hidden');
+        console.log('Task detail modal shown successfully');
+    } else {
+        console.warn('Task detail modal not found!');
+        // Show a simple alert as fallback
+        alert('Modal chi tiết task không tìm thấy. Vui lòng thử lại.');
     }
 }
 
 // Task Detail Controls
 function initTaskDetailControls() {
+    console.log('Initializing task detail controls...');
     const taskDetailModal = document.getElementById('taskDetailModal');
-    if (!taskDetailModal) return;
     
-    const closeBtn = taskDetailModal.querySelector('.close-btn');
+    if (!taskDetailModal) {
+        console.warn('Task detail modal not found');
+        return;
+    }
+    
+    // Close button
+    const closeBtn = document.getElementById('closeTaskDetailModal');
     if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Close task detail modal clicked');
             taskDetailModal.classList.add('hidden');
         });
+        console.log('Close button initialized');
+    } else {
+        console.warn('Close button not found');
     }
     
     // Close when clicking outside
     taskDetailModal.addEventListener('click', (e) => {
         if (e.target === taskDetailModal) {
+            console.log('Task detail modal closed by outside click');
             taskDetailModal.classList.add('hidden');
         }
     });
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !taskDetailModal.classList.contains('hidden')) {
+            console.log('Task detail modal closed by Escape key');
+            taskDetailModal.classList.add('hidden');
+        }
+    });
+    
+    console.log('Task detail controls initialized successfully');
+}
+
+// Project Status Management
+function initProjectStatus() {
+    console.log('Initializing project status management...');
+    
+    // Check for existing project badge to determine status
+    const projectBadge = document.querySelector('.project-status-badge, [class*="badge"]');
+    let detectedStatus = 'active';
+    let detectedProgress = 75;
+    
+    if (projectBadge) {
+        const badgeText = projectBadge.textContent;
+        console.log('Found project badge:', badgeText);
+        
+        if (badgeText.includes('Đã hoàn tất') || badgeText.includes('Completed') || badgeText.includes('hoàn thành')) {
+            detectedStatus = 'completed';
+            detectedProgress = 100;
+            console.log('Project detected as completed from badge');
+        } else if (badgeText.includes('Đã hủy') || badgeText.includes('Cancelled') || badgeText.includes('hủy')) {
+            detectedStatus = 'cancelled';
+            detectedProgress = 30;
+            console.log('Project detected as cancelled from badge');
+        } else {
+            console.log('Project detected as active from badge');
+        }
+    }
+    
+    // Mock project data - in real app this would come from server
+    const projectStatus = {
+        id: 'project-1',
+        name: 'Website E-commerce',
+        status: detectedStatus, // Use detected status
+        startDate: '2024-12-01',
+        endDate: '2024-12-31',
+        currentDate: new Date().toISOString().split('T')[0], // Today's date
+        progress: detectedProgress // Use detected progress
+    };
+    
+    console.log('Project status:', projectStatus);
+    
+    // Update evaluation tab based on project status
+    updateEvaluationTab(projectStatus);
+    
+    // Update project progress display
+    updateProjectProgress(projectStatus);
+    
+    console.log('Project status management initialized successfully');
+}
+
+function updateEvaluationTab(projectStatus) {
+    console.log('Updating evaluation tab with project status:', projectStatus);
+    
+    const evaluationStatus = document.getElementById('evaluationStatus');
+    const evaluationContent = document.getElementById('evaluationContent');
+    const submitEvaluationBtn = document.getElementById('submitEvaluationBtn');
+    
+    if (!evaluationStatus) {
+        console.warn('Evaluation status element not found');
+        return;
+    }
+    
+    // Check if project has "Đã hoàn tất" badge or status is completed
+    const projectBadge = document.querySelector('.project-status-badge, [class*="badge"]');
+    const isCompletedByBadge = projectBadge && (
+        projectBadge.textContent.includes('Đã hoàn tất') || 
+        projectBadge.textContent.includes('Completed') ||
+        projectBadge.textContent.includes('hoàn thành')
+    );
+    
+    // If project has completed badge, override the status
+    if (isCompletedByBadge && projectStatus.status !== 'completed') {
+        console.log('Project has completed badge, overriding status to completed');
+        projectStatus.status = 'completed';
+    }
+    
+    if (projectStatus.status === 'completed') {
+        // Project is completed - show evaluation form
+        evaluationStatus.innerHTML = `
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                    <div>
+                        <h4 class="font-medium text-green-900">Dự án đã hoàn thành</h4>
+                        <p class="text-sm text-green-700">Bạn có thể tiến hành đánh giá thành viên</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        if (evaluationContent) {
+            evaluationContent.classList.remove('hidden');
+        }
+        
+        if (submitEvaluationBtn) {
+            submitEvaluationBtn.disabled = false;
+            submitEvaluationBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+        
+        // Auto-switch to evaluation tab if project is completed
+        switchToEvaluationTab();
+        
+        console.log('Evaluation tab set to completed state - auto-switched to evaluation tab');
+        
+    } else if (projectStatus.status === 'active') {
+        // Check if current date is past end date
+        const currentDate = new Date(projectStatus.currentDate);
+        const endDate = new Date(projectStatus.endDate);
+        
+        if (currentDate > endDate) {
+            // Past end date but still active - suggest completion
+            evaluationStatus.innerHTML = `
+                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-clock text-yellow-500 mr-3"></i>
+                        <div>
+                            <h4 class="font-medium text-yellow-900">Dự án đã quá hạn</h4>
+                            <p class="text-sm text-yellow-700">Dự án đã quá hạn. Nếu đã hoàn thành, vui lòng đánh dấu dự án là "Đã hoàn tất" để có thể đánh giá.</p>
+                            <button onclick="markProjectCompleted()" class="mt-2 bg-green-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-600 transition-colors">
+                                <i class="fas fa-check mr-2"></i>
+                                Đánh dấu hoàn thành
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else {
+            // Project is still active and within timeline
+            const daysLeft = Math.ceil((endDate - currentDate) / (1000 * 60 * 60 * 24));
+            
+            evaluationStatus.innerHTML = `
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-info-circle text-blue-500 mr-3"></i>
+                        <div>
+                            <h4 class="font-medium text-blue-900">Dự án đang hoạt động</h4>
+                            <p class="text-sm text-blue-700">Chưa đến thời điểm đánh giá. Còn ${daysLeft} ngày để hoàn thành dự án.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        if (evaluationContent) {
+            evaluationContent.classList.add('hidden');
+        }
+        
+        if (submitEvaluationBtn) {
+            submitEvaluationBtn.disabled = true;
+            submitEvaluationBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+        
+        console.log('Evaluation tab set to active state');
+        
+    } else if (projectStatus.status === 'cancelled') {
+        // Project is cancelled
+        evaluationStatus.innerHTML = `
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                <div class="flex items-center">
+                    <i class="fas fa-times-circle text-red-500 mr-3"></i>
+                    <div>
+                        <h4 class="font-medium text-red-900">Dự án đã bị hủy</h4>
+                        <p class="text-sm text-red-700">Không thể đánh giá dự án đã bị hủy</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        if (evaluationContent) {
+            evaluationContent.classList.add('hidden');
+        }
+        
+        if (submitEvaluationBtn) {
+            submitEvaluationBtn.disabled = true;
+            submitEvaluationBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+        
+        console.log('Evaluation tab set to cancelled state');
+    }
+}
+
+function updateProjectProgress(projectStatus) {
+    console.log('Updating project progress:', projectStatus.progress + '%');
+    
+    // Update progress bar if exists
+    const progressBar = document.querySelector('.project-progress-bar');
+    const progressText = document.querySelector('.project-progress-text');
+    
+    if (progressBar) {
+        progressBar.style.width = projectStatus.progress + '%';
+    }
+    
+    if (progressText) {
+        progressText.textContent = projectStatus.progress + '%';
+    }
+    
+    // Update project status badge
+    const statusBadge = document.querySelector('.project-status-badge');
+    if (statusBadge) {
+        let statusText = '';
+        let statusColor = '';
+        
+        switch (projectStatus.status) {
+            case 'active':
+                statusText = 'Đang hoạt động';
+                statusColor = 'bg-blue-100 text-blue-800';
+                break;
+            case 'completed':
+                statusText = 'Đã hoàn thành';
+                statusColor = 'bg-green-100 text-green-800';
+                break;
+            case 'cancelled':
+                statusText = 'Đã hủy';
+                statusColor = 'bg-red-100 text-red-800';
+                break;
+        }
+        
+        statusBadge.className = `inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColor}`;
+        statusBadge.textContent = statusText;
+    }
 }
 
 // Utility Functions
@@ -729,3 +1118,370 @@ window.VLUTaskMate = {
     checkAuthentication,
     updateUserInfo
 }; 
+
+// Function to switch to evaluation tab
+function switchToEvaluationTab() {
+    console.log('Switching to evaluation tab...');
+    
+    // Find evaluation tab button
+    const evaluationTabBtn = document.querySelector('[data-tab="evaluation"]');
+    const evaluationContent = document.getElementById('evaluation');
+    
+    if (evaluationTabBtn && evaluationContent) {
+        // Remove active class from all tab buttons
+        const allTabBtns = document.querySelectorAll('.project-tab, .tab-btn');
+        allTabBtns.forEach(btn => {
+            btn.classList.remove('active', 'border-vlu-red', 'text-vlu-red');
+            btn.classList.add('border-transparent', 'text-gray-500');
+        });
+        
+        // Add active class to evaluation tab button
+        evaluationTabBtn.classList.add('active', 'border-vlu-red', 'text-vlu-red');
+        evaluationTabBtn.classList.remove('border-transparent', 'text-gray-500');
+        
+        // Hide all tab contents
+        const allTabContents = document.querySelectorAll('.tab-content');
+        allTabContents.forEach(content => {
+            content.classList.add('hidden');
+            content.classList.remove('active');
+        });
+        
+        // Show evaluation tab content
+        evaluationContent.classList.remove('hidden');
+        evaluationContent.classList.add('active');
+        
+        console.log('Successfully switched to evaluation tab');
+        
+        // Show notification
+        if (typeof showNotification === 'function') {
+            showNotification('Chuyển tab thành công', 'Đã chuyển đến tab đánh giá vì dự án đã hoàn thành');
+        }
+    } else {
+        console.warn('Evaluation tab button or content not found');
+    }
+}
+
+// Function to manually open evaluation tab (for testing)
+function openEvaluationTab() {
+    console.log('Manually opening evaluation tab...');
+    switchToEvaluationTab();
+} 
+
+// Function to mark project as completed
+function markProjectCompleted() {
+    console.log('Marking project as completed...');
+    
+    // Update project status
+    const projectStatus = {
+        id: 'project-1',
+        name: 'Website E-commerce',
+        status: 'completed',
+        startDate: '2024-12-01',
+        endDate: '2024-12-31',
+        currentDate: new Date().toISOString().split('T')[0],
+        progress: 100
+    };
+    
+    // Update evaluation tab
+    updateEvaluationTab(projectStatus);
+    
+    // Update project progress
+    updateProjectProgress(projectStatus);
+    
+    // Show success notification
+    if (typeof showNotification === 'function') {
+        showNotification('Thành công', 'Dự án đã được đánh dấu hoàn thành!');
+    } else {
+        alert('Dự án đã được đánh dấu hoàn thành!');
+    }
+    
+    console.log('Project marked as completed successfully');
+} 
+
+// Leave Group Management
+function initLeaveGroup() {
+    console.log('Initializing leave group functionality...');
+    
+    const leaveGroupToolbarBtns = document.querySelectorAll('.leave-group-toolbar-btn');
+    const leaveGroupModal = document.getElementById('leaveGroupModal');
+    const closeLeaveGroupModal = document.getElementById('closeLeaveGroupModal');
+    const cancelLeaveGroup = document.getElementById('cancelLeaveGroup');
+    const confirmLeaveGroup = document.getElementById('confirmLeaveGroup');
+    
+    if (!leaveGroupModal) {
+        console.warn('Leave group modal not found');
+        return;
+    }
+    
+    // Function to handle leave group button click
+    function handleLeaveGroupClick(btn) {
+        const memberName = btn.getAttribute('data-member');
+        const memberRole = btn.getAttribute('data-role');
+        
+        console.log('Leave group button clicked for:', memberName, 'with role:', memberRole);
+        
+        // Populate modal with member info
+        const memberNameElement = document.getElementById('leaveGroupMemberName');
+        const memberRoleElement = document.getElementById('leaveGroupMemberRole');
+        
+        if (memberNameElement) {
+            memberNameElement.textContent = memberName;
+        }
+        
+        if (memberRoleElement) {
+            memberRoleElement.textContent = `Vai trò: ${memberRole}`;
+        }
+        
+        // Show/hide leader transfer section based on role
+        const leaderTransferSection = document.getElementById('leaderTransferSection');
+        const newLeaderSelect = document.getElementById('newLeaderSelect');
+        
+        if (leaderTransferSection && newLeaderSelect) {
+            if (memberRole === 'Leader') {
+                // Show leader transfer section for Leader
+                leaderTransferSection.classList.remove('hidden');
+                
+                // Populate dropdown with available members
+                populateLeaderTransferDropdown();
+                
+                // Disable confirm button until a new leader is selected
+                const confirmBtn = document.getElementById('confirmLeaveGroup');
+                if (confirmBtn) {
+                    confirmBtn.disabled = true;
+                    confirmBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+                
+                // Add event listener to enable confirm button when selection is made
+                newLeaderSelect.addEventListener('change', function() {
+                    if (confirmBtn) {
+                        if (this.value) {
+                            confirmBtn.disabled = false;
+                            confirmBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                        } else {
+                            confirmBtn.disabled = true;
+                            confirmBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                        }
+                    }
+                });
+                
+            } else {
+                // Hide leader transfer section for non-Leader
+                leaderTransferSection.classList.add('hidden');
+                
+                // Enable confirm button for non-Leader
+                const confirmBtn = document.getElementById('confirmLeaveGroup');
+                if (confirmBtn) {
+                    confirmBtn.disabled = false;
+                    confirmBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            }
+        }
+        
+        // Store member info for confirmation
+        leaveGroupModal.setAttribute('data-member', memberName);
+        leaveGroupModal.setAttribute('data-role', memberRole);
+        
+        // Show modal
+        leaveGroupModal.classList.remove('hidden');
+        console.log('Leave group modal shown');
+    }
+    
+    // Function to populate leader transfer dropdown
+    function populateLeaderTransferDropdown() {
+        const newLeaderSelect = document.getElementById('newLeaderSelect');
+        if (!newLeaderSelect) return;
+        
+        // Clear existing options except the first one
+        newLeaderSelect.innerHTML = '<option value="">-- Chọn thành viên --</option>';
+        
+        // Get all member elements from the page
+        const memberElements = document.querySelectorAll('.flex.items-center.justify-between.p-4.border.border-gray-200.rounded-lg');
+        
+        memberElements.forEach(element => {
+            const nameElement = element.querySelector('h4');
+            const roleElement = element.querySelector('span');
+            
+            if (nameElement && roleElement) {
+                const memberName = nameElement.textContent;
+                const roleText = roleElement.textContent.trim();
+                
+                // Only add non-Leader members
+                if (!roleText.includes('Leader')) {
+                    const option = document.createElement('option');
+                    option.value = memberName;
+                    option.textContent = `${memberName} (${roleText})`;
+                    newLeaderSelect.appendChild(option);
+                }
+            }
+        });
+        
+        console.log('Leader transfer dropdown populated');
+    }
+    
+    // Open leave group modal when clicking leave group button (in toolbar only)
+    leaveGroupToolbarBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleLeaveGroupClick(btn);
+        });
+    });
+    
+    // Close modal handlers
+    if (closeLeaveGroupModal) {
+        closeLeaveGroupModal.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Close leave group modal clicked');
+            leaveGroupModal.classList.add('hidden');
+        });
+    }
+    
+    if (cancelLeaveGroup) {
+        cancelLeaveGroup.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Cancel leave group clicked');
+            leaveGroupModal.classList.add('hidden');
+        });
+    }
+    
+    // Close modal when clicking outside
+    leaveGroupModal.addEventListener('click', (e) => {
+        if (e.target === leaveGroupModal) {
+            console.log('Leave group modal closed by outside click');
+            leaveGroupModal.classList.add('hidden');
+        }
+    });
+    
+    // Confirm leave group
+    if (confirmLeaveGroup) {
+        confirmLeaveGroup.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const memberName = leaveGroupModal.getAttribute('data-member');
+            const memberRole = leaveGroupModal.getAttribute('data-role');
+            
+            console.log('Confirm leave group for:', memberName, 'with role:', memberRole);
+            
+            // Process leave group
+            processLeaveGroup(memberName, memberRole);
+            
+            // Close modal
+            leaveGroupModal.classList.add('hidden');
+        });
+    }
+    
+    console.log('Leave group functionality initialized successfully');
+}
+
+function processLeaveGroup(memberName, memberRole) {
+    console.log('Processing leave group for:', memberName, 'with role:', memberRole);
+    
+    // Check if member is leader
+    if (memberRole === 'Leader') {
+        // Get the selected new leader
+        const newLeaderSelect = document.getElementById('newLeaderSelect');
+        const selectedNewLeader = newLeaderSelect ? newLeaderSelect.value : '';
+        
+        if (!selectedNewLeader) {
+            // Show error if no new leader is selected
+            if (typeof showNotification === 'function') {
+                showNotification('Lỗi', 'Vui lòng chọn thành viên để nhượng quyền Leader trước khi rời nhóm.');
+            } else {
+                alert('Vui lòng chọn thành viên để nhượng quyền Leader trước khi rời nhóm.');
+            }
+            return;
+        }
+        
+        // Process leader transfer
+        console.log('Transferring leadership to:', selectedNewLeader);
+        
+        // Update UI to show new leader
+        updateLeaderInUI(selectedNewLeader);
+        
+        // Show success notification for leader transfer
+        if (typeof showNotification === 'function') {
+            showNotification('Thành công', `Đã nhượng quyền Leader cho ${selectedNewLeader}. Bạn đã rời nhóm thành công!`);
+        } else {
+            alert(`Đã nhượng quyền Leader cho ${selectedNewLeader}. Bạn đã rời nhóm thành công!`);
+        }
+        
+        // Redirect to main page after a short delay
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 2000);
+        
+        return;
+    }
+    
+    // This is a non-Leader member leaving, redirect to main page
+    console.log('Non-Leader member is leaving group, redirecting...');
+    
+    // Show success notification
+    if (typeof showNotification === 'function') {
+        showNotification('Thành công', 'Bạn đã rời nhóm thành công!');
+    } else {
+        alert('Bạn đã rời nhóm thành công!');
+    }
+    
+    // Redirect to main page after a short delay
+    setTimeout(() => {
+        window.location.href = 'index.html';
+    }, 1500);
+    
+    // Here you would typically send the leave group request to the server
+    console.log('Leave group request would be sent to server for:', memberName);
+}
+
+// Function to update leader in UI
+function updateLeaderInUI(newLeaderName) {
+    console.log('Updating leader in UI to:', newLeaderName);
+    
+    // Find the member element and update their role
+    const memberElements = document.querySelectorAll('.flex.items-center.justify-between.p-4.border.border-gray-200.rounded-lg');
+    
+    memberElements.forEach(element => {
+        const nameElement = element.querySelector('h4');
+        const roleElement = element.querySelector('span');
+        
+        if (nameElement && roleElement) {
+            const memberName = nameElement.textContent;
+            
+            if (memberName === newLeaderName) {
+                // Update this member to Leader
+                roleElement.innerHTML = 'Leader';
+                roleElement.className = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800';
+                console.log('Updated member to Leader:', memberName);
+            } else if (roleElement.textContent.includes('Leader')) {
+                // Update previous leader to Member
+                roleElement.innerHTML = 'Member';
+                roleElement.className = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800';
+                console.log('Updated previous leader to Member:', memberName);
+            }
+        }
+    });
+    
+    // Update toolbar button data if it exists
+    const toolbarBtn = document.querySelector('.leave-group-toolbar-btn');
+    if (toolbarBtn) {
+        toolbarBtn.setAttribute('data-member', newLeaderName);
+        console.log('Updated toolbar button data to new leader:', newLeaderName);
+    }
+}
+
+function updateMemberCount() {
+    console.log('Updating member count...');
+    
+    const memberElements = document.querySelectorAll('.flex.items-center.justify-between.p-4.border.border-gray-200.rounded-lg');
+    const memberCount = memberElements.length;
+    
+    // Update member count display if exists
+    const memberCountElement = document.querySelector('.member-count');
+    if (memberCountElement) {
+        memberCountElement.textContent = memberCount;
+    }
+    
+    console.log('Member count updated:', memberCount);
+} 

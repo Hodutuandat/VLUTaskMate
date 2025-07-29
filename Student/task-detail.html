@@ -6,6 +6,7 @@
     <title>VLUTaskMate - Chi tiết Task</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
     <script>
         tailwind.config = {
             theme: {
@@ -118,10 +119,16 @@
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <div class="flex items-center justify-between mb-4">
                                 <h3 class="text-lg font-semibold text-gray-900">Subtasks</h3>
-                                <button id="addSubtaskBtn" class="bg-vlu-red text-white px-3 py-1 rounded text-sm font-medium hover:bg-red-700 transition-colors">
-                                    <i class="fas fa-plus mr-1"></i>
-                                    Thêm
-                                </button>
+                                <div class="flex items-center space-x-2">
+                                    <button id="saveSubtasksBtn" class="bg-green-600 text-white px-3 py-1 rounded text-sm font-medium hover:bg-green-700 transition-colors">
+                                        <i class="fas fa-save mr-1"></i>
+                                        Lưu thay đổi
+                                    </button>
+                                    <button id="addSubtaskBtn" class="bg-vlu-red text-white px-3 py-1 rounded text-sm font-medium hover:bg-red-700 transition-colors">
+                                        <i class="fas fa-plus mr-1"></i>
+                                        Thêm
+                                    </button>
+                                </div>
                             </div>
                             
                             <div class="space-y-3">
@@ -153,7 +160,13 @@
 
                         <!-- Comments -->
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Bình luận</h3>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Bình luận</h3>
+                                <button id="saveCommentsBtn" class="bg-green-600 text-white px-3 py-1 rounded text-sm font-medium hover:bg-green-700 transition-colors">
+                                    <i class="fas fa-save mr-1"></i>
+                                    Lưu thay đổi
+                                </button>
+                            </div>
                             
                             <div class="space-y-4 mb-6">
                                 <!-- Comment 1 -->
@@ -215,7 +228,13 @@
                     <div class="space-y-6">
                         <!-- Task Info -->
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Thông tin Task</h3>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-900">Thông tin Task</h3>
+                                <button id="saveTaskInfoBtn" class="bg-green-600 text-white px-3 py-1 rounded text-sm font-medium hover:bg-green-700 transition-colors">
+                                    <i class="fas fa-save mr-1"></i>
+                                    Lưu thay đổi
+                                </button>
+                            </div>
                             
                             <div class="space-y-4">
                                 <div>
@@ -356,5 +375,239 @@
     </div>
 
     <script src="../assets/script.js"></script>
+    <script>
+        // Task Detail Save Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Initializing task detail save functionality...');
+            
+            // Initialize save buttons
+            initializeSaveButtons();
+            
+            // Initialize existing functionality
+            initializeExistingFeatures();
+        });
+
+        function initializeSaveButtons() {
+            // Save Subtasks Button
+            const saveSubtasksBtn = document.getElementById('saveSubtasksBtn');
+            if (saveSubtasksBtn) {
+                saveSubtasksBtn.addEventListener('click', function() {
+                    saveSubtasks();
+                });
+            }
+
+            // Save Task Info Button
+            const saveTaskInfoBtn = document.getElementById('saveTaskInfoBtn');
+            if (saveTaskInfoBtn) {
+                saveTaskInfoBtn.addEventListener('click', function() {
+                    saveTaskInfo();
+                });
+            }
+
+            // Save Comments Button
+            const saveCommentsBtn = document.getElementById('saveCommentsBtn');
+            if (saveCommentsBtn) {
+                saveCommentsBtn.addEventListener('click', function() {
+                    saveComments();
+                });
+            }
+
+            console.log('Save buttons initialized');
+        }
+
+        function saveSubtasks() {
+            console.log('Saving subtasks...');
+            
+            // Get all subtask checkboxes
+            const subtaskCheckboxes = document.querySelectorAll('.space-y-3 input[type="checkbox"]');
+            const subtaskData = [];
+            
+            subtaskCheckboxes.forEach((checkbox, index) => {
+                const subtaskText = checkbox.nextElementSibling.textContent;
+                subtaskData.push({
+                    id: index + 1,
+                    text: subtaskText,
+                    completed: checkbox.checked,
+                    status: checkbox.checked ? 'Hoàn thành' : 'Chưa hoàn thành'
+                });
+            });
+            
+            // Simulate saving to server
+            setTimeout(() => {
+                showNotification('Thành công', 'Đã lưu thay đổi subtasks!');
+                console.log('Subtasks saved:', subtaskData);
+                
+                // Update status text for completed subtasks
+                subtaskCheckboxes.forEach((checkbox, index) => {
+                    const statusElement = checkbox.parentElement.querySelector('.text-xs');
+                    if (statusElement) {
+                        statusElement.textContent = checkbox.checked ? 'Hoàn thành' : 'Chưa hoàn thành';
+                        statusElement.className = checkbox.checked ? 
+                            'text-xs text-green-600 font-medium' : 
+                            'text-xs text-gray-500';
+                    }
+                });
+            }, 1000);
+        }
+
+        function saveTaskInfo() {
+            console.log('Saving task info...');
+            
+            // Get task info form data
+            const statusSelect = document.querySelector('select:first-of-type');
+            const prioritySelect = document.querySelector('select:last-of-type');
+            
+            const taskData = {
+                status: statusSelect ? statusSelect.value : 'In Progress',
+                priority: prioritySelect ? prioritySelect.value : 'Cao',
+                lastModified: new Date().toLocaleString('vi-VN')
+            };
+            
+            // Simulate saving to server
+            setTimeout(() => {
+                showNotification('Thành công', 'Đã lưu thông tin task!');
+                console.log('Task info saved:', taskData);
+                
+                // Update activity history
+                addActivityHistory('Thông tin task được cập nhật', 'blue');
+            }, 1000);
+        }
+
+        function saveComments() {
+            console.log('Saving comments...');
+            
+            // Get comment input
+            const commentInput = document.getElementById('commentInput');
+            const commentText = commentInput ? commentInput.value.trim() : '';
+            
+            if (commentText) {
+                // Simulate saving to server
+                setTimeout(() => {
+                    // Add new comment to the list
+                    addNewComment(commentText);
+                    
+                    // Clear input
+                    if (commentInput) {
+                        commentInput.value = '';
+                    }
+                    
+                    showNotification('Thành công', 'Đã lưu bình luận!');
+                    console.log('Comment saved:', commentText);
+                    
+                    // Update activity history
+                    addActivityHistory('Bình luận mới được thêm', 'yellow');
+                }, 1000);
+            } else {
+                showNotification('Thông báo', 'Vui lòng nhập nội dung bình luận!');
+            }
+        }
+
+        function addNewComment(commentText) {
+            const commentsContainer = document.querySelector('.space-y-4.mb-6');
+            if (!commentsContainer) return;
+            
+            const newComment = document.createElement('div');
+            newComment.className = 'flex space-x-3';
+            newComment.innerHTML = `
+                <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
+                <div class="flex-1">
+                    <div class="flex items-center space-x-2 mb-1">
+                        <span class="font-medium text-gray-900">Hồ Du Tuấn Đạt</span>
+                        <span class="text-xs text-gray-500">Vừa xong</span>
+                    </div>
+                    <p class="text-gray-700 mb-2">${commentText}</p>
+                    <div class="flex items-center space-x-4 text-xs text-gray-500">
+                        <button class="hover:text-vlu-red">Trả lời</button>
+                        <button class="hover:text-vlu-red">Chỉnh sửa</button>
+                        <button class="hover:text-red-600">Xóa</button>
+                    </div>
+                </div>
+            `;
+            
+            // Insert at the beginning
+            commentsContainer.insertBefore(newComment, commentsContainer.firstChild);
+        }
+
+        function addActivityHistory(activity, color) {
+            const activityContainer = document.querySelector('.space-y-4');
+            if (!activityContainer) return;
+            
+            const newActivity = document.createElement('div');
+            newActivity.className = 'flex items-start space-x-3';
+            newActivity.innerHTML = `
+                <div class="w-2 h-2 bg-${color}-500 rounded-full mt-2"></div>
+                <div class="flex-1">
+                    <p class="text-sm text-gray-900">${activity}</p>
+                    <p class="text-xs text-gray-500">${new Date().toLocaleString('vi-VN')}</p>
+                </div>
+            `;
+            
+            // Insert at the beginning
+            activityContainer.insertBefore(newActivity, activityContainer.firstChild);
+        }
+
+        function showNotification(title, message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-transform duration-300';
+            notification.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <div class="font-medium">${title}</div>
+                        <div class="text-sm">${message}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        function initializeExistingFeatures() {
+            // Initialize existing comment submission
+            const submitCommentBtn = document.getElementById('submitComment');
+            if (submitCommentBtn) {
+                submitCommentBtn.addEventListener('click', function() {
+                    saveComments();
+                });
+            }
+
+            // Initialize subtask modal
+            const addSubtaskBtn = document.getElementById('addSubtaskBtn');
+            const addSubtaskModal = document.getElementById('addSubtaskModal');
+            const closeSubtaskModal = document.getElementById('closeSubtaskModal');
+            const cancelSubtask = document.getElementById('cancelSubtask');
+
+            if (addSubtaskBtn && addSubtaskModal) {
+                addSubtaskBtn.addEventListener('click', function() {
+                    addSubtaskModal.classList.remove('hidden');
+                });
+            }
+
+            if (closeSubtaskModal && addSubtaskModal) {
+                closeSubtaskModal.addEventListener('click', function() {
+                    addSubtaskModal.classList.add('hidden');
+                });
+            }
+
+            if (cancelSubtask && addSubtaskModal) {
+                cancelSubtask.addEventListener('click', function() {
+                    addSubtaskModal.classList.add('hidden');
+                });
+            }
+
+            console.log('Existing features initialized');
+        }
+    </script>
 </body>
 </html> 

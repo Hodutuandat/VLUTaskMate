@@ -6,6 +6,7 @@
     <title>VLUTaskMate - Chi tiết dự án</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/style.css">
     <script>
         tailwind.config = {
             theme: {
@@ -56,15 +57,15 @@
                         <i class="fas fa-folder mr-3"></i>
                         Dự án của tôi
                     </a>
-                    <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                    <a href="my-tasks.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
                         <i class="fas fa-tasks mr-3"></i>
                         Nhiệm vụ của tôi
                     </a>
-                    <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                    <a href="notifications.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
                         <i class="fas fa-bell mr-3"></i>
                         Thông báo
                     </a>
-                    <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
+                    <a href="profile.html" class="flex items-center px-4 py-3 text-gray-600 hover:text-vlu-red hover:bg-gray-50 rounded-lg">
                         <i class="fas fa-user mr-3"></i>
                         Tài khoản
                     </a>
@@ -94,6 +95,10 @@
                             <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
                                 Đang hoạt động
                             </span>
+                            <button class="leave-group-toolbar-btn bg-orange-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors" data-member="Hồ Du Tuấn Đạt" data-role="Leader">
+                                <i class="fas fa-sign-out-alt mr-2"></i>
+                                Rời nhóm
+                            </button>
                         </div>
                     </div>
                     <p class="text-gray-700">Xây dựng hệ thống quản lý thư viện trực tuyến với các tính năng mượn trả sách, quản lý độc giả, và báo cáo thống kê.</p>
@@ -102,11 +107,11 @@
                 <!-- Navigation Tabs -->
                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
                     <nav class="flex space-x-8 px-6">
-                        <button class="tab-btn active py-4 px-1 border-b-2 border-vlu-red text-vlu-red font-medium" data-tab="members">
+                        <button class="tab-btn py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" data-tab="members">
                             <i class="fas fa-users mr-2"></i>
                             Thành viên nhóm
                         </button>
-                        <button class="tab-btn py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" data-tab="tasks">
+                        <button class="tab-btn active py-4 px-1 border-b-2 border-vlu-red text-vlu-red font-medium" data-tab="tasks">
                             <i class="fas fa-tasks mr-2"></i>
                             Nhiệm vụ
                         </button>
@@ -124,7 +129,7 @@
                 <!-- Tab Content -->
                 <div id="tabContent">
                     <!-- Members Tab -->
-                    <div id="members" class="tab-content active">
+                    <div id="members" class="tab-content hidden" data-tab-content="members">
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <div class="flex items-center justify-between mb-6">
                                 <h3 class="text-lg font-semibold text-gray-900">Thành viên nhóm</h3>
@@ -220,7 +225,7 @@
                     </div>
 
                     <!-- Tasks Tab -->
-                    <div id="tasks" class="tab-content hidden">
+                    <div id="tasks" class="tab-content active" data-tab-content="tasks">
                         <div class="bg-gray-50 rounded-lg p-6">
 
                             <!-- Kanban Board -->
@@ -454,7 +459,7 @@
                     </div>
 
                     <!-- Evaluation Tab -->
-                    <div id="evaluation" class="tab-content hidden">
+                    <div id="evaluation" class="tab-content hidden" data-tab-content="evaluation">
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <div class="flex items-center justify-between mb-6">
                                 <h3 class="text-lg font-semibold text-gray-900">Đánh giá thành viên</h3>
@@ -537,7 +542,7 @@
                     </div>
 
                     <!-- Close Project Tab -->
-                    <div id="close" class="tab-content hidden">
+                    <div id="close" class="tab-content hidden" data-tab-content="close">
                         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                             <div class="text-center">
                                 <i class="fas fa-lock text-4xl text-gray-400 mb-4"></i>
@@ -839,7 +844,11 @@
                             </div>
                             <div class="mt-4">
                                 <textarea id="newComment" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-vlu-red focus:border-transparent" rows="2" placeholder="Write a comment..."></textarea>
-                                <div class="flex justify-end mt-2">
+                                <div class="flex justify-end space-x-2 mt-2">
+                                    <button id="saveAllChangesBtn" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm">
+                                        <i class="fas fa-save mr-1"></i>
+                                        Lưu tất cả
+                                    </button>
                                     <button id="addComment" class="px-4 py-2 bg-vlu-red text-white rounded-md hover:bg-red-700 transition-colors text-sm">Thêm Comment</button>
                                 </div>
                             </div>
@@ -1081,6 +1090,279 @@
         </div>
     </div>
 
+    <!-- Leave Group Confirmation Modal -->
+    <div id="leaveGroupModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-medium text-gray-900">Xác nhận Rời Nhóm</h3>
+                    <button id="closeLeaveGroupModal" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="mb-6">
+                    <div class="flex items-center justify-center mb-4">
+                        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-sign-out-alt text-2xl text-orange-600"></i>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="font-medium text-gray-900" id="leaveGroupMemberName">Tên thành viên</p>
+                        <p class="text-sm text-gray-500" id="leaveGroupMemberRole">Vai trò trong nhóm</p>
+                    </div>
+                    
+                    <!-- Leader Transfer Section -->
+                    <div id="leaderTransferSection" class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg hidden">
+                        <div class="flex items-start">
+                            <i class="fas fa-crown text-blue-500 mt-1 mr-3"></i>
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-blue-900 mb-2">Nhượng quyền Leader</p>
+                                <p class="text-xs text-blue-700 mb-3">Vui lòng chọn thành viên để nhượng quyền Leader trước khi rời nhóm:</p>
+                                <select id="newLeaderSelect" class="w-full px-3 py-2 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
+                                    <option value="">-- Chọn thành viên --</option>
+                                    <option value="Nguyễn Văn A">Nguyễn Văn A (Member)</option>
+                                    <option value="Trần Thị B">Trần Thị B (Member)</option>
+                                    <option value="Lê Văn C">Lê Văn C (Pending)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                        <div class="flex items-start">
+                            <i class="fas fa-exclamation-triangle text-orange-500 mt-1 mr-3"></i>
+                            <div>
+                                <p class="text-sm font-medium text-orange-900 mb-2">Bạn có chắc chắn muốn rời nhóm?</p>
+                                <ul class="text-xs text-orange-700 space-y-1">
+                                    <li>• Bạn sẽ không thể truy cập dự án này nữa</li>
+                                    <li>• Tất cả task được giao sẽ được chuyển cho thành viên khác</li>
+                                    <li>• Bạn cần được mời lại nếu muốn tham gia nhóm</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button id="cancelLeaveGroup" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50">
+                        Hủy
+                    </button>
+                    <button id="confirmLeaveGroup" class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 transition-colors">
+                        <i class="fas fa-sign-out-alt mr-2"></i>
+                        Rời Nhóm
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../assets/script.js"></script>
+    <script>
+        // Task Detail Modal Save Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Initializing task detail modal save functionality...');
+            
+            // Initialize save buttons for task detail modal
+            initializeTaskDetailSaveButtons();
+        });
+
+        function initializeTaskDetailSaveButtons() {
+            // Save All Changes Button
+            const saveAllChangesBtn = document.getElementById('saveAllChangesBtn');
+            if (saveAllChangesBtn) {
+                saveAllChangesBtn.addEventListener('click', function() {
+                    saveAllChanges();
+                });
+            }
+
+            console.log('Task detail modal save all button initialized');
+        }
+
+        function saveAllChanges() {
+            console.log('Saving all changes...');
+            
+            let hasChanges = false;
+            const changes = [];
+            
+            // 1. Save Task Status
+            const taskStatusSelect = document.getElementById('taskStatus');
+            const taskTitle = document.getElementById('taskDetailTitle');
+            if (taskStatusSelect && taskTitle) {
+                const newStatus = taskStatusSelect.value;
+                const taskName = taskTitle.textContent;
+                changes.push(`Trạng thái: ${newStatus}`);
+                hasChanges = true;
+            }
+            
+            // 2. Save Description (if in edit mode)
+            const descriptionTextarea = document.getElementById('descriptionTextarea');
+            const descriptionContent = document.getElementById('descriptionContent');
+            const taskDescription = document.getElementById('taskDescription');
+            
+            if (descriptionTextarea && !descriptionTextarea.parentElement.classList.contains('hidden')) {
+                const newDescription = descriptionTextarea.value.trim();
+                if (newDescription) {
+                    // Update the description display
+                    taskDescription.textContent = newDescription;
+                    
+                    // Hide edit mode and show content
+                    descriptionTextarea.parentElement.classList.add('hidden');
+                    descriptionContent.classList.remove('hidden');
+                    
+                    changes.push('Mô tả task');
+                    hasChanges = true;
+                }
+            }
+            
+            // 3. Save Subtasks
+            const subtaskCheckboxes = document.querySelectorAll('#subtasksContainer input[type="checkbox"]');
+            if (subtaskCheckboxes.length > 0) {
+                // Update visual feedback for completed subtasks
+                subtaskCheckboxes.forEach((checkbox) => {
+                    const subtaskText = checkbox.nextElementSibling;
+                    if (checkbox.checked) {
+                        subtaskText.classList.add('line-through', 'text-gray-500');
+                    } else {
+                        subtaskText.classList.remove('line-through', 'text-gray-500');
+                    }
+                });
+                changes.push('Subtasks');
+                hasChanges = true;
+            }
+            
+            // 4. Save Comments
+            const newCommentTextarea = document.getElementById('newComment');
+            const commentText = newCommentTextarea ? newCommentTextarea.value.trim() : '';
+            
+            if (commentText) {
+                // Add new comment to the list
+                addNewTaskComment(commentText);
+                
+                // Clear input
+                if (newCommentTextarea) {
+                    newCommentTextarea.value = '';
+                }
+                
+                changes.push('Bình luận mới');
+                hasChanges = true;
+            }
+            
+            // Show notification based on changes
+            if (hasChanges) {
+                // Simulate saving to server
+                setTimeout(() => {
+                    const changeText = changes.join(', ');
+                    showTaskNotification('Thành công', `Đã lưu tất cả thay đổi: ${changeText}!`);
+                    console.log('All changes saved:', changes);
+                    
+                    // Add activity history
+                    addTaskActivity(`Đã lưu: ${changeText}`, 'green');
+                }, 1000);
+            } else {
+                showTaskNotification('Thông báo', 'Không có thay đổi nào để lưu!');
+            }
+        }
+
+        function addNewTaskComment(commentText) {
+            const commentsContainer = document.querySelector('.space-y-4');
+            if (!commentsContainer) return;
+            
+            const newComment = document.createElement('div');
+            newComment.className = 'flex space-x-3';
+            newComment.innerHTML = `
+                <img class="h-8 w-8 rounded-full bg-purple-500 text-white text-xs flex items-center justify-center" src="https://via.placeholder.com/32" alt="User">
+                <div class="flex-1">
+                    <div class="bg-gray-50 p-3 rounded-lg">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="font-medium text-sm text-gray-900">Hồ Du Tuấn Đạt</span>
+                            <span class="text-xs text-gray-500">Vừa xong</span>
+                        </div>
+                        <p class="text-sm text-gray-700">${commentText}</p>
+                    </div>
+                </div>
+            `;
+            
+            // Insert at the beginning
+            commentsContainer.insertBefore(newComment, commentsContainer.firstChild);
+        }
+
+        function addTaskActivity(activity, color) {
+            const activityContainer = document.getElementById('activityContainer');
+            if (!activityContainer) return;
+            
+            const newActivity = document.createElement('div');
+            newActivity.className = 'flex items-start space-x-3';
+            newActivity.innerHTML = `
+                <img class="h-6 w-6 rounded-full bg-purple-500 text-white text-xs flex items-center justify-center" src="https://via.placeholder.com/24" alt="User">
+                <div class="flex-1">
+                    <p class="text-sm text-gray-700">${activity}</p>
+                    <p class="text-xs text-gray-500">${new Date().toLocaleString('vi-VN')}</p>
+                </div>
+            `;
+            
+            // Insert at the beginning
+            activityContainer.insertBefore(newActivity, activityContainer.firstChild);
+        }
+
+        function showTaskNotification(title, message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-transform duration-300';
+            notification.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <div class="font-medium">${title}</div>
+                        <div class="text-sm">${message}</div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Override existing functions to work with task detail modal
+        function initTaskDetail() {
+            console.log('Initializing task detail with save functionality...');
+            
+            // Initialize existing task detail functionality
+            const taskCards = document.querySelectorAll('.task-card');
+            taskCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Prevent opening if clicking on action buttons
+                    if (e.target.closest('button')) {
+                        return;
+                    }
+                    
+                    const taskId = this.getAttribute('data-task-id');
+                    const taskTitle = this.getAttribute('data-task-title');
+                    const taskDescription = this.getAttribute('data-task-description');
+                    const taskType = this.getAttribute('data-task-type');
+                    const taskPriority = this.getAttribute('data-task-priority');
+                    
+                    openTaskDetail(this);
+                });
+            });
+            
+            // Initialize save buttons
+            initializeTaskDetailSaveButtons();
+        }
+
+        // Call initTaskDetail when DOM is loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initTaskDetail);
+        } else {
+            initTaskDetail();
+        }
+    </script>
 </body>
 </html> 

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Menu - VLUTaskMate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vlu-red': '#dc2626',
+                        'vlu-light-red': '#fef2f2',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-4xl mx-auto p-8">
+        <h1 class="text-3xl font-bold text-vlu-red mb-8">Test Menu Dropdown</h1>
+        
+        <!-- Test Header -->
+        <header class="bg-white shadow-sm border-b border-gray-200 mb-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <h1 class="text-2xl font-bold text-vlu-red">VLUTaskMate</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <!-- Notification Bell with Dropdown -->
+                        <div class="relative">
+                            <button id="notificationBtn" class="relative p-2 text-gray-600 hover:text-gray-900">
+                                <i class="fas fa-bell"></i>
+                                <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-vlu-red"></span>
+                            </button>
+                            
+                            <!-- Notification Dropdown -->
+                            <div id="notificationDropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                                <!-- Header -->
+                                <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                                    <h3 class="text-lg font-semibold text-gray-900">Thông báo</h3>
+                                    <button id="closeNotifications" class="text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                
+                                <!-- Notification List -->
+                                <div class="max-h-96 overflow-y-auto">
+                                    <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
+                                        <div class="flex items-start space-x-3">
+                                            <div class="flex-shrink-0">
+                                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                    <i class="fas fa-tasks text-blue-600 text-sm"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <p class="text-sm font-medium text-gray-900">Bạn được giao nhiệm vụ mới</p>
+                                                <p class="text-sm text-gray-500 mt-1">"Thiết kế giao diện" trong dự án Website E-commerce</p>
+                                                <p class="text-xs text-gray-400 mt-1">2 phút trước</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Footer -->
+                                <div class="p-4 border-t border-gray-200">
+                                    <button class="w-full text-center text-sm text-vlu-red hover:text-red-700 font-medium">
+                                        Xem tất cả thông báo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="relative">
+                            <button id="userMenuBtn" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900">
+                                <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
+                                <span class="text-sm font-medium" id="userName">Hồ Du Tuấn Đạt</span>
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            
+                            <!-- User Menu Dropdown -->
+                            <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                                <div class="px-4 py-2 text-sm text-gray-700 border-b">
+                                    <div id="userEmail">student@vlu.edu.vn</div>
+                                    <div class="text-xs text-gray-500">Sinh viên</div>
+                                </div>
+                                <div class="py-1">
+                                    <button class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-user mr-3"></i>
+                                        Hồ sơ
+                                    </button>
+                                    <button class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-sign-out-alt mr-3"></i>
+                                        Đăng xuất
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Test Instructions -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 class="text-xl font-semibold mb-4">Hướng dẫn test:</h2>
+            <div class="space-y-2 text-gray-600">
+                <p>1. Click vào icon chuông để mở dropdown thông báo</p>
+                <p>2. Click vào tên người dùng để mở dropdown menu</p>
+                <p>3. Click bên ngoài để đóng dropdown</p>
+                <p>4. Mở Developer Tools (F12) để xem console logs</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="test-menu-simple.js"></script>
+</body>
+</html> 

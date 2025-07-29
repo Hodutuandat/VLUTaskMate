@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Navigation - VLUTaskMate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vlu-red': '#dc2626',
+                        'vlu-light-red': '#fef2f2',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-4xl mx-auto p-8">
+        <h1 class="text-3xl font-bold text-vlu-red mb-8">Test Navigation & Tab Switching</h1>
+        
+        <!-- Test Links -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Test Links</h2>
+            <div class="space-y-2">
+                <a href="Student/index.html" class="block text-blue-600 hover:text-blue-800">Student Dashboard</a>
+                <a href="Student/my-tasks.html" class="block text-blue-600 hover:text-blue-800">My Tasks</a>
+                <a href="Student/project.html" class="block text-blue-600 hover:text-blue-800">Project Detail</a>
+                <a href="Student/notifications.html" class="block text-blue-600 hover:text-blue-800">Notifications</a>
+                <a href="Student/profile.html" class="block text-blue-600 hover:text-blue-800">Profile</a>
+            </div>
+        </div>
+
+        <!-- Test Tab Switching -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+            <div class="border-b border-gray-200">
+                <nav class="flex space-x-8 px-6">
+                    <button class="tab-btn active py-4 px-1 border-b-2 border-vlu-red text-vlu-red font-medium" data-tab="tab1">
+                        Tab 1
+                    </button>
+                    <button class="tab-btn py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" data-tab="tab2">
+                        Tab 2
+                    </button>
+                    <button class="tab-btn py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" data-tab="tab3">
+                        Tab 3
+                    </button>
+                </nav>
+            </div>
+            
+            <div id="tabContent">
+                <div id="tab1" class="tab-content active" data-tab-content="tab1">
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold mb-4">Tab 1 Content</h3>
+                        <p>This is the content for tab 1. Tab switching should work correctly.</p>
+                    </div>
+                </div>
+                
+                <div id="tab2" class="tab-content hidden" data-tab-content="tab2">
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold mb-4">Tab 2 Content</h3>
+                        <p>This is the content for tab 2. Tab switching should work correctly.</p>
+                    </div>
+                </div>
+                
+                <div id="tab3" class="tab-content hidden" data-tab-content="tab3">
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold mb-4">Tab 3 Content</h3>
+                        <p>This is the content for tab 3. Tab switching should work correctly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/script.js"></script>
+</body>
+</html> 

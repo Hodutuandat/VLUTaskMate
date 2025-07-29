@@ -71,18 +71,49 @@
 }
 
 /* Tab styling */
-.project-tab {
+.project-tab, .tab-btn {
     transition: all 0.2s ease;
+    cursor: pointer;
 }
 
-.project-tab.active {
+.project-tab.active, .tab-btn.active {
     border-bottom-color: var(--vlu-red) !important;
     color: var(--vlu-red) !important;
+    font-weight: 500;
 }
 
-.project-tab:not(.active) {
+.project-tab:not(.active), .tab-btn:not(.active) {
     border-bottom-color: transparent !important;
     color: #6b7280 !important;
+}
+
+/* Tab content visibility */
+.tab-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tab-content.active {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.tab-content.hidden {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Force display for active tabs */
+#overview-content.active,
+#tasks-content.active,
+#comments-content.active,
+#evaluations-content.active {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 /* Ensure grid items are visible */
@@ -627,4 +658,99 @@ body {
 .custom-checkbox:focus {
     outline: 2px solid var(--vlu-red);
     outline-offset: 2px;
+} 
+
+/* Dropdown Menu Styles */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    min-width: 200px;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Notification Dropdown */
+#notificationDropdown {
+    z-index: 1001 !important;
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    margin-top: 0.5rem !important;
+    min-width: 320px !important;
+    background: white !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+#notificationDropdown.hidden {
+    display: none !important;
+}
+
+#notificationDropdown:not(.hidden) {
+    display: block !important;
+}
+
+/* User Menu Dropdown */
+#userMenuDropdown {
+    z-index: 1001 !important;
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    margin-top: 0.5rem !important;
+    min-width: 192px !important;
+    background: white !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+#userMenuDropdown.hidden {
+    display: none !important;
+}
+
+#userMenuDropdown:not(.hidden) {
+    display: block !important;
+}
+
+/* Dropdown Button Styles */
+.dropdown-btn {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dropdown-btn:hover {
+    color: var(--vlu-red);
+}
+
+/* Ensure dropdowns are above other content */
+.relative {
+    position: relative !important;
+}
+
+/* Fix for any potential z-index conflicts */
+.z-50 {
+    z-index: 50 !important;
+}
+
+.z-1000 {
+    z-index: 1000 !important;
+}
+
+.z-1001 {
+    z-index: 1001 !important;
 } 

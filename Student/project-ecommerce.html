@@ -80,7 +80,7 @@
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
             <div class="border-b border-gray-200">
                 <nav class="-mb-px flex space-x-8 px-6">
-                    <button class="tab-btn py-4 px-1 border-b-2 border-transparent text-gray-500 hover:text-gray-700 font-medium" data-tab="members">
+                    <button class="tab-btn active py-4 px-1 border-b-2 border-vlu-red text-vlu-red font-medium" data-tab="members">
                         <i class="fas fa-users mr-2"></i>
                         Thành viên nhóm
                     </button>
@@ -102,7 +102,7 @@
             <!-- Tab Content -->
             <div id="tabContent">
                 <!-- Members Tab -->
-                <div id="members" class="tab-content active">
+                <div id="members" class="tab-content active" data-tab-content="members">
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div class="flex items-center justify-between mb-6">
                             <h3 class="text-lg font-semibold text-gray-900">Thành viên nhóm</h3>
@@ -209,7 +209,7 @@
                 </div>
 
                 <!-- Tasks Tab -->
-                <div id="tasks" class="tab-content hidden">
+                <div id="tasks" class="tab-content hidden" data-tab-content="tasks">
                     <div class="bg-gray-50 rounded-lg p-6">
                         <div class="text-center py-8">
                             <i class="fas fa-check-circle text-4xl text-green-500 mb-4"></i>
@@ -220,7 +220,7 @@
                 </div>
 
                 <!-- Evaluation Tab -->
-                <div id="evaluation" class="tab-content hidden">
+                <div id="evaluation" class="tab-content hidden" data-tab-content="evaluation">
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div class="flex items-center justify-between mb-6">
                             <h3 class="text-lg font-semibold text-gray-900">Đánh giá thành viên</h3>
@@ -340,7 +340,7 @@
                 </div>
 
                 <!-- Close Project Tab -->
-                <div id="close" class="tab-content hidden">
+                <div id="close" class="tab-content hidden" data-tab-content="close">
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <div class="text-center">
                             <i class="fas fa-check-circle text-4xl text-green-500 mb-4"></i>

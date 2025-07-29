@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Menu - VLUTaskMate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .debug-info {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            font-size: 0.875rem;
+        }
+        .debug-success { background: #d1fae5; border-color: #10b981; }
+        .debug-error { background: #fee2e2; border-color: #ef4444; }
+        .debug-warning { background: #fef3c7; border-color: #f59e0b; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-4xl mx-auto p-8">
+        <h1 class="text-3xl font-bold text-red-600 mb-8">Debug Menu Dropdown</h1>
+        
+        <!-- Debug Info -->
+        <div class="debug-info debug-warning">
+            <strong>Debug Mode:</strong> Mở Developer Tools (F12) để xem console logs
+        </div>
+        
+        <!-- Test Header -->
+        <header class="bg-white shadow-sm border border-gray-200 mb-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center">
+                        <h1 class="text-2xl font-bold text-red-600">VLUTaskMate</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <!-- Notification Bell with Dropdown -->
+                        <div class="relative">
+                            <button id="notificationBtn" class="relative p-2 text-gray-600 hover:text-gray-900 border border-gray-300 rounded">
+                                <i class="fas fa-bell"></i>
+                                <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-600"></span>
+                            </button>
+                            
+                            <!-- Notification Dropdown -->
+                            <div id="notificationDropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                                <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                                    <h3 class="text-lg font-semibold text-gray-900">Thông báo</h3>
+                                    <button id="closeNotifications" class="text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="p-4">
+                                    <p>Test notification content</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="relative">
+                            <button id="userMenuBtn" class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 border border-gray-300 rounded px-3 py-2">
+                                <img class="h-8 w-8 rounded-full bg-gray-300" src="https://via.placeholder.com/32" alt="User">
+                                <span class="text-sm font-medium" id="userName">Hồ Du Tuấn Đạt</span>
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            
+                            <!-- User Menu Dropdown -->
+                            <div id="userMenuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden">
+                                <div class="px-4 py-2 text-sm text-gray-700 border-b">
+                                    <div id="userEmail">student@vlu.edu.vn</div>
+                                    <div class="text-xs text-gray-500">Sinh viên</div>
+                                </div>
+                                <div class="py-1">
+                                    <button class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-user mr-3"></i>
+                                        Hồ sơ
+                                    </button>
+                                    <button class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-sign-out-alt mr-3"></i>
+                                        Đăng xuất
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Debug Controls -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Debug Controls</h2>
+            <div class="space-y-4">
+                <div>
+                    <button id="testNotification" class="bg-blue-500 text-white px-4 py-2 rounded mr-2">
+                        Test Notification Dropdown
+                    </button>
+                    <button id="testUserMenu" class="bg-green-500 text-white px-4 py-2 rounded mr-2">
+                        Test User Menu Dropdown
+                    </button>
+                    <button id="checkElements" class="bg-yellow-500 text-white px-4 py-2 rounded">
+                        Check Elements
+                    </button>
+                </div>
+                <div id="debugOutput" class="debug-info">
+                    <strong>Debug Output:</strong> Click buttons above to test
+                </div>
+            </div>
+        </div>
+
+        <!-- Element Status -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 class="text-xl font-semibold mb-4">Element Status</h2>
+            <div id="elementStatus" class="space-y-2">
+                <div>Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Debug JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== DEBUG MENU LOADED ===');
+            
+            const debugOutput = document.getElementById('debugOutput');
+            const elementStatus = document.getElementById('elementStatus');
+            
+            function log(message, type = 'info') {
+                console.log(message);
+                debugOutput.innerHTML = `<strong>${type.toUpperCase()}:</strong> ${message}`;
+                debugOutput.className = `debug-info debug-${type}`;
+            }
+            
+            function checkElements() {
+                const elements = {
+                    notificationBtn: document.getElementById('notificationBtn'),
+                    notificationDropdown: document.getElementById('notificationDropdown'),
+                    closeNotifications: document.getElementById('closeNotifications'),
+                    userMenuBtn: document.getElementById('userMenuBtn'),
+                    userMenuDropdown: document.getElementById('userMenuDropdown')
+                };
+                
+                let statusHtml = '';
+                for (const [name, element] of Object.entries(elements)) {
+                    const found = element !== null;
+                    const classes = element ? element.className : 'N/A';
+                    const style = found ? 'color: green;' : 'color: red;';
+                    statusHtml += `<div style="${style}">${name}: ${found ? '✓ Found' : '✗ Not Found'} (${classes})</div>`;
+                }
+                
+                elementStatus.innerHTML = statusHtml;
+                return elements;
+            }
+            
+            // Check elements on load
+            const elements = checkElements();
+            log('Elements checked on load');
+            
+            // Test buttons
+            document.getElementById('testNotification').addEventListener('click', function() {
+                log('Testing notification dropdown...', 'warning');
+                if (elements.notificationBtn) {
+                    elements.notificationBtn.click();
+                    log('Notification button clicked', 'success');
+                } else {
+                    log('Notification button not found!', 'error');
+                }
+            });
+            
+            document.getElementById('testUserMenu').addEventListener('click', function() {
+                log('Testing user menu dropdown...', 'warning');
+                if (elements.userMenuBtn) {
+                    elements.userMenuBtn.click();
+                    log('User menu button clicked', 'success');
+                } else {
+                    log('User menu button not found!', 'error');
+                }
+            });
+            
+            document.getElementById('checkElements').addEventListener('click', function() {
+                checkElements();
+                log('Elements rechecked', 'info');
+            });
+            
+            // Initialize dropdowns
+            if (elements.notificationBtn && elements.notificationDropdown) {
+                elements.notificationBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    log('Notification button clicked manually');
+                    
+                    const isHidden = elements.notificationDropdown.classList.contains('hidden');
+                    if (isHidden) {
+                        elements.notificationDropdown.classList.remove('hidden');
+                        log('Notification dropdown shown', 'success');
+                    } else {
+                        elements.notificationDropdown.classList.add('hidden');
+                        log('Notification dropdown hidden', 'success');
+                    }
+                });
+            }
+            
+            if (elements.userMenuBtn && elements.userMenuDropdown) {
+                elements.userMenuBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    log('User menu button clicked manually');
+                    
+                    const isHidden = elements.userMenuDropdown.classList.contains('hidden');
+                    if (isHidden) {
+                        elements.userMenuDropdown.classList.remove('hidden');
+                        log('User menu dropdown shown', 'success');
+                    } else {
+                        elements.userMenuDropdown.classList.add('hidden');
+                        log('User menu dropdown hidden', 'success');
+                    }
+                });
+            }
+            
+            if (elements.closeNotifications && elements.notificationDropdown) {
+                elements.closeNotifications.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    elements.notificationDropdown.classList.add('hidden');
+                    log('Notification dropdown closed', 'success');
+                });
+            }
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (elements.notificationDropdown && 
+                    !elements.notificationBtn.contains(e.target) && 
+                    !elements.notificationDropdown.contains(e.target)) {
+                    elements.notificationDropdown.classList.add('hidden');
+                    log('Notification dropdown closed by outside click', 'info');
+                }
+                
+                if (elements.userMenuDropdown && 
+                    !elements.userMenuBtn.contains(e.target) && 
+                    !elements.userMenuDropdown.contains(e.target)) {
+                    elements.userMenuDropdown.classList.add('hidden');
+                    log('User menu dropdown closed by outside click', 'info');
+                }
+            });
+            
+            log('Debug menu initialized successfully', 'success');
+        });
+    </script>
+</body>
+</html> 
