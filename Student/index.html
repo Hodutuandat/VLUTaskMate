@@ -827,7 +827,8 @@
                             </div>
                             
                             <div id="invitedMembersList" class="space-y-2">
-                                </div>
+                                <!-- Invited members will be displayed here -->
+                            </div>
                         </div>
                     </div>
                     
@@ -943,9 +944,45 @@
             // Handle form submission
             document.getElementById('createProjectForm').addEventListener('submit', function(e) {
                 e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(this);
+                const projectName = formData.get('projectName');
+                const projectDescription = formData.get('projectDescription');
+                const projectStartDate = formData.get('projectStartDate');
+                const projectEndDate = formData.get('projectEndDate');
+                
+                // Get invited members
+                const invitedMembers = [];
+                const memberItems = document.querySelectorAll('#invitedMembersList .member-item');
+                memberItems.forEach(item => {
+                    const email = item.querySelector('.member-email').textContent;
+                    invitedMembers.push({
+                        email: email,
+                        status: 'pending'
+                    });
+                });
+                
+                // Validate required fields
+                if (!projectName || !projectStartDate || !projectEndDate) {
+                    alert('Vui lòng điền đầy đủ thông tin bắt buộc');
+                    return;
+                }
+                
                 // Simulate form submission
-                alert('Project created successfully!');
+                console.log('Creating project with data:', {
+                    name: projectName,
+                    description: projectDescription,
+                    startDate: projectStartDate,
+                    endDate: projectEndDate,
+                    invitedMembers: invitedMembers
+                });
+                
+                showNotification('Thành công', `Dự án "${projectName}" đã được tạo thành công!`);
+                
+                // Reset form and close modal
                 this.reset();
+                document.getElementById('invitedMembersList').innerHTML = '';
                 document.getElementById('createProjectModal').classList.add('hidden');
             });
 
@@ -955,17 +992,53 @@
                 const email = emailInput.value.trim();
                 
                 if (email) {
+                    // Validate VLU email format
+                    if (!email.endsWith('@vlu.edu.vn')) {
+                        alert('Vui lòng nhập email VLU hợp lệ (email@vlu.edu.vn)');
+                        return;
+                    }
+                    
                     const membersList = document.getElementById('invitedMembersList');
+                    
+                    // Check if member already exists
+                    const existingMembers = membersList.querySelectorAll('.member-item');
+                    for (let member of existingMembers) {
+                        const memberEmail = member.querySelector('.member-email').textContent;
+                        if (memberEmail === email) {
+                            alert('Thành viên này đã được mời!');
+                            return;
+                        }
+                    }
+                    
                     const memberItem = document.createElement('div');
-                    memberItem.className = 'flex items-center justify-between p-2 bg-gray-50 rounded';
+                    memberItem.className = 'member-item flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200';
                     memberItem.innerHTML = `
-                        <span class="text-sm text-gray-700">${email}</span>
-                        <button type="button" class="text-red-500 hover:text-red-700" onclick="this.parentElement.remove()">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-user text-blue-600 text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="member-email text-sm font-medium text-gray-700">${email}</span>
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        Pending
+                                    </span>
+                                </div>
+                                <p class="text-xs text-gray-500 mt-1">Đã gửi lời mời</p>
+                            </div>
+                        </div>
+                        <button type="button" class="remove-member-btn text-red-500 hover:text-red-700 transition-colors" onclick="removeInvitedMember(this)" title="Xóa thành viên">
                             <i class="fas fa-times"></i>
                         </button>
                     `;
                     membersList.appendChild(memberItem);
                     emailInput.value = '';
+                    
+                    // Show success notification
+                    showNotification('Thành công', `Đã gửi lời mời đến ${email}`);
+                } else {
+                    alert('Vui lòng nhập email thành viên');
                 }
             });
             
@@ -991,6 +1064,51 @@
             
             console.log('All projects displayed on one page');
         });
+        
+        // Function to remove invited member
+        function removeInvitedMember(button) {
+            const memberItem = button.closest('.member-item');
+            const email = memberItem.querySelector('.member-email').textContent;
+            
+            if (confirm(`Bạn có chắc chắn muốn xóa lời mời cho ${email}?`)) {
+                memberItem.remove();
+                showNotification('Thành công', `Đã xóa lời mời cho ${email}`);
+            }
+        }
+        
+        // Function to show notification
+        function showNotification(title, message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform transition-all duration-300 translate-x-full';
+            notification.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <div class="font-medium">${title}</div>
+                        <div class="text-sm opacity-90">${message}</div>
+                    </div>
+                </div>
+            `;
+            
+            // Add to body
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
     </script>
 </body>
 </html>

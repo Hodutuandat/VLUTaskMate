@@ -608,21 +608,64 @@ function initMemberInvitation() {
 }
 
 function inviteMember(email, form) {
+    // Validate VLU email format
+    if (!email.endsWith('@vlu.edu.vn')) {
+        showNotification('Lỗi', 'Vui lòng nhập email VLU hợp lệ (email@vlu.edu.vn)');
+        return;
+    }
+    
+    // Check if member already exists
+    const invitedList = form.closest('.invite-section').querySelector('.invited-members-list');
+    if (invitedList) {
+        const existingMembers = invitedList.querySelectorAll('.member-item');
+        for (let member of existingMembers) {
+            const memberEmail = member.querySelector('.member-email').textContent;
+            if (memberEmail === email) {
+                showNotification('Lỗi', 'Thành viên này đã được mời!');
+                return;
+            }
+        }
+    }
+    
     // Simulate invitation
     showNotification('Thành công', `Lời mời đã được gửi đến ${email}`);
     
     // Add to invited members list
-    const invitedList = form.closest('.invite-section').querySelector('.invited-members-list');
     if (invitedList) {
         const memberItem = document.createElement('div');
-        memberItem.className = 'flex items-center justify-between p-2 bg-gray-50 rounded';
+        memberItem.className = 'member-item flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200';
         memberItem.innerHTML = `
-            <span class="text-sm text-gray-700">${email}</span>
-            <button type="button" class="text-red-500 hover:text-red-700" onclick="this.parentElement.remove()">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-blue-600 text-sm"></i>
+                </div>
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="member-email text-sm font-medium text-gray-700">${email}</span>
+                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                            <i class="fas fa-clock mr-1"></i>
+                            Pending
+                        </span>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Đã gửi lời mời</p>
+                </div>
+            </div>
+            <button type="button" class="remove-member-btn text-red-500 hover:text-red-700 transition-colors" onclick="removeInvitedMember(this)" title="Xóa thành viên">
                 <i class="fas fa-times"></i>
             </button>
         `;
         invitedList.appendChild(memberItem);
+    }
+}
+
+// Function to remove invited member
+function removeInvitedMember(button) {
+    const memberItem = button.closest('.member-item');
+    const email = memberItem.querySelector('.member-email').textContent;
+    
+    if (confirm(`Bạn có chắc chắn muốn xóa lời mời cho ${email}?`)) {
+        memberItem.remove();
+        showNotification('Thành công', `Đã xóa lời mời cho ${email}`);
     }
 }
 
